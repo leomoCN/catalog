@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宏图战术 · 在线产品画册</title>
+<style>
+:root{
+  --black:#0a0a0b; --panel:#101014; --card:#16161b;
+  --red:#e60012; --red-d:#a3000d; --red-soft:rgba(230,0,18,.14);
+  --white:#f4f4f5; --muted:#9a9aa3; --line:rgba(255,255,255,.09);
+  --disp:"Bahnschrift","DIN Alternate","Arial Narrow","Microsoft YaHei",sans-serif;
+  --cjk:"Microsoft YaHei","PingFang SC","Noto Sans SC","Segoe UI",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:var(--cjk);line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:var(--red);color:#fff}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:#0c0c0f}
+::-webkit-scrollbar-thumb{background:#2a2a30;border-radius:5px}
+::-webkit-scrollbar-thumb:hover{background:var(--red)}
+img{max-width:100%;display:block}
+button{font-family:inherit}
+a{color:inherit;text-decoration:none}
+
+/* ---------- Nav ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(10,10,11,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;cursor:pointer}
+.brand-mark{width:34px;height:34px;background:var(--red);clip-path:polygon(0 0,100% 0,100% 72%,72% 100%,0 100%);display:grid;place-items:center;font-family:var(--disp);font-weight:800;font-size:15px;color:#fff;flex:none}
+.brand-name{font-size:17px;font-weight:800;letter-spacing:.14em}
+.brand-en{font-family:var(--disp);font-size:10px;letter-spacing:.34em;color:var(--muted);margin-top:1px}
+.nav-links{display:flex;gap:30px;align-items:center}
+.nav-links a{color:var(--muted);font-size:14px;letter-spacing:.14em;position:relative;padding:6px 0;transition:color .25s}
+.nav-links a:hover{color:#fff}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--red);transition:width .25s}
+.nav-links a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:14px}
+.btn-edit{border:1px solid rgba(230,0,18,.65);background:transparent;color:#ffd6d9;padding:8px 18px;border-radius:2px;cursor:pointer;font-size:13px;letter-spacing:.1em;transition:all .25s;white-space:nowrap}
+.btn-edit:hover{background:var(--red);color:#fff;box-shadow:0 0 18px rgba(230,0,18,.4)}
+body.editing .btn-edit{background:var(--red);color:#fff}
+.burger{display:none;background:none;border:1px solid var(--line);color:#fff;width:38px;height:34px;font-size:16px;cursor:pointer;border-radius:2px}
+
+/* ---------- Hero ---------- */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:140px 40px 80px;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse at 72% 26%,rgba(230,0,18,.16),transparent 52%),radial-gradient(ellipse at 18% 82%,rgba(230,0,18,.08),transparent 48%),var(--black)}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:72px 72px;-webkit-mask-image:radial-gradient(ellipse at center,#000 25%,transparent 72%);mask-image:radial-gradient(ellipse at center,#000 25%,transparent 72%)}
+.hero::after{content:"";position:absolute;right:-160px;top:-160px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(230,0,18,.22),transparent 65%);filter:blur(30px);pointer-events:none}
+.hero-inner{position:relative;z-index:2;max-width:1180px;margin:0 auto;width:100%}
+.hero-eyebrow{color:var(--red);font-family:var(--disp);font-size:13px;letter-spacing:.55em;font-weight:600}
+.hero-title{font-size:clamp(40px,7vw,82px);font-weight:900;line-height:1.08;margin:20px 0 14px;letter-spacing:.02em}
+.hero-title .red{color:var(--red)}
+.hero-title-en{font-family:var(--disp);letter-spacing:.38em;color:var(--muted);font-size:clamp(11px,1.3vw,15px);text-transform:uppercase}
+.hero-sub{max-width:660px;color:var(--muted);font-size:16px;line-height:2;margin-top:26px}
+.hero-cta{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap}
+.btn-red{background:var(--red);color:#fff;border:1px solid var(--red);padding:14px 36px;font-size:15px;letter-spacing:.14em;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.btn-red:hover{background:var(--red-d);border-color:var(--red-d);box-shadow:0 0 26px rgba(230,0,18,.45)}
+.btn-ghost{border:1px solid rgba(255,255,255,.28);background:transparent;color:#fff;padding:14px 36px;font-size:15px;letter-spacing:.14em;cursor:pointer;transition:all .25s}
+.btn-ghost:hover{border-color:var(--red);color:var(--red)}
+.hero-stats{display:flex;gap:56px;margin-top:72px;padding-top:34px;border-top:1px solid var(--line);flex-wrap:wrap}
+.stat{display:flex;flex-direction:column;gap:4px}
+.stat-num{font-family:var(--disp);font-size:clamp(28px,3.4vw,40px);font-weight:700;line-height:1}
+.stat-num .unit{color:var(--red);font-size:.55em;margin-left:3px;font-weight:600}
+.stat-label{color:var(--muted);font-size:12.5px;letter-spacing:.22em}
+.hero-scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-family:var(--disp);font-size:10px;letter-spacing:.5em;z-index:2}
+.hero-scroll i{width:1px;height:44px;background:linear-gradient(180deg,var(--red),transparent);display:block;animation:drop 1.8s ease-in-out infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}55%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- Sections ---------- */
+.section{padding:110px 40px;max-width:1280px;margin:0 auto}
+.sec-head{display:flex;align-items:flex-end;gap:20px;margin-bottom:52px}
+.sec-no{font-family:var(--disp);color:var(--red);font-size:14px;letter-spacing:.3em;padding-bottom:6px}
+.sec-titles{flex:1}
+.sec-title{font-size:clamp(26px,3.4vw,38px);font-weight:900;letter-spacing:.04em}
+.sec-en{font-family:var(--disp);color:var(--muted);font-size:11.5px;letter-spacing:.4em;text-transform:uppercase;margin-top:4px}
+.sec-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(230,0,18,.65),transparent);max-width:340px;margin-bottom:14px}
+
+/* Filters */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:38px}
+.pill{border:1px solid var(--line);background:transparent;color:var(--muted);padding:9px 22px;border-radius:999px;cursor:pointer;font-size:14px;transition:all .25s}
+.pill .cnt{font-family:var(--disp);font-size:11px;opacity:.75;margin-left:4px}
+.pill:hover{border-color:rgba(230,0,18,.6);color:#fff}
+.pill.active{background:var(--red);border-color:var(--red);color:#fff}
+.filters-sub{margin-top:8px}
+.filters-sub .pill{padding:6px 16px;font-size:13px}
+
+/* Product grid & cards */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.card{position:relative;background:var(--card);border:1px solid var(--line);cursor:pointer;overflow:hidden;transition:transform .35s,border-color .35s,box-shadow .35s}
+.card:hover{transform:translateY(-6px);border-color:rgba(230,0,18,.6);box-shadow:0 20px 44px rgba(0,0,0,.55),0 0 0 1px rgba(230,0,18,.3)}
+.card-imgwrap{aspect-ratio:4/3;overflow:hidden;position:relative;background:#0d0d10}
+.card-imgwrap img{width:100%;height:100%;object-fit:cover;transition:transform .55s}
+.card:hover .card-imgwrap img{transform:scale(1.06)}
+.card-cat{position:absolute;top:14px;left:14px;background:var(--red);color:#fff;font-size:12px;padding:4px 13px;letter-spacing:.1em;z-index:2}
+.card-sub{position:absolute;top:46px;left:14px;border:1px solid rgba(255,255,255,.4);background:rgba(10,10,11,.6);color:#dcdce2;font-size:11.5px;padding:3px 11px;letter-spacing:.08em;z-index:2;backdrop-filter:blur(4px)}
+.card-dots{position:absolute;bottom:12px;right:14px;display:flex;gap:6px;z-index:2}
+.card-dots i{width:14px;height:14px;border-radius:50%;border:1px solid rgba(255,255,255,.45);display:block}
+.card-idx{position:absolute;top:6px;right:16px;font-family:var(--disp);color:rgba(255,255,255,.28);font-size:26px;font-weight:700;z-index:2}
+.card-body{padding:22px 24px 26px}
+.card-name{font-size:19px;font-weight:800;margin-bottom:5px}
+.card-model{font-family:var(--disp);color:var(--red);font-size:13px;letter-spacing:.14em;margin-bottom:12px}
+.card-brief{color:var(--muted);font-size:13.5px;line-height:1.75;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:47px}
+.card-more{font-size:13px;color:var(--muted);letter-spacing:.22em;display:inline-flex;align-items:center;gap:8px;transition:color .25s}
+.card-more i{font-style:normal;transition:transform .25s}
+.card:hover .card-more{color:var(--red)}
+.card:hover .card-more i{transform:translateX(5px)}
+.card-edit-badge{display:none;position:absolute;top:14px;right:14px;z-index:3;background:rgba(10,10,11,.88);border:1px solid var(--red);color:#fff;font-size:12px;padding:3px 12px;letter-spacing:.1em}
+body.editing .card-edit-badge{display:block}
+.card-del{display:none;position:absolute;top:46px;right:14px;z-index:3;background:rgba(10,10,11,.88);border:1px solid var(--line);color:#ff8a92;font-size:12px;padding:3px 12px;cursor:pointer;letter-spacing:.1em}
+body.editing .card-del{display:block}
+body.editing .card-del:hover{border-color:var(--red);color:#fff}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:80px 0;border:1px dashed var(--line);font-size:15px;letter-spacing:.1em}
+
+/* About */
+.about-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.about-card{background:var(--card);border:1px solid var(--line);padding:38px 32px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s}
+.about-card:hover{border-color:rgba(230,0,18,.55);transform:translateY(-4px)}
+.about-card::before{content:"";position:absolute;top:0;left:0;width:64px;height:3px;background:var(--red)}
+.about-num{font-family:var(--disp);font-size:44px;font-weight:800;color:transparent;-webkit-text-stroke:1px rgba(230,0,18,.55);line-height:1}
+.about-en{font-family:var(--disp);color:var(--red);font-size:12px;letter-spacing:.4em;margin:18px 0 10px}
+.about-title{font-size:21px;font-weight:800;margin-bottom:12px}
+.about-desc{color:var(--muted);font-size:14px;line-height:1.9}
+
+/* Contact */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.c-info{display:flex;flex-direction:column;gap:26px}
+.c-item{display:flex;gap:16px;align-items:flex-start}
+.c-dot{width:10px;height:10px;background:var(--red);margin-top:8px;flex:none;transform:rotate(45deg)}
+.c-item b{display:block;color:var(--muted);font-size:12px;letter-spacing:.24em;font-weight:600;margin-bottom:3px}
+.c-item p{font-size:15.5px;color:var(--white)}
+.c-note{margin-top:10px;color:#5c5c66;font-size:12.5px;letter-spacing:.06em}
+.form-card{background:var(--card);border:1px solid var(--line);padding:36px}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:12.5px;color:var(--muted);margin-bottom:8px;letter-spacing:.12em}
+.field input,.field textarea{width:100%;background:#0c0c10;border:1px solid rgba(255,255,255,.15);color:#fff;padding:12px 14px;font-size:14px;font-family:inherit;transition:border-color .25s}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--red)}
+.field textarea{resize:vertical;min-height:96px}
+
+/* Footer */
+footer{border-top:1px solid var(--line);padding:36px 40px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+footer .f-brand{font-weight:800;color:var(--white);letter-spacing:.1em}
+
+/* Edit toolbar */
+.editbar{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:210;display:none;align-items:center;gap:10px;background:rgba(14,14,18,.96);border:1px solid rgba(230,0,18,.55);padding:12px 16px;box-shadow:0 14px 44px rgba(0,0,0,.65);flex-wrap:wrap;justify-content:center;max-width:94vw}
+.editbar-tip{color:var(--muted);font-size:12px;margin-right:8px;letter-spacing:.04em}
+.editbar button{border:0;cursor:pointer;font-size:13px;letter-spacing:.1em;padding:9px 20px;transition:all .2s}
+.eb-add{background:var(--red);color:#fff}
+.eb-add:hover{background:var(--red-d)}
+.eb-reset{background:transparent;color:var(--muted);border:1px solid var(--line)!important}
+.eb-reset:hover{color:#fff;border-color:var(--muted)!important}
+.eb-done{background:#fff;color:#000}
+.eb-done:hover{background:#ddd}
+
+/* Editing affordance */
+body.editing [data-path]{outline:1px dashed rgba(230,0,18,.55);outline-offset:3px;border-radius:2px;cursor:text;transition:background .2s}
+body.editing [data-path]:hover{outline-color:var(--red);background:var(--red-soft)}
+
+/* Modals */
+.modal-mask{position:fixed;inset:0;background:rgba(4,4,5,.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:300;display:none;align-items:center;justify-content:center;padding:22px}
+.modal-mask.open{display:flex}
+.modal{background:var(--panel);border:1px solid rgba(255,255,255,.13);width:min(980px,100%);max-height:88vh;overflow:auto;position:relative;animation:pop .3s cubic-bezier(.2,.9,.3,1.2)}
+.modal::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),transparent 70%);z-index:2}
+@keyframes pop{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+.modal-x{position:absolute;top:16px;right:16px;z-index:5;width:36px;height:36px;border:1px solid var(--line);background:rgba(10,10,11,.7);color:#fff;font-size:17px;cursor:pointer;transition:all .25s;border-radius:2px}
+.modal-x:hover{border-color:var(--red);color:var(--red);transform:rotate(90deg)}
+.vm-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}
+.vm-img,.vm-body{min-width:0}
+.vm-img{position:relative;background:#0d0d10;aspect-ratio:4/3;overflow:hidden}
+.vm-img img{width:100%;height:100%;object-fit:cover}
+.vm-img .card-cat{top:18px;left:18px}
+.vm-img .card-sub{top:50px;left:18px}
+.vm-count{position:absolute;top:16px;right:16px;background:rgba(10,10,11,.78);color:#fff;font-size:12px;padding:4px 11px;font-family:var(--disp);letter-spacing:.08em;z-index:4}
+.vm-arrow{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border:1px solid rgba(255,255,255,.22);background:rgba(10,10,11,.55);color:#fff;font-size:18px;cursor:pointer;z-index:4;transition:all .2s;display:grid;place-items:center}
+.vm-arrow:hover{background:var(--red);border-color:var(--red)}
+.vm-arrow.prev{left:12px}
+.vm-arrow.next{right:12px}
+.vm-thumbs{position:absolute;left:0;right:0;bottom:0;display:flex;gap:8px;padding:14px 14px 12px;background:linear-gradient(180deg,transparent,rgba(4,4,5,.88));z-index:4;overflow-x:auto}
+.vm-img .vm-thumb{width:66px;height:50px;object-fit:cover;border:2px solid transparent;cursor:pointer;opacity:.65;transition:all .2s;flex:none}
+.vm-img .vm-thumb:hover{opacity:1}
+.vm-img .vm-thumb.on{border-color:var(--red);opacity:1}
+.vm-sku{margin-bottom:20px}
+.sku-grp{margin-bottom:14px}
+.sku-name{font-size:12px;color:var(--muted);letter-spacing:.18em;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.sku-name::before{content:"";width:6px;height:6px;background:var(--red);display:inline-block}
+.sku-chip{display:inline-block;border:1px solid var(--line);padding:7px 16px;font-size:13px;color:#d5d5db;margin:0 8px 6px 0;cursor:pointer;transition:all .2s;user-select:none}
+.sku-chip:hover{border-color:rgba(230,0,18,.6);color:#fff}
+.sku-chip.on{background:var(--red);border-color:var(--red);color:#fff}
+.vm-body{padding:44px 40px 38px}
+.vm-model{font-family:var(--disp);color:var(--red);font-size:14px;letter-spacing:.2em;margin-bottom:8px}
+.vm-name{font-size:27px;font-weight:900;margin-bottom:16px}
+.vm-tags{margin-bottom:18px}
+.tag{display:inline-block;border:1px solid rgba(230,0,18,.5);color:#ff9aa1;font-size:12px;padding:3px 13px;margin:0 8px 8px 0;border-radius:999px;letter-spacing:.06em}
+.vm-brief{color:var(--muted);font-size:14.5px;line-height:1.85;margin-bottom:22px}
+.vm-desc{color:#c9c9cf;font-size:14px;line-height:1.95;margin-bottom:8px}
+.spec{width:100%;border-collapse:collapse;margin-top:10px}
+.spec td{padding:10.5px 12px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:top}
+.spec td:first-child{color:var(--muted);width:38%;letter-spacing:.05em}
+.vm-cta{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+.vm-cta .btn-red{padding:12px 30px;font-size:14px}
+.vm-cta .btn-ghost{padding:12px 30px;font-size:14px}
+
+/* Editor modal */
+.edit-modal{width:min(760px,100%)}
+.edit-head{padding:30px 34px 0}
+.edit-head h3{font-size:21px;font-weight:800}
+.edit-head p{color:var(--muted);font-size:12.5px;margin-top:5px}
+.edit-body{padding:26px 34px 8px}
+.edit-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+.ef-full{grid-column:1/-1}
+.gal-row{display:grid;grid-template-columns:64px 1fr auto 38px;gap:10px;align-items:center;margin-bottom:10px}
+.gal-prev{width:64px;height:48px;object-fit:cover;border:1px solid var(--line);background:#0c0c10}
+.gal-row:first-child .gal-prev{outline:2px solid var(--red);outline-offset:-2px}
+.gal-url{width:100%;background:#0c0c10;border:1px solid rgba(255,255,255,.15);color:#fff;padding:10px 12px;font-size:13px;font-family:inherit;transition:border-color .25s}
+.gal-url:focus{outline:none;border-color:var(--red)}
+.gal-file{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);color:var(--muted);font-size:12px;padding:9px 14px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.gal-file:hover{border-color:var(--red);color:#fff}
+.gal-del{background:transparent;border:1px solid var(--line);color:#ff8a92;cursor:pointer;font-size:15px;height:38px;transition:all .2s}
+.gal-del:hover{border-color:var(--red);color:#fff}
+.sku-edit-row{display:grid;grid-template-columns:150px 1fr 38px;gap:8px;margin-bottom:8px}
+.file-hint{font-size:11.5px;color:#5c5c66;margin-top:7px;letter-spacing:.03em}
+.spec-row{display:grid;grid-template-columns:1fr 1fr 38px;gap:8px;margin-bottom:8px}
+.sp-del{background:transparent;border:1px solid var(--line);color:#ff8a92;cursor:pointer;font-size:15px;transition:all .2s}
+.sp-del:hover{border-color:var(--red);color:#fff}
+.btn-add-row{background:transparent;border:1px dashed rgba(255,255,255,.25);color:var(--muted);padding:8px 16px;cursor:pointer;font-size:12.5px;letter-spacing:.08em;margin-top:4px;transition:all .2s}
+.btn-add-row:hover{border-color:var(--red);color:var(--red)}
+.edit-foot{padding:18px 34px 30px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.edit-foot .grp{display:flex;gap:10px;flex-wrap:wrap}
+.btn-save{background:var(--red);color:#fff;border:0;padding:11px 30px;font-size:14px;letter-spacing:.12em;cursor:pointer;transition:all .2s}
+.btn-save:hover{background:var(--red-d);box-shadow:0 0 20px rgba(230,0,18,.4)}
+.btn-cancel{background:transparent;border:1px solid var(--line);color:var(--muted);padding:11px 24px;font-size:14px;cursor:pointer;transition:all .2s}
+.btn-cancel:hover{color:#fff;border-color:var(--muted)}
+.btn-del{background:transparent;border:1px solid rgba(230,0,18,.5);color:#ff8a92;padding:11px 24px;font-size:14px;cursor:pointer;transition:all .2s}
+.btn-del:hover{background:rgba(230,0,18,.12);border-color:var(--red);color:#fff}
+
+/* Toast */
+.toast{position:fixed;top:82px;left:50%;transform:translateX(-50%) translateY(-10px);background:var(--red);color:#fff;padding:11px 26px;font-size:14px;z-index:400;opacity:0;pointer-events:none;transition:all .3s;box-shadow:0 10px 30px rgba(0,0,0,.5);letter-spacing:.04em;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Reveal */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+
+/* Responsive */
+@media(max-width:1024px){.grid{grid-template-columns:repeat(2,1fr)}.about-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){
+  .nav{padding:0 20px}
+  .nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:rgba(10,10,11,.97);flex-direction:column;padding:18px 24px;gap:14px;border-bottom:1px solid var(--line)}
+  .nav-links.open{display:flex}
+  .burger{display:block}
+  .hero{padding:120px 22px 70px}
+  .section{padding:84px 22px}
+  .contact-wrap{grid-template-columns:1fr;gap:44px}
+  .vm-grid{grid-template-columns:1fr}
+  .vm-body{padding:32px 26px}
+  .edit-grid{grid-template-columns:1fr}
+  .ef-full{grid-column:auto}
+}
+@media(max-width:680px){
+  .grid{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
+  .hero-stats{gap:30px}
+  .hero-cta .btn-red,.hero-cta .btn-ghost{width:100%;text-align:center}
+  .brand-en{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== 导航 ===================== -->
+<header class="nav">
+  <div class="brand" onclick="location.href='#home'">
+    <div class="brand-mark">HT</div>
+    <div>
+      <div class="brand-name" data-path="brand">宏图精工</div>
+      <div class="brand-en" data-path="brandEn">HUANGTU PRECISION</div>
+    </div>
+  </div>
+  <nav class="nav-links" id="navLinks">
+    <a href="#home">首页</a>
+    <a href="#products">产品中心</a>
+    <a href="#about">核心能力</a>
+    <a href="#contact">联系我们</a>
+  </nav>
+  <div class="nav-right">
+    <button class="btn-edit" id="btnEdit" onclick="window.toggleEdit()">编辑模式</button>
+    <button class="burger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="菜单">☰</button>
+  </div>
+</header>
+
+<!-- ===================== Hero ===================== -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-eyebrow rv">PRECISION · RELIABILITY · DELIVERY</div>
+    <h1 class="hero-title rv"><span data-path="hero.title" id="heroTitle">专业战术装备 · 为严苛环境而生</span></h1>
+    <div class="hero-title-en rv" data-path="hero.titleEn">TACTICAL GEAR BUILT FOR EXTREME CONDITIONS</div>
+    <p class="hero-sub rv" data-path="hero.subtitle">专注战术背包、胸包与模块化携行装备，采用高耐磨尼龙与 YKK 拉链，从面料到缝线执行军规标准，为户外、勤务与应急场景提供可靠装备。</p>
+    <div class="hero-cta rv">
+      <a href="#products" class="btn-red">浏览产品</a>
+      <a href="#contact" class="btn-ghost">在线询价</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat rv"><span class="stat-num"><span data-path="hero.stats.0.num">18</span><span class="unit" data-path="hero.stats.0.unit">年</span></span><span class="stat-label" data-path="hero.stats.0.label">制造经验</span></div>
+      <div class="stat rv"><span class="stat-num"><span data-path="hero.stats.1.num">120</span><span class="unit" data-path="hero.stats.1.unit">+</span></span><span class="stat-label" data-path="hero.stats.1.label">在售产品</span></div>
+      <div class="stat rv"><span class="stat-num"><span data-path="hero.stats.2.num">32</span><span class="unit" data-path="hero.stats.2.unit">国</span></span><span class="stat-label" data-path="hero.stats.2.label">服务客户</span></div>
+      <div class="stat rv"><span class="stat-num"><span data-path="hero.stats.3.num">99.7</span><span class="unit" data-path="hero.stats.3.unit">%</span></span><span class="stat-label" data-path="hero.stats.3.label">交付准时率</span></div>
+    </div>
+  </div>
+  <div class="hero-scroll">SCROLL<i></i></div>
+</section>
+
+<!-- ===================== 产品中心 ===================== -->
+<section class="section" id="products">
+  <div class="sec-head rv">
+    <span class="sec-no">01 /</span>
+    <div class="sec-titles">
+      <h2 class="sec-title" data-path="sectionTitles.products">产品中心</h2>
+      <div class="sec-en" data-path="sectionTitles.productsEn">PRODUCT CENTER</div>
+    </div>
+    <div class="sec-line"></div>
+  </div>
+  <div class="filters" id="filters"></div>
+  <div class="filters filters-sub" id="filters2" style="display:none"></div>
+  <div class="grid" id="productGrid"></div>
+</section>
+
+<!-- ===================== 核心能力 ===================== -->
+<section class="section" id="about">
+  <div class="sec-head rv">
+    <span class="sec-no">02 /</span>
+    <div class="sec-titles">
+      <h2 class="sec-title" data-path="sectionTitles.about">核心能力</h2>
+      <div class="sec-en" data-path="sectionTitles.aboutEn">CORE CAPABILITIES</div>
+    </div>
+    <div class="sec-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-card rv">
+      <div class="about-num">01</div>
+      <div class="about-en" data-path="about.items.0.en">R&amp;D</div>
+      <h3 class="about-title" data-path="about.items.0.title">精密研发</h3>
+      <p class="about-desc" data-path="about.items.0.desc">18 年非标定制经验，20+ 项专利技术，支持 OEM / ODM 深度定制，从图纸到量产最快 15 天出样。</p>
+    </div>
+    <div class="about-card rv">
+      <div class="about-num">02</div>
+      <div class="about-en" data-path="about.items.1.en">QC</div>
+      <h3 class="about-title" data-path="about.items.1.title">品质管控</h3>
+      <p class="about-desc" data-path="about.items.1.desc">ISO9001 全流程质量体系，关键工序 100% 检测，三坐标测量仪全检出厂，合格率 99.8%。</p>
+    </div>
+    <div class="about-card rv">
+      <div class="about-num">03</div>
+      <div class="about-en" data-path="about.items.2.en">DELIVERY</div>
+      <h3 class="about-title" data-path="about.items.2.title">全球交付</h3>
+      <p class="about-desc" data-path="about.items.2.desc">服务 32 国客户，标准品 7 天发货，定制件 30 天交付，全流程物流可追溯。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 联系我们 ===================== -->
+<section class="section" id="contact">
+  <div class="sec-head rv">
+    <span class="sec-no">03 /</span>
+    <div class="sec-titles">
+      <h2 class="sec-title" data-path="sectionTitles.contact">联系我们</h2>
+      <div class="sec-en" data-path="sectionTitles.contactEn">CONTACT US</div>
+    </div>
+    <div class="sec-line"></div>
+  </div>
+  <div class="contact-wrap">
+    <div class="c-info rv">
+      <div class="c-item">
+        <span class="c-dot"></span>
+        <div><b>公司地址 / ADDRESS</b><p data-path="contact.address">江苏省苏州市工业园区智能制造产业园 18 栋</p></div>
+      </div>
+      <div class="c-item">
+        <span class="c-dot"></span>
+        <div><b>联系电话 / TEL</b><p data-path="contact.phone">0512-8888 6666</p></div>
+      </div>
+      <div class="c-item">
+        <span class="c-dot"></span>
+        <div><b>电子邮箱 / EMAIL</b><p data-path="contact.email">sales@huangtu-mfg.com</p></div>
+      </div>
+      <div class="c-item">
+        <span class="c-dot"></span>
+        <div><b>服务时间 / HOURS</b><p data-path="contact.hours">周一至周六 8:30 - 18:00</p></div>
+      </div>
+      <p class="c-note" data-path="contact.note">* 以上为演示数据，进入编辑模式可直接修改</p>
+    </div>
+    <form class="form-card rv" id="contactForm">
+      <div class="field"><label>您的称呼 / NAME</label><input type="text" placeholder="请输入姓名" required></div>
+      <div class="field"><label>公司名称 / COMPANY</label><input type="text" placeholder="请输入公司名称"></div>
+      <div class="field"><label>联系电话 / PHONE</label><input type="tel" placeholder="请输入联系电话"></div>
+      <div class="field"><label>需求描述 / MESSAGE</label><textarea placeholder="请输入您的采购需求或留言…"></textarea></div>
+      <button type="submit" class="btn-red" style="width:100%">提交询价</button>
+    </form>
+  </div>
+</section>
+
+<!-- ===================== Footer ===================== -->
+<footer>
+  <span><span class="f-brand" data-path="brand">宏图精工</span> · <span data-path="brandEn">HUANGTU PRECISION</span></span>
+  <span>© <span id="year"></span> 在线产品画册 · 演示数据可在编辑模式修改</span>
+</footer>
+
+<!-- ===================== 编辑工具栏 ===================== -->
+<div class="editbar" id="editbar">
+  <span class="editbar-tip">编辑模式：点击文字直接改 · 点击产品卡片编辑产品</span>
+  <button class="eb-add" onclick="window.openEditor(null)">+ 添加产品</button>
+  <button class="eb-reset" onclick="window.exportData()">导出数据</button>
+  <button class="eb-reset" onclick="window.importData()">导入数据</button>
+  <button class="eb-reset" onclick="window.resetData()">重置默认数据</button>
+  <button class="eb-done" onclick="window.toggleEdit()">完成</button>
+</div>
+
+<!-- ===================== 产品详情弹窗 ===================== -->
+<div class="modal-mask" id="viewModal">
+  <div class="modal">
+    <button class="modal-x" onclick="window.closeModal('viewModal')" aria-label="关闭">✕</button>
+    <div class="vm-grid">
+      <div class="vm-img">
+        <img id="vmImg" src="" alt="产品图片" data-fallback="" onerror="window.imgErr(this)">
+        <span class="card-cat" id="vmCat"></span>
+        <span class="card-sub" id="vmSub"></span>
+        <span class="vm-count" id="vmCount"></span>
+        <button class="vm-arrow prev" type="button" aria-label="上一张">‹</button>
+        <button class="vm-arrow next" type="button" aria-label="下一张">›</button>
+        <div class="vm-thumbs" id="vmThumbs"></div>
+      </div>
+      <div class="vm-body">
+        <div class="vm-model" id="vmModel"></div>
+        <h3 class="vm-name" id="vmName"></h3>
+        <div class="vm-tags" id="vmTags"></div>
+        <p class="vm-brief" id="vmBrief"></p>
+        <p class="vm-desc" id="vmDesc"></p>
+        <div class="vm-sku" id="vmSku"></div>
+        <table class="spec" id="vmSpec"></table>
+        <div class="vm-cta">
+          <a class="btn-red" href="#contact" onclick="window.closeModal('viewModal')">在线询价</a>
+          <a class="btn-ghost" id="vmTel" href="tel:">拨打电话</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== 产品编辑弹窗 ===================== -->
+<div class="modal-mask" id="editModal">
+  <div class="modal edit-modal">
+    <button class="modal-x" onclick="window.closeModal('editModal')" aria-label="关闭">✕</button>
+    <div class="edit-head">
+      <h3 id="efTitle">新增产品</h3>
+      <p>填写产品信息，保存后立即在画册中生效并自动持久化</p>
+    </div>
+    <div class="edit-body">
+      <input type="hidden" id="efId">
+      <div class="edit-grid">
+        <div class="field"><label>产品名称 *</label><input id="efName" type="text" placeholder="如：路普战术背包"></div>
+        <div class="field"><label>产品型号</label><input id="efModel" type="text" placeholder="如：LP-BP35"></div>
+        <div class="field"><label>所属系列（一级）</label><input id="efSeries" type="text" list="seriesList" placeholder="如：路普系列">
+          <datalist id="seriesList"></datalist>
+        </div>
+        <div class="field"><label>所属品类（二级）</label><input id="efCat" type="text" list="catList" placeholder="如：战术背包">
+          <datalist id="catList"></datalist>
+        </div>
+        <div class="field"><label>标签（逗号分隔）</label><input id="efTags" type="text" placeholder="如：35L大容量, MOLLE扩展"></div>
+        <div class="field ef-full"><label>一句话卖点</label><input id="efBrief" type="text" placeholder="卡片上展示的简短卖点"></div>
+        <div class="field ef-full"><label>详细描述</label><textarea id="efDesc" rows="3" placeholder="详情弹窗中展示的产品描述"></textarea></div>
+        <div class="field ef-full"><label>产品图片（可多张，首图为封面，支持 URL 或本地上传）</label>
+          <div id="galleryRows"></div>
+          <button type="button" class="btn-add-row" onclick="window.addGalleryRow()">+ 添加图片</button>
+          <div class="file-hint">本地上传会将图片存入浏览器本地存储（建议 1.5MB 以内）；粘贴 URL 则引用线上图片</div>
+        </div>
+        <div class="field ef-full"><label>SKU 规格（如 颜色/容量，选项用逗号分隔）</label>
+          <div id="skuRows"></div>
+          <button type="button" class="btn-add-row" onclick="window.addSkuRow()">+ 添加规格组</button>
+        </div>
+        <div class="field ef-full"><label>规格参数</label>
+          <div id="specRows"></div>
+          <button type="button" class="btn-add-row" onclick="window.addSpecRow()">+ 添加参数行</button>
+        </div>
+      </div>
+    </div>
+    <div class="edit-foot">
+      <div class="grp" id="efDelWrap" style="display:none">
+        <button class="btn-del" onclick="window.deleteProduct(document.getElementById('efId').value)">删除此产品</button>
+      </div>
+      <div class="grp">
+        <button class="btn-cancel" onclick="window.closeModal('editModal')">取消</button>
+        <button class="btn-save" onclick="window.saveEditor()">保存产品</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+'use strict';
+var LS_KEY='ht_catalog_v2';
+var $=function(s){return document.querySelector(s);};
+var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s));};
+var clone=function(o){return JSON.parse(JSON.stringify(o));};
+
+var DEFAULT_DATA={
+  brand:'宏图战术',
+  brandEn:'HONGTU TACTICAL',
+  hero:{
+    title:'专业战术装备 · 为严苛环境而生',
+    titleEn:'TACTICAL GEAR BUILT FOR EXTREME CONDITIONS',
+    subtitle:'专注战术背包、胸包与模块化携行装备，采用高耐磨尼龙与 YKK 拉链，从面料到缝线执行军规标准，为户外、勤务与应急场景提供可靠装备。',
+    stats:[
+      {num:'15',unit:'年',label:'制造经验'},
+      {num:'80',unit:'+',label:'在售产品'},
+      {num:'26',unit:'国',label:'服务客户'},
+      {num:'99.5',unit:'%',label:'交付准时率'}
+    ]
+  },
+  sectionTitles:{
+    products:'产品中心',productsEn:'PRODUCT CENTER',
+    about:'核心能力',aboutEn:'CORE CAPABILITIES',
+    contact:'联系我们',contactEn:'CONTACT US'
+  },
+  about:{items:[
+    {en:'R&D',title:'自主研发',desc:'自有版型工坊与 30+ 项专利结构设计，支持 OEM / ODM 深度定制，从打样到量产最快 15 天。'},
+    {en:'QC',title:'军规品质',desc:'面料、拉链、扣具全链路检测，关键部位 200kg 拉力测试，出厂合格率 99.5%。'},
+    {en:'DELIVERY',title:'快速交付',desc:'标准款 48 小时发货，定制款 20 天交付，全球物流可追溯。'}
+  ]},
+  contact:{
+    address:'浙江省义乌市北苑工业区装备产业园 12 栋',
+    phone:'0579-8666 8888',
+    email:'sales@hongtu-tactical.com',
+    hours:'周一至周六 8:30 - 18:00',
+    note:'* 以上为演示数据，进入编辑模式可直接修改'
+  },
+  products:[
+    {id:'p1',name:'路普战术双肩背包',model:'LP-BP35',series:'路普系列',category:'战术背包',
+     img:'media-output/img-mssif67f-c7485015.png',imgFallback:'https://sc02.alicdn.com/kf/A3780a645d61c4ef2a277cedf50c78590u.png',
+     gallery:['media-output/img-mssif67f-c7485015.png','media-output/img-mssif5dr-5cef33b0.png'],
+     brief:'35L 大容量战术双肩包，MOLLE 模块化扩展，通勤户外两用',
+     desc:'采用 900D 高密度尼龙与防水涂层，底部加强耐磨层；主仓 35L 可容纳 17 英寸笔记本，前仓 MOLLE 织带支持模块化扩展，背部透气背负系统长时间使用不闷热。',
+     tags:['35L 大容量','MOLLE 扩展','防水耐磨'],
+     skus:[{name:'颜色',options:['黑色','狼棕','军绿']},{name:'容量',options:['35L','45L']}],
+     specs:[['容量','35L（可扩展 45L）'],['面料','900D 高密度尼龙 + 防水涂层'],['拉链','YKK 双开防爆拉链'],['背负系统','透气网布 + 可调胸带'],['MOLLE 织带','前仓 6×5 格'],['重量','1.35 kg']]},
+    {id:'p2',name:'路普战术胸包',model:'LP-CP12',series:'路普系列',category:'战术胸包',
+     img:'media-output/img-mssif228-21eee2d1.png',imgFallback:'https://sc02.alicdn.com/kf/A8bbbb999ba3148aab105ca0e20c1d6e53.png',
+     gallery:['media-output/img-mssif228-21eee2d1.png','media-output/img-mssif4tj-14e8cbbd.png'],
+     brief:'12L 模块化战术胸包，快拆扣具，取物不卸包',
+     desc:'挂载于胸前或腰带，快拆扣具 3 秒装卸；内置分类隔层与钥匙挂扣，外部 MOLLE 面板可扩展附件包，适合骑行、户外与勤务携带。',
+     tags:['快拆设计','模块化','轻量便携'],
+     skus:[{name:'颜色',options:['黑色','狼棕']}],
+     specs:[['容量','12L'],['面料','600D 尼龙'],['扣具','UTX 快拆扣'],['隔层','主仓 + 3 分类袋'],['MOLLE','正面 4×3 格'],['重量','0.62 kg']]},
+    {id:'p3',name:'路普战术腰包',model:'LP-WP06',series:'路普系列',category:'战术腰包',
+     img:'media-output/img-mssijeu5-40895ce6.png',imgFallback:'https://sc02.alicdn.com/kf/A587c479cc46749c8b224ab8b4860bde1A.png',
+     gallery:['media-output/img-mssijeu5-40895ce6.png','media-output/img-mssif8lv-8379635d.png'],
+     brief:'6L 战术腰包，可挂腰可斜挎，贴身防盗',
+     desc:'弧形贴身设计贴合腰部，隐藏式后袋防盗；腰带可拆卸转为斜挎模式，YKK 拉链 + 防泼水面料，骑行、旅行与日常通勤皆宜。',
+     tags:['一包两用','隐藏防盗袋','防泼水'],
+     skus:[{name:'颜色',options:['黑色','军绿']}],
+     specs:[['容量','6L'],['面料','600D 尼龙'],['模式','腰挂 / 斜挎两用'],['口袋','主仓 + 前袋 + 隐藏袋'],['腰带宽度','5 cm'],['重量','0.38 kg']]},
+    {id:'p4',name:'山脊轻量战术背包',model:'RJ-BP20',series:'山脊系列',category:'战术背包',
+     img:'media-output/img-mssif784-45db30c0.png',imgFallback:'https://sc02.alicdn.com/kf/Aca678146b431464cb0d2c5c41eefff43t.png',
+     gallery:['media-output/img-mssif784-45db30c0.png','media-output/img-mssif6k4-8b0e3811.png'],
+     brief:'20L 轻量化战术背包，城市通勤与短途出行优选',
+     desc:'减重版型设计，20L 紧凑容量满足日常通勤；背部透气支架与减压肩带，附电脑独立仓，简洁外观适配城市与户外场景。',
+     tags:['轻量 0.9kg','电脑独立仓','透气背负'],
+     skus:[{name:'颜色',options:['黑色','沙色']},{name:'容量',options:['20L','26L']}],
+     specs:[['容量','20L'],['面料','420D 抗撕裂尼龙'],['重量','0.9 kg'],['电脑仓','15.6 英寸'],['背板','EVA 透气支架'],['拉链','YKK']]},
+    {id:'p5',name:'山脊模块化胸包',model:'RJ-CP08',series:'山脊系列',category:'战术胸包',
+     img:'media-output/img-mssif9s5-e0117add.png',imgFallback:'https://sc02.alicdn.com/kf/A4efb5067eb0a47e58fe5400c0a131e72Y.png',
+     gallery:['media-output/img-mssif9s5-e0117add.png','media-output/img-mssif4d1-021f6576.png'],
+     brief:'8L 模块化胸包，快挂系统适配 MOLLE 背心',
+     desc:'背板集成快挂卡扣，可直挂战术背心 MOLLE 织带或单独胸挂使用；内部防震隔层保护电子设备，勤务与户外作业皆适用。',
+     tags:['背心直挂','防震隔层','模块化'],
+     skus:[{name:'颜色',options:['狼棕','军绿']}],
+     specs:[['容量','8L'],['面料','500D 尼龙'],['挂载','MOLLE 快挂 ×4'],['内衬','防震 EVA'],['重量','0.55 kg']]},
+    {id:'p6',name:'侦察通用附件包',model:'RC-UP02',series:'侦察系列',category:'模块化配件',
+     img:'media-output/img-mssija8v-900c246a.png',imgFallback:'https://sc02.alicdn.com/kf/A165988bc953546a9a2df134367644719N.png',
+     gallery:['media-output/img-mssija8v-900c246a.png','media-output/img-mssif733-011ee1cf.png'],
+     brief:'通用 MOLLE 附件包，可组合进任意携行系统',
+     desc:'标准 MOLLE 织带可挂载于背包、背心或腰带，透明前袋快速取物；多规格尺寸可选，是携行系统的通用扩展模块。',
+     tags:['标准 MOLLE','透明快取袋','多规格'],
+     skus:[{name:'颜色',options:['黑色','狼棕','军绿']},{name:'规格',options:['M','L']}],
+     specs:[['尺寸','M：20×14×6 cm'],['面料','500D 尼龙'],['挂载','MOLLE 2×3'],['前袋','透明 PVC 快取'],['重量','0.22 kg']]}
+  ]
+};
+
+/* ---------- 状态 ---------- */
+var data=load(), editing=false, currentSeries='全部', currentCat='全部';
+
+function load(){
+  try{ var raw=localStorage.getItem(LS_KEY);
+    if(raw){ var d=JSON.parse(raw); if(d&&Array.isArray(d.products)){
+      d.products.forEach(function(p){
+        if(!p.series)p.series='默认系列';
+        if(!p.gallery||!p.gallery.length)p.gallery=(p.img?[p.img]:[]);
+        if(!p.skus)p.skus=[];
+      });
+      return d;
+    } }
+  }catch(e){}
+  return clone(DEFAULT_DATA);
+}
+function persist(){ try{ localStorage.setItem(LS_KEY,JSON.stringify(data)); }catch(e){ toast('保存失败：本地存储空间不足或不可用'); } }
+function getByPath(o,p){ return p.split('.').reduce(function(a,k){ return (a==null?a:a[k]); },o); }
+function setByPath(o,p,v){ var ks=p.split('.'),a=o,i; for(i=0;i<ks.length-1;i++){ if(a[ks[i]]==null)a[ks[i]]={}; a=a[ks[i]]; } a[ks[ks.length-1]]=v; }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function seriesList(){ var s={}; data.products.forEach(function(p){ if(p.series)s[p.series]=1; }); return Object.keys(s); }
+function catList(){ var s={}; data.products.forEach(function(p){ if(p.category)s[p.category]=1; }); return Object.keys(s); }
+function catListOf(series){ var s={}; data.products.forEach(function(p){ if(p.series===series&&p.category)s[p.category]=1; }); return Object.keys(s); }
+function placeholderSVG(){ return 'data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="768"><rect width="1024" height="768" fill="#121216"/><rect x="26" y="26" width="972" height="716" fill="none" stroke="#e60012" stroke-width="3"/><text x="512" y="402" font-family="Arial" font-size="80" font-weight="bold" fill="#e60012" text-anchor="middle">HT</text></svg>'); }
+
+window.imgErr=function(el){ el.onerror=null; var fb=el.getAttribute('data-fallback'); if(fb){ el.setAttribute('data-fallback',''); el.src=fb; } else { el.src=placeholderSVG(); } };
+
+/* ---------- 渲染 ---------- */
+function renderEditable(){ $$('[data-path]').forEach(function(el){ var v=getByPath(data,el.dataset.path); if(v!=null) el.textContent=v; }); }
+function renderFilters(){
+  var box=$('#filters'), h='<button class="pill'+(currentSeries==='全部'?' active':'')+'" data-series="全部">全部系列<span class="cnt">'+data.products.length+'</span></button>';
+  seriesList().forEach(function(s){
+    var n=data.products.filter(function(p){return p.series===s;}).length;
+    h+='<button class="pill'+(currentSeries===s?' active':'')+'" data-series="'+esc(s)+'">'+esc(s)+'<span class="cnt">'+n+'</span></button>';
+  });
+  box.innerHTML=h;
+  var box2=$('#filters2');
+  if(currentSeries==='全部'){ box2.style.display='none'; box2.innerHTML=''; return; }
+  var cats=catListOf(currentSeries);
+  var h2='<button class="pill'+(currentCat==='全部'?' active':'')+'" data-cat="全部">全部品类</button>';
+  cats.forEach(function(c){
+    var n=data.products.filter(function(p){return p.series===currentSeries&&p.category===c;}).length;
+    h2+='<button class="pill'+(currentCat===c?' active':'')+'" data-cat="'+esc(c)+'">'+esc(c)+'<span class="cnt">'+n+'</span></button>';
+  });
+  box2.innerHTML=h2; box2.style.display='flex';
+}
+function colorDots(p){
+  var g=null; (p.skus||[]).forEach(function(s){ if(/颜色|配色|色彩/.test(s.name)&&!g)g=s; });
+  if(!g||!g.options)return '';
+  var map={'黑色':'#26262b','狼棕':'#8a6f4d','军绿':'#5c6b3f','沙色':'#b9a37c','灰色':'#7a7a82','迷彩':'#6b6b52','白色':'#e8e8ea'};
+  var dots=g.options.slice(0,5).map(function(o){ return '<i style="background:'+(map[o]||'#8a8a92')+'" title="'+esc(o)+'"></i>'; }).join('');
+  return '<span class="card-dots">'+dots+'</span>';
+}
+function renderProducts(){
+  var grid=$('#productGrid');
+  var list=data.products.filter(function(p){
+    return (currentSeries==='全部'||p.series===currentSeries)&&(currentCat==='全部'||p.category===currentCat);
+  });
+  if(!list.length){ grid.innerHTML='<div class="empty">该筛选下暂无产品<br>进入「编辑模式」点击「+ 添加产品」即可新增</div>'; return; }
+  grid.innerHTML=list.map(function(p,i){
+    var src=(p.gallery&&p.gallery.length)?esc(p.gallery[0]):esc(p.img||placeholderSVG());
+    return '<article class="card rv" data-id="'+esc(p.id)+'">'+
+      '<div class="card-imgwrap">'+
+        '<img src="'+src+'" alt="'+esc(p.name)+'" loading="lazy" data-fallback="'+esc(p.imgFallback||'')+'" onerror="window.imgErr(this)">'+
+        '<span class="card-cat">'+esc(p.series||'')+'</span>'+
+        '<span class="card-sub">'+esc(p.category)+'</span>'+
+        '<span class="card-idx">'+String(i+1).padStart(2,'0')+'</span>'+
+        '<span class="card-edit-badge">编辑</span>'+
+        '<button class="card-del" type="button" title="删除产品">删除</button>'+
+        colorDots(p)+
+      '</div>'+
+      '<div class="card-body">'+
+        '<h3 class="card-name">'+esc(p.name)+'</h3>'+
+        '<div class="card-model">'+esc(p.model)+'</div>'+
+        '<p class="card-brief">'+esc(p.brief||'')+'</p>'+
+        '<span class="card-more">查看详情 <i>→</i></span>'+
+      '</div></article>';
+  }).join('');
+  observeRv();
+}
+function renderAll(){ renderEditable(); renderFilters(); renderProducts(); }
+
+/* ---------- 滚动显现 ---------- */
+var io=null;
+function observeRv(){
+  if(io) io.disconnect();
+  io=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } }); },{threshold:.1});
+  $$('.rv').forEach(function(el){ io.observe(el); });
+}
+
+/* ---------- 详情弹窗 ---------- */
+var vmIdx=0;
+function openView(id){
+  var p=null; data.products.forEach(function(x){ if(x.id===id)p=x; }); if(!p)return;
+  var gal=(p.gallery&&p.gallery.length)?p.gallery.slice():[p.img||''];
+  if(!gal[0])gal[0]=placeholderSVG();
+  vmIdx=0;
+  window._vmGal=gal; window._vmPfb=p.imgFallback||'';
+  $('#vmCat').textContent=p.series||''; $('#vmSub').textContent=p.category;
+  $('#vmName').textContent=p.name; $('#vmModel').textContent=p.model;
+  $('#vmBrief').textContent=p.brief||''; $('#vmDesc').textContent=p.desc||'';
+  $('#vmTags').innerHTML=(p.tags||[]).map(function(t){ return '<span class="tag">'+esc(t)+'</span>'; }).join('');
+  $('#vmSpec').innerHTML=(p.specs||[]).map(function(s){ return '<tr><td>'+esc(s[0])+'</td><td>'+esc(s[1])+'</td></tr>'; }).join('');
+  $('#vmTel').href='tel:'+String(data.contact.phone||'').replace(/\s/g,'');
+  var skuBox=$('#vmSku');
+  if(p.skus&&p.skus.length){
+    skuBox.innerHTML=p.skus.map(function(g){
+      return '<div class="sku-grp"><div class="sku-name">'+esc(g.name)+'</div>'+g.options.map(function(o){ return '<span class="sku-chip">'+esc(o)+'</span>'; }).join('')+'</div>';
+    }).join('');
+  } else skuBox.innerHTML='';
+  renderGal();
+  $('#viewModal').classList.add('open'); document.body.style.overflow='hidden';
+}
+function renderGal(){
+  var gal=window._vmGal||[];
+  var main=$('#vmImg'); main.src=gal[vmIdx]||placeholderSVG();
+  main.setAttribute('data-fallback',vmIdx===0?(window._vmPfb||''):'');
+  $('#vmCount').textContent=(vmIdx+1)+' / '+gal.length;
+  $('#vmThumbs').innerHTML=gal.map(function(g,i){
+    return '<img class="vm-thumb'+(i===vmIdx?' on':'')+'" src="'+esc(g)+'" data-i="'+i+'" alt="图 '+(i+1)+'" onerror="window.imgErr(this)">';
+  }).join('');
+}
+
+/* ---------- 编辑弹窗 ---------- */
+function renderSpecRows(specs){
+  var wrap=$('#specRows'); wrap.innerHTML='';
+  var rows=(specs&&specs.length)?specs:[['','']];
+  rows.forEach(function(s){
+    var row=document.createElement('div'); row.className='spec-row';
+    row.innerHTML='<input class="sp-k" placeholder="参数名称" value="'+esc(s[0])+'"><input class="sp-v" placeholder="参数值" value="'+esc(s[1])+'"><button type="button" class="sp-del" title="删除此行">×</button>';
+    wrap.appendChild(row);
+  });
+}
+window.addSpecRow=function(){
+  var rows=$$('#specRows .spec-row').map(function(r){ return [r.querySelector('.sp-k').value,r.querySelector('.sp-v').value]; });
+  rows.push(['','']); renderSpecRows(rows);
+};
+window.openEditor=function(id){
+  var p=null; if(id){ data.products.forEach(function(x){ if(x.id===id)p=x; }); }
+  $('#efTitle').textContent=p?('编辑产品：'+p.name):'新增产品';
+  $('#efId').value=p?p.id:('p'+Date.now());
+  $('#efName').value=p?p.name:''; $('#efModel').value=p?p.model:'';
+  $('#efSeries').value=p?p.series:'';
+  $('#efCat').value=p?p.category:'';
+  $('#efBrief').value=p?p.brief:''; $('#efDesc').value=p?p.desc:'';
+  $('#efTags').value=p?(p.tags||[]).join('，'):'';
+  $('#seriesList').innerHTML=seriesList().map(function(s){ return '<option value="'+esc(s)+'">'; }).join('');
+  $('#catList').innerHTML=catList().map(function(c){ return '<option value="'+esc(c)+'">'; }).join('');
+  renderGalRows(p?(p.gallery&&p.gallery.length?p.gallery:[p.img]):[]);
+  renderSkuRows(p?p.skus:[]);
+  renderSpecRows(p?p.specs:[]);
+  $('#efDelWrap').style.display=p?'block':'none';
+  $('#editModal').classList.add('open'); document.body.style.overflow='hidden';
+};
+function renderGalRows(urls){
+  var wrap=$('#galleryRows'); wrap.innerHTML='';
+  var rows=(urls&&urls.length)?urls:[''];
+  rows.forEach(function(u){
+    var row=document.createElement('div'); row.className='gal-row';
+    row.innerHTML='<img class="gal-prev" src="'+esc(u||placeholderSVG())+'" alt="预览" onerror="window.imgErr(this)">'+
+      '<input class="gal-url" type="text" placeholder="粘贴图片 URL，如 https://…" value="'+esc(u)+'">'+
+      '<label class="gal-file">上传<input type="file" accept="image/*" hidden></label>'+
+      '<button type="button" class="gal-del" title="删除此图">×</button>';
+    wrap.appendChild(row);
+  });
+}
+function renderSkuRows(skus){
+  var wrap=$('#skuRows'); wrap.innerHTML='';
+  var rows=(skus&&skus.length)?skus:[{name:'颜色',options:['黑色','狼棕','军绿']}];
+  rows.forEach(function(g){
+    var row=document.createElement('div'); row.className='sku-edit-row';
+    row.innerHTML='<input class="sk-n" placeholder="规格名，如 颜色" value="'+esc(g.name||'')+'">'+
+      '<input class="sk-o" placeholder="选项，逗号分隔，如 黑色,狼棕" value="'+esc((g.options||[]).join(','))+'">'+
+      '<button type="button" class="sp-del" title="删除此组">×</button>';
+    wrap.appendChild(row);
+  });
+}
+window.addGalleryRow=function(){
+  var urls=$$('#galleryRows .gal-url').map(function(i){ return i.value.trim(); });
+  urls.push(''); renderGalRows(urls);
+};
+window.addSkuRow=function(){
+  var rows=$$('#skuRows .sku-edit-row').map(function(r){ return {name:r.querySelector('.sk-n').value,options:r.querySelector('.sk-o').value}; });
+  rows.push({name:'',options:''}); renderSkuRows(rows);
+};
+window.saveEditor=function(){
+  var name=$('#efName').value.trim();
+  if(!name){ toast('请填写产品名称'); $('#efName').focus(); return; }
+  var gallery=$$('#galleryRows .gal-url').map(function(i){ return i.value.trim(); }).filter(Boolean);
+  var skus=$$('#skuRows .sku-edit-row').map(function(r){
+    return {name:r.querySelector('.sk-n').value.trim(),options:r.querySelector('.sk-o').value.split(/[,，]/).map(function(s){return s.trim();}).filter(Boolean)};
+  }).filter(function(g){ return g.name; });
+  var product={
+    id:$('#efId').value, name:name, model:$('#efModel').value.trim(),
+    series:$('#efSeries').value.trim()||'默认系列',
+    category:$('#efCat').value.trim()||'未分类',
+    brief:$('#efBrief').value.trim(), desc:$('#efDesc').value.trim(),
+    tags:$('#efTags').value.split(/[,，]/).map(function(s){return s.trim();}).filter(Boolean),
+    img:gallery[0]||placeholderSVG(), imgFallback:'', gallery:gallery, skus:skus,
+    specs:$$('#specRows .spec-row').map(function(r){ return [r.querySelector('.sp-k').value.trim(),r.querySelector('.sp-v').value.trim()]; }).filter(function(s){ return s[0]||s[1]; })
+  };
+  var idx=-1; data.products.forEach(function(x,i){ if(x.id===product.id)idx=i; });
+  if(idx>=0)data.products[idx]=product; else data.products.push(product);
+  persist(); renderAll(); closeModal('editModal'); toast('产品已保存');
+};
+window.deleteProduct=function(id){
+  if(!confirm('确定删除该产品？此操作不可撤销。'))return;
+  data.products=data.products.filter(function(p){ return p.id!==id; });
+  if(currentSeries!=='全部'&&seriesList().indexOf(currentSeries)<0){ currentSeries='全部'; currentCat='全部'; }
+  else if(currentCat!=='全部'&&catListOf(currentSeries).indexOf(currentCat)<0) currentCat='全部';
+  persist(); renderAll(); closeModal('editModal'); toast('产品已删除');
+};
+window.resetData=function(){
+  if(!confirm('确定恢复默认数据？当前所有修改将被清空。'))return;
+  try{ localStorage.removeItem(LS_KEY); }catch(e){}
+  data=clone(DEFAULT_DATA); currentSeries='全部'; currentCat='全部'; renderAll(); toast('已恢复默认数据');
+};
+
+/* ---------- 编辑模式（密码保护） ---------- */
+/* 修改编辑密码：用任意 SHA-256 工具计算新密码哈希，替换下方 EDIT_PASS_HASH 即可 */
+var EDIT_PASS_HASH='3f085c1de6185adefcaffc63d874566a50d0d008d31fbaf0c0fc9d409f6eab81';
+function sha256(str){
+  return crypto.subtle.digest('SHA-256',new TextEncoder().encode(str)).then(function(buf){
+    return Array.prototype.map.call(new Uint8Array(buf),function(x){ return x.toString(16).padStart(2,'0'); }).join('');
+  });
+}
+function setEdit(on){
+  editing=on;
+  document.body.classList.toggle('editing',editing);
+  $$('[data-path]').forEach(function(el){ el.contentEditable=editing?'true':'false'; });
+  $('#btnEdit').textContent=editing?'退出编辑':'编辑模式';
+  $('#editbar').style.display=editing?'flex':'none';
+  if(editing) toast('编辑模式已开启：点击任意文字直接修改，点击产品卡片编辑产品');
+}
+window.toggleEdit=function(){
+  if(editing){ setEdit(false); return; }
+  var pw=prompt('请输入编辑密码（仅管理员可编辑）：');
+  if(pw===null||pw==='')return;
+  sha256(pw).then(function(h){
+    if(h===EDIT_PASS_HASH){ setEdit(true); }
+    else { toast('密码错误，无法进入编辑模式'); }
+  }).catch(function(){ toast('当前浏览器不支持安全校验，无法进入编辑'); });
+};
+window.exportData=function(){
+  var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download='catalog-data.json';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); },2000);
+  toast('已导出数据文件 catalog-data.json（可发给我烘焙进页面）');
+};
+window.importData=function(){
+  var raw=prompt('粘贴要导入的数据 JSON（打开导出的 catalog-data.json 全选复制后粘贴）：');
+  if(!raw)return;
+  try{
+    var d=JSON.parse(raw);
+    if(!d||!Array.isArray(d.products)) throw new Error('bad');
+    d.products.forEach(function(p){
+      if(!p.series)p.series='默认系列';
+      if(!p.gallery||!p.gallery.length)p.gallery=(p.img?[p.img]:[]);
+      if(!p.skus)p.skus=[];
+    });
+    data=d; persist(); renderAll(); toast('数据导入成功');
+  }catch(e){ toast('数据格式不正确，导入失败'); }
+};
+
+/* ---------- 事件 ---------- */
+$('#productGrid').addEventListener('click',function(e){
+  var card=e.target.closest('.card'); if(!card)return;
+  var id=card.dataset.id;
+  if(e.target.closest('.card-del')){ e.stopPropagation(); if(confirm('确定删除该产品？此操作不可撤销。'))window.deleteProduct(id); return; }
+  if(editing)openEditor(id); else openView(id);
+});
+$('#filters').addEventListener('click',function(e){
+  var b=e.target.closest('.pill'); if(!b)return;
+  currentSeries=b.dataset.series; currentCat='全部'; renderFilters(); renderProducts();
+});
+$('#filters2').addEventListener('click',function(e){
+  var b=e.target.closest('.pill'); if(!b)return;
+  currentCat=b.dataset.cat; renderFilters(); renderProducts();
+});
+$('#specRows').addEventListener('click',function(e){
+  var d=e.target.closest('.sp-del'); if(!d)return;
+  var rows=$$('#specRows .spec-row');
+  if(rows.length<=1){ rows[0].querySelectorAll('input').forEach(function(i){ i.value=''; }); return; }
+  d.closest('.spec-row').remove();
+});
+$('#galleryRows').addEventListener('input',function(e){
+  var inp=e.target.closest('.gal-url'); if(!inp)return;
+  var v=inp.value.trim(); if(v){ inp.closest('.gal-row').querySelector('.gal-prev').src=v; }
+});
+$('#galleryRows').addEventListener('change',function(e){
+  var f=e.target.files[0]; if(!f)return;
+  if(!f.type.startsWith('image/')){ toast('请选择图片文件'); return; }
+  if(f.size>1.5*1024*1024) toast('图片超过 1.5MB，会占用较多存储空间，建议先压缩');
+  var r=new FileReader();
+  r.onload=function(){
+    var row=e.target.closest('.gal-row');
+    row.querySelector('.gal-url').value=r.result;
+    row.querySelector('.gal-prev').src=r.result;
+  };
+  r.readAsDataURL(f);
+});
+$('#galleryRows').addEventListener('click',function(e){
+  var d=e.target.closest('.gal-del'); if(!d)return;
+  var rows=$$('#galleryRows .gal-row');
+  if(rows.length<=1){ rows[0].querySelector('.gal-url').value=''; rows[0].querySelector('.gal-prev').src=placeholderSVG(); return; }
+  d.closest('.gal-row').remove();
+});
+$('#skuRows').addEventListener('click',function(e){
+  var d=e.target.closest('.sp-del'); if(!d)return;
+  var rows=$$('#skuRows .sku-edit-row');
+  if(rows.length<=1){ rows[0].querySelectorAll('input').forEach(function(i){ i.value=''; }); return; }
+  d.closest('.sku-edit-row').remove();
+});
+$('#viewModal').addEventListener('click',function(e){
+  var t=e.target;
+  if(t.classList&&t.classList.contains('vm-thumb')){ vmIdx=+t.dataset.i; renderGal(); return; }
+  if(t.classList&&t.classList.contains('vm-arrow')){
+    var gal=window._vmGal||[];
+    if(!gal.length)return;
+    if(t.classList.contains('prev')) vmIdx=(vmIdx-1+gal.length)%gal.length;
+    else vmIdx=(vmIdx+1)%gal.length;
+    renderGal();
+  }
+});
+$('#vmSku').addEventListener('click',function(e){
+  var chip=e.target.closest('.sku-chip'); if(!chip)return;
+  var grp=chip.closest('.sku-grp');
+  grp.querySelectorAll('.sku-chip').forEach(function(c){ c.classList.remove('on'); });
+  chip.classList.add('on');
+});
+$('#contactForm').addEventListener('submit',function(e){ e.preventDefault(); e.target.reset(); toast('提交成功（演示模式，可自行对接后端）'); });
+document.addEventListener('blur',function(e){
+  var el=e.target;
+  if(editing&&el&&el.dataset&&el.dataset.path){ var v=el.textContent.trim(); setByPath(data,el.dataset.path,v); persist(); }
+},true);
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){ $$('.modal-mask.open').forEach(function(m){ m.classList.remove('open'); }); document.body.style.overflow=''; }
+});
+$$('.modal-mask').forEach(function(m){
+  m.addEventListener('click',function(e){ if(e.target===m){ m.classList.remove('open'); document.body.style.overflow=''; } });
+});
+
+/* ---------- Toast & 关闭 ---------- */
+var toastTimer=null;
+function toast(msg){ var t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(function(){ t.classList.remove('show'); },2600); }
+window.closeModal=function(id){ $('#'+id).classList.remove('open'); document.body.style.overflow=''; };
+
+/* ---------- 启动 ---------- */
+$('#year').textContent=new Date().getFullYear();
+renderAll(); observeRv();
+})();
+</script>
+</body>
+</html>

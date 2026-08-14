@@ -180,7 +180,9 @@ body.editing [data-path]:hover{outline-color:var(--red);background:var(--red-sof
 .vm-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}
 .vm-img,.vm-body{min-width:0}
 .vm-img{position:relative;background:#0d0d10;aspect-ratio:4/3;overflow:hidden}
-.vm-img img{width:100%;height:100%;object-fit:cover}
+.vm-slide-track{display:flex;width:100%;height:100%;transition:transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)}
+.vm-slide-item{flex:0 0 100%;width:100%;height:100%}
+.vm-slide-item img{width:100%;height:100%;object-fit:cover}
 .vm-img .card-cat{top:18px;left:18px}
 .vm-img .card-sub{top:50px;left:18px}
 .vm-count{position:absolute;top:16px;right:16px;background:rgba(10,10,11,.78);color:#fff;font-size:12px;padding:4px 11px;font-family:var(--disp);letter-spacing:.08em;z-index:4}
@@ -209,6 +211,10 @@ body.editing [data-path]:hover{outline-color:var(--red);background:var(--red-sof
 .spec{width:100%;border-collapse:collapse;margin-top:10px}
 .spec td{padding:10.5px 12px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:top}
 .spec td:first-child{color:var(--muted);width:38%;letter-spacing:.05em}
+.vm-details{margin-top:30px;border-top:1px solid var(--line);padding-top:24px}
+.vm-details-title{font-size:15px;font-weight:700;margin-bottom:16px;letter-spacing:.1em;display:flex;align-items:center;gap:8px}
+.vm-details-title::before{content:"";width:4px;height:14px;background:var(--red);display:inline-block}
+.vm-details img{width:100%;height:auto;margin-bottom:10px}
 .vm-cta{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
 .vm-cta .btn-red{padding:12px 30px;font-size:14px}
 .vm-cta .btn-ghost{padding:12px 30px;font-size:14px}
@@ -478,7 +484,7 @@ body.editing [data-path]:hover{outline-color:var(--red);background:var(--red-sof
     <button class="modal-x" onclick="window.closeModal('viewModal')" aria-label="关闭">✕</button>
     <div class="vm-grid">
       <div class="vm-img">
-        <img id="vmImg" src="" alt="产品图片" data-fallback="" onerror="window.imgErr(this)">
+        <div class="vm-slide-track" id="vmSlideTrack"></div>
         <span class="card-cat" id="vmCat"></span>
         <span class="card-sub" id="vmSub"></span>
         <span class="vm-count" id="vmCount"></span>
@@ -494,6 +500,10 @@ body.editing [data-path]:hover{outline-color:var(--red);background:var(--red-sof
         <p class="vm-desc" id="vmDesc"></p>
         <div class="vm-sku" id="vmSku"></div>
         <table class="spec" id="vmSpec"></table>
+        <div class="vm-details" id="vmDetailsWrap" style="display:none">
+          <div class="vm-details-title">产品图文详情</div>
+          <div id="vmDetails"></div>
+        </div>
         <div class="vm-cta">
           <a class="btn-red" href="#contact" onclick="window.closeModal('viewModal')">在线询价</a>
           <a class="btn-ghost" id="vmTel" href="tel:">拨打电话</a>
@@ -525,10 +535,14 @@ body.editing [data-path]:hover{outline-color:var(--red);background:var(--red-sof
         <div class="field"><label>标签（逗号分隔）</label><input id="efTags" type="text" placeholder="如：35L大容量, MOLLE扩展"></div>
         <div class="field ef-full"><label>一句话卖点</label><input id="efBrief" type="text" placeholder="卡片上展示的简短卖点"></div>
         <div class="field ef-full"><label>详细描述</label><textarea id="efDesc" rows="3" placeholder="详情弹窗中展示的产品描述"></textarea></div>
-        <div class="field ef-full"><label>产品图片（可多张，首图为封面，支持 URL 或本地上传）</label>
+        <div class="field ef-full"><label>产品画廊轮播图（可多张，首图为卡片封面）</label>
           <div id="galleryRows"></div>
-          <button type="button" class="btn-add-row" onclick="window.addGalleryRow()">+ 添加图片</button>
-          <div class="file-hint">本地上传会将图片存入浏览器本地存储（建议 1.5MB 以内）；粘贴 URL 则引用线上图片</div>
+          <button type="button" class="btn-add-row" onclick="window.addGalleryRow()">+ 添加轮播图</button>
+          <div class="file-hint">支持粘贴图片 URL 或本地上传。多色产品请按“颜色选项”的顺序将对应颜色图片放进来。</div>
+        </div>
+        <div class="field ef-full"><label>产品详情长图（垂直平铺在弹窗最下方，像淘宝详情页一样）</label>
+          <div id="detailImgsRows"></div>
+          <button type="button" class="btn-add-row" onclick="window.addDetailImgsRow()">+ 添加详情图</button>
         </div>
         <div class="field ef-full"><label>SKU 规格（如 颜色/容量，选项用逗号分隔）</label>
           <div id="skuRows"></div>
@@ -608,7 +622,8 @@ var DEFAULT_DATA={
   products:[
     {id:'p1',name:'路普战术双肩背包',model:'LP-BP35',series:'路普系列',category:'战术背包',
      img:'media-output/img-mssif67f-c7485015.png',imgFallback:'https://sc02.alicdn.com/kf/A3780a645d61c4ef2a277cedf50c78590u.png',
-     gallery:['media-output/img-mssif67f-c7485015.png','media-output/img-msspjgl1-1aedef57.png','media-output/img-msspkleb-6b6ea5cf.png','media-output/img-mssif5dr-5cef33b0.png','https://sc04.alicdn.com/kf/A5d00d41cb6c949548e7e8bf2f2e8a7f03.jpg'],
+     gallery:['media-output/img-mssif67f-c7485015.png','media-output/img-msspjgl1-1aedef57.png','media-output/img-msspkleb-6b6ea5cf.png','media-output/img-mssif5dr-5cef33b0.png'],
+     detailImgs:['https://sc04.alicdn.com/kf/A5d00d41cb6c949548e7e8bf2f2e8a7f03.jpg'],
      brief:'35L 大容量战术双肩包，MOLLE 模块化扩展，通勤户外两用',
      desc:'采用 900D 高密度尼龙与防水涂层，底部加强耐磨层；主仓 35L 可容纳 17 英寸笔记本，前仓 MOLLE 织带支持模块化扩展，背部透气背负系统长时间使用不闷热。',
      tags:['35L 大容量','MOLLE 扩展','防水耐磨'],
@@ -670,6 +685,7 @@ function load(){
       d.products.forEach(function(p){
         if(!p.series)p.series='默认系列';
         if(!p.gallery||!p.gallery.length)p.gallery=(p.img?[p.img]:[]);
+        if(!p.detailImgs)p.detailImgs=[];
         if(!p.skus)p.skus=[];
       });
       return d;
@@ -771,6 +787,13 @@ function openView(id){
     skuBox.innerHTML=visibleSkus.map(function(g){
       return '<div class="sku-grp"><div class="sku-name">'+esc(g.name)+'</div>'+g.options.map(function(o,i){ return '<span class="sku-chip" data-name="'+esc(g.name)+'" data-idx="'+i+'">'+esc(o)+'</span>'; }).join('')+'</div>';
     }).join('');
+    
+    // Auto-select first chip
+    $$('.sku-grp').forEach(function(grp){
+      var firstChip = grp.querySelector('.sku-chip');
+      if (firstChip) firstChip.classList.add('on');
+    });
+
     window._vmSkuMap={};
     var mapGrp=p.skus.filter(function(g){return g.name==='图片映射';})[0];
     var colGrp=p.skus.filter(function(g){return /颜色|配色/.test(g.name);})[0];
@@ -778,13 +801,27 @@ function openView(id){
       colGrp.options.forEach(function(o,i){ window._vmSkuMap[o]=mapGrp.options[i]; });
     }
   } else skuBox.innerHTML='';
+  
+  var dWrap=$('#vmDetailsWrap'), dBox=$('#vmDetails');
+  if(p.detailImgs&&p.detailImgs.length){
+    dBox.innerHTML=p.detailImgs.map(function(u){ return '<img src="'+esc(u)+'" loading="lazy" onerror="window.imgErr(this)">'; }).join('');
+    dWrap.style.display='block';
+  } else dWrap.style.display='none';
+  
   renderGal();
   $('#viewModal').classList.add('open'); document.body.style.overflow='hidden';
 }
 function renderGal(){
   var gal=window._vmGal||[];
-  var main=$('#vmImg'); main.src=gal[vmIdx]||placeholderSVG();
-  main.setAttribute('data-fallback',vmIdx===0?(window._vmPfb||''):'');
+  var track=$('#vmSlideTrack');
+  
+  // init slide track
+  if(track.children.length !== gal.length){
+    track.innerHTML=gal.map(function(g){ return '<div class="vm-slide-item"><img src="'+esc(g)+'" onerror="window.imgErr(this)"></div>'; }).join('');
+  }
+  
+  track.style.transform = 'translateX(-' + (vmIdx * 100) + '%)';
+  
   $('#vmCount').textContent=(vmIdx+1)+' / '+gal.length;
   $('#vmThumbs').innerHTML=gal.map(function(g,i){
     return '<img class="vm-thumb'+(i===vmIdx?' on':'')+'" src="'+esc(g)+'" data-i="'+i+'" alt="图 '+(i+1)+'" onerror="window.imgErr(this)">';
@@ -817,6 +854,7 @@ window.openEditor=function(id){
   $('#seriesList').innerHTML=seriesList().map(function(s){ return '<option value="'+esc(s)+'">'; }).join('');
   $('#catList').innerHTML=catList().map(function(c){ return '<option value="'+esc(c)+'">'; }).join('');
   renderGalRows(p?(p.gallery&&p.gallery.length?p.gallery:[p.img]):[]);
+  renderDetailImgsRows(p?p.detailImgs:[]);
   renderSkuRows(p?p.skus:[]);
   renderSpecRows(p?p.specs:[]);
   $('#efDelWrap').style.display=p?'block':'none';
@@ -829,6 +867,18 @@ function renderGalRows(urls){
     var row=document.createElement('div'); row.className='gal-row';
     row.innerHTML='<img class="gal-prev" src="'+esc(u||placeholderSVG())+'" alt="预览" onerror="window.imgErr(this)">'+
       '<input class="gal-url" type="text" placeholder="粘贴图片 URL，如 https://…" value="'+esc(u)+'">'+
+      '<label class="gal-file">上传<input type="file" accept="image/*" hidden></label>'+
+      '<button type="button" class="gal-del" title="删除此图">×</button>';
+    wrap.appendChild(row);
+  });
+}
+function renderDetailImgsRows(urls){
+  var wrap=$('#detailImgsRows'); wrap.innerHTML='';
+  var rows=(urls&&urls.length)?urls:[''];
+  rows.forEach(function(u){
+    var row=document.createElement('div'); row.className='gal-row';
+    row.innerHTML='<img class="gal-prev" src="'+esc(u||placeholderSVG())+'" alt="预览" onerror="window.imgErr(this)">'+
+      '<input class="gal-url" type="text" placeholder="粘贴详情图片 URL" value="'+esc(u)+'">'+
       '<label class="gal-file">上传<input type="file" accept="image/*" hidden></label>'+
       '<button type="button" class="gal-del" title="删除此图">×</button>';
     wrap.appendChild(row);
@@ -849,6 +899,10 @@ window.addGalleryRow=function(){
   var urls=$$('#galleryRows .gal-url').map(function(i){ return i.value.trim(); });
   urls.push(''); renderGalRows(urls);
 };
+window.addDetailImgsRow=function(){
+  var urls=$$('#detailImgsRows .gal-url').map(function(i){ return i.value.trim(); });
+  urls.push(''); renderDetailImgsRows(urls);
+};
 window.addSkuRow=function(){
   var rows=$$('#skuRows .sku-edit-row').map(function(r){ return {name:r.querySelector('.sk-n').value,options:r.querySelector('.sk-o').value}; });
   rows.push({name:'',options:''}); renderSkuRows(rows);
@@ -857,6 +911,7 @@ window.saveEditor=function(){
   var name=$('#efName').value.trim();
   if(!name){ toast('请填写产品名称'); $('#efName').focus(); return; }
   var gallery=$$('#galleryRows .gal-url').map(function(i){ return i.value.trim(); }).filter(Boolean);
+  var detailImgs=$$('#detailImgsRows .gal-url').map(function(i){ return i.value.trim(); }).filter(Boolean);
   var skus=$$('#skuRows .sku-edit-row').map(function(r){
     return {name:r.querySelector('.sk-n').value.trim(),options:r.querySelector('.sk-o').value.split(/[,，]/).map(function(s){return s.trim();}).filter(Boolean)};
   }).filter(function(g){ return g.name; });
@@ -866,7 +921,7 @@ window.saveEditor=function(){
     category:$('#efCat').value.trim()||'未分类',
     brief:$('#efBrief').value.trim(), desc:$('#efDesc').value.trim(),
     tags:$('#efTags').value.split(/[,，]/).map(function(s){return s.trim();}).filter(Boolean),
-    img:gallery[0]||placeholderSVG(), imgFallback:'', gallery:gallery, skus:skus,
+    img:gallery[0]||placeholderSVG(), imgFallback:'', gallery:gallery, detailImgs:detailImgs, skus:skus,
     specs:$$('#specRows .spec-row').map(function(r){ return [r.querySelector('.sp-k').value.trim(),r.querySelector('.sp-v').value.trim()]; }).filter(function(s){ return s[0]||s[1]; })
   };
   var idx=-1; data.products.forEach(function(x,i){ if(x.id===product.id)idx=i; });
@@ -928,6 +983,7 @@ window.importData=function(){
     d.products.forEach(function(p){
       if(!p.series)p.series='默认系列';
       if(!p.gallery||!p.gallery.length)p.gallery=(p.img?[p.img]:[]);
+      if(!p.detailImgs)p.detailImgs=[];
       if(!p.skus)p.skus=[];
     });
     data=d; persist(); renderAll(); toast('数据导入成功');
@@ -955,11 +1011,11 @@ $('#specRows').addEventListener('click',function(e){
   if(rows.length<=1){ rows[0].querySelectorAll('input').forEach(function(i){ i.value=''; }); return; }
   d.closest('.spec-row').remove();
 });
-$('#galleryRows').addEventListener('input',function(e){
+$('#galleryRows, #detailImgsRows').addEventListener('input',function(e){
   var inp=e.target.closest('.gal-url'); if(!inp)return;
   var v=inp.value.trim(); if(v){ inp.closest('.gal-row').querySelector('.gal-prev').src=v; }
 });
-$('#galleryRows').addEventListener('change',function(e){
+$('#galleryRows, #detailImgsRows').addEventListener('change',function(e){
   var f=e.target.files[0]; if(!f)return;
   if(!f.type.startsWith('image/')){ toast('请选择图片文件'); return; }
   if(f.size>1.5*1024*1024) toast('图片超过 1.5MB，会占用较多存储空间，建议先压缩');
@@ -971,9 +1027,10 @@ $('#galleryRows').addEventListener('change',function(e){
   };
   r.readAsDataURL(f);
 });
-$('#galleryRows').addEventListener('click',function(e){
+$('#galleryRows, #detailImgsRows').addEventListener('click',function(e){
   var d=e.target.closest('.gal-del'); if(!d)return;
-  var rows=$$('#galleryRows .gal-row');
+  var wrap=d.closest('#galleryRows') || d.closest('#detailImgsRows');
+  var rows=wrap.querySelectorAll('.gal-row');
   if(rows.length<=1){ rows[0].querySelector('.gal-url').value=''; rows[0].querySelector('.gal-prev').src=placeholderSVG(); return; }
   d.closest('.gal-row').remove();
 });

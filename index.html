@@ -571,7 +571,8 @@ body.editing [data-path]:hover{outline-color:var(--red);background:var(--red-sof
 <script>
 (function(){
 'use strict';
-var LS_KEY='ht_catalog_v2';
+var LS_KEY='ht_catalog_v3';
+var LEGACY_KEY='ht_catalog_v2';
 var $=function(s){return document.querySelector(s);};
 var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s));};
 var clone=function(o){return JSON.parse(JSON.stringify(o));};
@@ -679,28 +680,50 @@ var DEFAULT_DATA={
 /* ---------- 状态 ---------- */
 var data=load(), editing=false, currentSeries='全部', currentCat='全部';
 
+function normalizeData(d){
+  if(!d||!Array.isArray(d.products))return null;
+  d.products.forEach(function(p){
+    if(!p.series)p.series='默认系列';
+    if(!p.gallery||!p.gallery.length)p.gallery=(p.img?[p.img]:[]);
+    if(!p.detailImgs)p.detailImgs=[];
+    if(!p.skus)p.skus=[];
+  });
+  return d;
+}
 function load(){
-  try{ var raw=localStorage.getItem(LS_KEY);
-    if(raw){ var d=JSON.parse(raw); if(d&&Array.isArray(d.products)){
-      d.products.forEach(function(p){
-        if(!p.series)p.series='默认系列';
-        if(!p.gallery||!p.gallery.length)p.gallery=(p.img?[p.img]:[]);
-        if(!p.detailImgs)p.detailImgs=[];
-        if(!p.skus)p.skus=[];
-      });
-      return d;
-    } }
+  try{
+    var raw=localStorage.getItem(LS_KEY)||localStorage.getItem(LEGACY_KEY);
+    var d=raw?normalizeData(JSON.parse(raw)):null;
+    if(d)return d;
   }catch(e){}
   return clone(DEFAULT_DATA);
 }
-function persist(){ try{ localStorage.setItem(LS_KEY,JSON.stringify(data)); }catch(e){ toast('保存失败：本地存储空间不足或不可用'); } }
+function persist(){
+  try{
+    var raw=JSON.stringify(data);
+    localStorage.setItem(LS_KEY,raw);
+    var check=localStorage.getItem(LS_KEY);
+    if(!check||JSON.parse(check).products.length!==data.products.length){
+      toast('保存校验失败，请检查浏览器存储权限');
+      return false;
+    }
+    return true;
+  }catch(e){
+    toast('保存失败：浏览器存储空间不足或被禁用');
+    return false;
+  }
+}
 function getByPath(o,p){ return p.split('.').reduce(function(a,k){ return (a==null?a:a[k]); },o); }
 function setByPath(o,p,v){ var ks=p.split('.'),a=o,i; for(i=0;i<ks.length-1;i++){ if(a[ks[i]]==null)a[ks[i]]={}; a=a[ks[i]]; } a[ks[ks.length-1]]=v; }
 function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 function seriesList(){ var s={}; data.products.forEach(function(p){ if(p.series)s[p.series]=1; }); return Object.keys(s); }
 function catList(){ var s={}; data.products.forEach(function(p){ if(p.category)s[p.category]=1; }); return Object.keys(s); }
 function catListOf(series){ var s={}; data.products.forEach(function(p){ if(p.series===series&&p.category)s[p.category]=1; }); return Object.keys(s); }
-function placeholderSVG(){ return 'data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="768"><rect width="1024" height="768" fill="#121216"/><rect x="26" y="26" width="972" height="716" fill="none" stroke="#e60012" stroke-width="3"/><text x="512" y="402" font-family="Arial" font-size="80" font-weight="bold" fill="#e60012" text-anchor="middle">HT</text></svg>'); }
+function placeholderSVG(){ return 'data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="768"><rect width="1024" height="768" fill="#121216"/><rect x="26" y="26" width="972" height="716" fill="none" stroke="#e60012" stroke-width="3"/><text x="512" y="402" font-family="Arial" font-size="80" font-weight="bold" fill="#e60012" text-anchor="middle">LP</text></svg>'); }
+function imageKey(url){
+  return String(url||'').replace(/^\.\//,'').replace(/^https?:\/\/[^/]+\//,'').replace(/^.*\//,'');
+}
+function imageMatch(a,b){ return a===b || imageKey(a)===imageKey(b); }
 
 window.imgErr=function(el){ el.onerror=null; var fb=el.getAttribute('data-fallback'); if(fb){ el.setAttribute('data-fallback',''); el.src=fb; } else { el.src=placeholderSVG(); } };
 
@@ -768,12 +791,13 @@ function observeRv(){
 }
 
 /* ---------- 详情弹窗 ---------- */
-var vmIdx=0;
+var vmIdx=0, vmGalKey='';
 function openView(id){
   var p=null; data.products.forEach(function(x){ if(x.id===id)p=x; }); if(!p)return;
   var gal=(p.gallery&&p.gallery.length)?p.gallery.slice():[p.img||''];
   if(!gal[0])gal[0]=placeholderSVG();
   vmIdx=0;
+  vmGalKey=p.id+':'+gal.join('|');
   window._vmGal=gal; window._vmPfb=p.imgFallback||'';
   $('#vmCat').textContent=p.series||''; $('#vmSub').textContent=p.category;
   $('#vmName').textContent=p.name; $('#vmModel').textContent=p.model;
@@ -797,8 +821,12 @@ function openView(id){
     window._vmSkuMap={};
     var mapGrp=p.skus.filter(function(g){return g.name==='图片映射';})[0];
     var colGrp=p.skus.filter(function(g){return /颜色|配色/.test(g.name);})[0];
-    if(mapGrp&&colGrp){
-      colGrp.options.forEach(function(o,i){ window._vmSkuMap[o]=mapGrp.options[i]; });
+    if(colGrp){
+      colGrp.options.forEach(function(o,i){
+        var mapped=mapGrp&&mapGrp.options[i];
+        if(mapped) window._vmSkuMap[o]=mapped;
+        else if(p.gallery[i]) window._vmSkuMap[o]=p.gallery[i];
+      });
     }
   } else skuBox.innerHTML='';
   
@@ -816,11 +844,15 @@ function renderGal(){
   var track=$('#vmSlideTrack');
   
   // init slide track
-  if(track.children.length !== gal.length){
+  if(track.dataset.galKey !== vmGalKey || track.children.length !== gal.length){
+    track.dataset.galKey=vmGalKey;
     track.innerHTML=gal.map(function(g){ return '<div class="vm-slide-item"><img src="'+esc(g)+'" onerror="window.imgErr(this)"></div>'; }).join('');
+    track.style.transition='none';
+    track.style.transform='translateX(-'+(vmIdx*100)+'%)';
+    requestAnimationFrame(function(){ track.style.transition='transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)'; });
+  } else {
+    track.style.transform = 'translateX(-' + (vmIdx * 100) + '%)';
   }
-  
-  track.style.transform = 'translateX(-' + (vmIdx * 100) + '%)';
   
   $('#vmCount').textContent=(vmIdx+1)+' / '+gal.length;
   $('#vmThumbs').innerHTML=gal.map(function(g,i){
@@ -926,7 +958,7 @@ window.saveEditor=function(){
   };
   var idx=-1; data.products.forEach(function(x,i){ if(x.id===product.id)idx=i; });
   if(idx>=0)data.products[idx]=product; else data.products.push(product);
-  persist(); renderAll(); closeModal('editModal'); toast('产品已保存');
+  if(persist()){ renderAll(); closeModal('editModal'); toast('产品已保存，刷新后仍会保留'); }
 };
 window.deleteProduct=function(id){
   if(!confirm('确定删除该产品？此操作不可撤销。'))return;
@@ -1011,28 +1043,30 @@ $('#specRows').addEventListener('click',function(e){
   if(rows.length<=1){ rows[0].querySelectorAll('input').forEach(function(i){ i.value=''; }); return; }
   d.closest('.spec-row').remove();
 });
-$('#galleryRows, #detailImgsRows').addEventListener('input',function(e){
-  var inp=e.target.closest('.gal-url'); if(!inp)return;
-  var v=inp.value.trim(); if(v){ inp.closest('.gal-row').querySelector('.gal-prev').src=v; }
-});
-$('#galleryRows, #detailImgsRows').addEventListener('change',function(e){
-  var f=e.target.files[0]; if(!f)return;
-  if(!f.type.startsWith('image/')){ toast('请选择图片文件'); return; }
-  if(f.size>1.5*1024*1024) toast('图片超过 1.5MB，会占用较多存储空间，建议先压缩');
-  var r=new FileReader();
-  r.onload=function(){
-    var row=e.target.closest('.gal-row');
-    row.querySelector('.gal-url').value=r.result;
-    row.querySelector('.gal-prev').src=r.result;
-  };
-  r.readAsDataURL(f);
-});
-$('#galleryRows, #detailImgsRows').addEventListener('click',function(e){
-  var d=e.target.closest('.gal-del'); if(!d)return;
-  var wrap=d.closest('#galleryRows') || d.closest('#detailImgsRows');
-  var rows=wrap.querySelectorAll('.gal-row');
-  if(rows.length<=1){ rows[0].querySelector('.gal-url').value=''; rows[0].querySelector('.gal-prev').src=placeholderSVG(); return; }
-  d.closest('.gal-row').remove();
+$$('#galleryRows, #detailImgsRows').forEach(function(wrap){
+  wrap.addEventListener('input',function(e){
+    var inp=e.target.closest('.gal-url'); if(!inp)return;
+    var v=inp.value.trim(); if(v){ inp.closest('.gal-row').querySelector('.gal-prev').src=v; }
+  });
+  wrap.addEventListener('change',function(e){
+    if(!e.target.files||!e.target.files[0])return;
+    var f=e.target.files[0];
+    if(!f.type.startsWith('image/')){ toast('请选择图片文件'); return; }
+    if(f.size>1.5*1024*1024) toast('图片超过 1.5MB，会占用较多存储空间，建议先压缩');
+    var r=new FileReader();
+    r.onload=function(){
+      var row=e.target.closest('.gal-row');
+      row.querySelector('.gal-url').value=r.result;
+      row.querySelector('.gal-prev').src=r.result;
+    };
+    r.readAsDataURL(f);
+  });
+  wrap.addEventListener('click',function(e){
+    var d=e.target.closest('.gal-del'); if(!d)return;
+    var rows=wrap.querySelectorAll('.gal-row');
+    if(rows.length<=1){ rows[0].querySelector('.gal-url').value=''; rows[0].querySelector('.gal-prev').src=placeholderSVG(); return; }
+    d.closest('.gal-row').remove();
+  });
 });
 $('#skuRows').addEventListener('click',function(e){
   var d=e.target.closest('.sp-del'); if(!d)return;
@@ -1057,12 +1091,13 @@ $('#vmSku').addEventListener('click',function(e){
   grp.querySelectorAll('.sku-chip').forEach(function(c){ c.classList.remove('on'); });
   chip.classList.add('on');
   if(/颜色|配色/.test(chip.dataset.name)&&window._vmSkuMap){
-    var imgUrl=window._vmSkuMap[chip.textContent];
+    var imgUrl=window._vmSkuMap[chip.textContent.trim()];
     if(imgUrl){
-      var idx=window._vmGal.indexOf('media-output/'+imgUrl);
-      if(idx===-1) idx=window._vmGal.indexOf(imgUrl);
+      var idx=-1;
+      window._vmGal.forEach(function(g,i){ if(imageMatch(g,imgUrl))idx=i; });
       if(idx!==-1){ vmIdx=idx; renderGal(); }
-    }
+      else { toast('该颜色暂未绑定专属图片，请在编辑模式中补充颜色图片'); }
+    } else { toast('该颜色暂未绑定专属图片，请在编辑模式中补充颜色图片'); }
   }
 });
 $('#contactForm').addEventListener('submit',function(e){ e.preventDefault(); e.target.reset(); toast('提交成功（演示模式，可自行对接后端）'); });

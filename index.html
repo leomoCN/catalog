@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>宏图战术 · 在线产品画册</title>
+<title>路普户外 · 在线画册</title>
 <style>
 :root{
   --black:#0a0a0b; --panel:#101014; --card:#16161b;
@@ -135,6 +135,20 @@ body.editing .card-del:hover{border-color:var(--red);color:#fff}
 .field input,.field textarea{width:100%;background:#0c0c10;border:1px solid rgba(255,255,255,.15);color:#fff;padding:12px 14px;font-size:14px;font-family:inherit;transition:border-color .25s}
 .field input:focus,.field textarea:focus{outline:none;border-color:var(--red)}
 .field textarea{resize:vertical;min-height:96px}
+
+/* Policy */
+.policy-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.policy-card{background:var(--card);border:1px solid var(--line);padding:36px;position:relative}
+.policy-title{font-size:18px;font-weight:800;color:var(--red);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.policy-title::before{content:"";width:4px;height:16px;background:var(--red);display:inline-block}
+.policy-list{list-style:none}
+.policy-list li{position:relative;padding-left:16px;margin-bottom:12px;font-size:14px;color:var(--muted);line-height:1.7}
+.policy-list li::before{content:"•";position:absolute;left:0;color:rgba(255,255,255,.2)}
+.policy-step{display:flex;margin-bottom:16px;gap:16px;align-items:flex-start}
+.ps-num{width:28px;height:28px;background:rgba(230,0,18,.1);border:1px solid rgba(230,0,18,.3);color:var(--red);border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:700;flex:none}
+.ps-txt{font-size:14px;color:var(--muted);line-height:1.7;padding-top:3px}
+.ps-txt b{color:#fff}
+.ps-arrow{color:rgba(230,0,18,.5);margin:0 4px;font-size:12px}
 
 /* Footer */
 footer{border-top:1px solid var(--line);padding:36px 40px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:13px}
@@ -273,16 +287,17 @@ body.editing [data-path]:hover{outline-color:var(--red);background:var(--red-sof
 <!-- ===================== 导航 ===================== -->
 <header class="nav">
   <div class="brand" onclick="location.href='#home'">
-    <div class="brand-mark">HT</div>
+    <div class="brand-mark">LP</div>
     <div>
-      <div class="brand-name" data-path="brand">宏图精工</div>
-      <div class="brand-en" data-path="brandEn">HUANGTU PRECISION</div>
+      <div class="brand-name" data-path="brand">路普户外</div>
+      <div class="brand-en" data-path="brandEn">LUPU OUTDOOR</div>
     </div>
   </div>
-  <nav class="nav-links" id="navLinks">
+    <nav class="nav-links" id="navLinks">
     <a href="#home">首页</a>
     <a href="#products">产品中心</a>
-    <a href="#about">核心能力</a>
+    <a href="#about">工厂实力</a>
+    <a href="#policy">合作政策</a>
     <a href="#contact">联系我们</a>
   </nav>
   <div class="nav-right">
@@ -332,29 +347,71 @@ body.editing [data-path]:hover{outline-color:var(--red);background:var(--red-sof
   <div class="sec-head rv">
     <span class="sec-no">02 /</span>
     <div class="sec-titles">
-      <h2 class="sec-title" data-path="sectionTitles.about">核心能力</h2>
-      <div class="sec-en" data-path="sectionTitles.aboutEn">CORE CAPABILITIES</div>
+      <h2 class="sec-title" data-path="sectionTitles.about">工厂实力</h2>
+      <div class="sec-en" data-path="sectionTitles.aboutEn">FACTORY STRENGTH</div>
     </div>
     <div class="sec-line"></div>
   </div>
   <div class="about-grid">
     <div class="about-card rv">
       <div class="about-num">01</div>
-      <div class="about-en" data-path="about.items.0.en">R&amp;D</div>
-      <h3 class="about-title" data-path="about.items.0.title">精密研发</h3>
-      <p class="about-desc" data-path="about.items.0.desc">18 年非标定制经验，20+ 项专利技术，支持 OEM / ODM 深度定制，从图纸到量产最快 15 天出样。</p>
+      <div class="about-en" data-path="about.items.0.en">PRODUCTION</div>
+      <h3 class="about-title" data-path="about.items.0.title">源头工厂直供</h3>
+      <p class="about-desc" data-path="about.items.0.desc">厂房面积 25000㎡，600+ 生产设备，600 多人的专业生产与技术研发团队，集研发设计、生产、销售于一体的综合型企业。</p>
     </div>
     <div class="about-card rv">
       <div class="about-num">02</div>
-      <div class="about-en" data-path="about.items.1.en">QC</div>
-      <h3 class="about-title" data-path="about.items.1.title">品质管控</h3>
-      <p class="about-desc" data-path="about.items.1.desc">ISO9001 全流程质量体系，关键工序 100% 检测，三坐标测量仪全检出厂，合格率 99.8%。</p>
+      <div class="about-en" data-path="about.items.1.en">STOCK</div>
+      <h3 class="about-title" data-path="about.items.1.title">海量现货储备</h3>
+      <p class="about-desc" data-path="about.items.1.desc">10000㎡ 现货仓库，2000+ SKU 货源充足。支持混批、一件代发，全天售后，24H 快速出货，适合国内外跨境电商及分销代理。</p>
     </div>
     <div class="about-card rv">
       <div class="about-num">03</div>
-      <div class="about-en" data-path="about.items.2.en">DELIVERY</div>
-      <h3 class="about-title" data-path="about.items.2.title">全球交付</h3>
-      <p class="about-desc" data-path="about.items.2.desc">服务 32 国客户，标准品 7 天发货，定制件 30 天交付，全流程物流可追溯。</p>
+      <div class="about-en" data-path="about.items.2.en">OEM/ODM</div>
+      <h3 class="about-title" data-path="about.items.2.title">专业深度定制</h3>
+      <p class="about-desc" data-path="about.items.2.desc">支持贴牌加工、手工加工，承接各类中高品质大数量订单。快速免费打样，供应链强大；应用碳纤维、阻燃、IRR等新技术新材料持续创新。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 合作政策 ===================== -->
+<section class="section" id="policy">
+  <div class="sec-head rv">
+    <span class="sec-no">03 /</span>
+    <div class="sec-titles">
+      <h2 class="sec-title" data-path="sectionTitles.policy">合作政策与流程</h2>
+      <div class="sec-en" data-path="sectionTitles.policyEn">COOPERATION POLICY & PROCESS</div>
+    </div>
+    <div class="sec-line"></div>
+  </div>
+  
+  <div class="policy-grid">
+    <div class="policy-card rv">
+      <h3 class="policy-title">交易与售后保障</h3>
+      <ul class="policy-list">
+        <li><span data-path="policy.price"><b>价格说明</b>：现货网上所标价格为出厂价，订制单需另外议价。</span></li>
+        <li><span data-path="policy.freight"><b>物流运费</b>：可根据客户要求发物流或快递，运费另外根据所到地区核算；如下单后运费有差可联系修改。</span></li>
+        <li><span data-path="policy.invoice"><b>发票支持</b>：本厂可以开增值税发票（另加收10%）、普通发票、收据。</span></li>
+        <li><span data-path="policy.payment"><b>付款方式</b>：现货支持网上支付宝、银行转账；订单需预付 30% 定金，余款付清后发货。</span></li>
+        <li><span data-path="policy.shipping"><b>发货时效</b>：每天 18 点前下单当日发货，18 点后次日发货（特殊情况联系客服）。</span></li>
+        <li><span data-path="policy.aftersale"><b>售后处理</b>：收货 7 日内如发现货物有问题请及时联系客服处理。禁止未经允许使用我司图片，使用需在我司采购。</span></li>
+      </ul>
+    </div>
+    
+    <div class="policy-card rv">
+      <h3 class="policy-title">OEM/ODM 定制流程</h3>
+      <div class="policy-step">
+        <div class="ps-num">1</div>
+        <div class="ps-txt"><span data-path="policy.flow1"><b>打样阶段</b>：咨询说明需求/提供版袋 <span class="ps-arrow">→</span> 产品估价 <span class="ps-arrow">→</span> 支付版费 <span class="ps-arrow">→</span> 按需打样 <span class="ps-arrow">→</span> 客户确认样品和价格</span></div>
+      </div>
+      <div class="policy-step">
+        <div class="ps-num">2</div>
+        <div class="ps-txt"><span data-path="policy.flow2"><b>大货阶段</b>：下正式订单 <span class="ps-arrow">→</span> 预付 30% 定金 <span class="ps-arrow">→</span> 工厂生产 <span class="ps-arrow">→</span> 客户验货确认品质 <span class="ps-arrow">→</span> 支付 70% 尾款 <span class="ps-arrow">→</span> 安排发货 <span class="ps-arrow">→</span> 客户收货（版费下大货单退还）</span></div>
+      </div>
+      <div class="policy-step">
+        <div class="ps-num">3</div>
+        <div class="ps-txt"><span data-path="policy.flow3"><b>生产时效</b>：打版一般 3-10 天，生产 20-30 天；如需订制材料则需 30-45 天。多位经验丰富的打版师傅，可根据实样、图片及详细要求快速出样。</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -362,7 +419,7 @@ body.editing [data-path]:hover{outline-color:var(--red);background:var(--red-sof
 <!-- ===================== 联系我们 ===================== -->
 <section class="section" id="contact">
   <div class="sec-head rv">
-    <span class="sec-no">03 /</span>
+    <span class="sec-no">04 /</span>
     <div class="sec-titles">
       <h2 class="sec-title" data-path="sectionTitles.contact">联系我们</h2>
       <div class="sec-en" data-path="sectionTitles.contactEn">CONTACT US</div>
@@ -387,7 +444,7 @@ body.editing [data-path]:hover{outline-color:var(--red);background:var(--red-sof
         <span class="c-dot"></span>
         <div><b>服务时间 / HOURS</b><p data-path="contact.hours">周一至周六 8:30 - 18:00</p></div>
       </div>
-      <p class="c-note" data-path="contact.note">* 以上为演示数据，进入编辑模式可直接修改</p>
+      <p class="c-note" data-path="contact.note">广州路普旅游用品有限公司 / 广东清远路普户外有限公司 欢迎各位老板来厂洽谈合作</p>
     </div>
     <form class="form-card rv" id="contactForm">
       <div class="field"><label>您的称呼 / NAME</label><input type="text" placeholder="请输入姓名" required></div>
@@ -401,8 +458,8 @@ body.editing [data-path]:hover{outline-color:var(--red);background:var(--red-sof
 
 <!-- ===================== Footer ===================== -->
 <footer>
-  <span><span class="f-brand" data-path="brand">宏图精工</span> · <span data-path="brandEn">HUANGTU PRECISION</span></span>
-  <span>© <span id="year"></span> 在线产品画册 · 演示数据可在编辑模式修改</span>
+  <span><span class="f-brand" data-path="brand">路普户外</span> · <span data-path="brandEn">LUPU OUTDOOR</span></span>
+  <span>© <span id="year"></span> 广州路普旅游用品有限公司 版权所有</span>
 </footer>
 
 <!-- ===================== 编辑工具栏 ===================== -->
@@ -506,44 +563,60 @@ var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s
 var clone=function(o){return JSON.parse(JSON.stringify(o));};
 
 var DEFAULT_DATA={
-  brand:'宏图战术',
-  brandEn:'HONGTU TACTICAL',
+  brand:'路普户外',
+  brandEn:'LUPU OUTDOOR',
   hero:{
     title:'专业战术装备 · 为严苛环境而生',
     titleEn:'TACTICAL GEAR BUILT FOR EXTREME CONDITIONS',
-    subtitle:'专注战术背包、胸包与模块化携行装备，采用高耐磨尼龙与 YKK 拉链，从面料到缝线执行军规标准，为户外、勤务与应急场景提供可靠装备。',
+    subtitle:'路普公司成立于2015年，历经多年的成长和发展，现有2个工厂。集研发设计、生产、销售为一体，主营户外背包、户外战术装备用品、防护用品等，支持OEM/ODM定制。',
     stats:[
-      {num:'15',unit:'年',label:'制造经验'},
-      {num:'80',unit:'+',label:'在售产品'},
-      {num:'26',unit:'国',label:'服务客户'},
-      {num:'99.5',unit:'%',label:'交付准时率'}
+      {num:'2.5',unit:'W㎡',label:'厂房面积'},
+      {num:'600',unit:'+',label:'生产团队'},
+      {num:'2000',unit:'+',label:'SKU 产品'},
+      {num:'1',unit:'W㎡',label:'现货仓库'}
     ]
   },
   sectionTitles:{
     products:'产品中心',productsEn:'PRODUCT CENTER',
-    about:'核心能力',aboutEn:'CORE CAPABILITIES',
+    about:'工厂实力',aboutEn:'FACTORY STRENGTH',
+    policy:'合作政策与流程',policyEn:'COOPERATION POLICY & PROCESS',
     contact:'联系我们',contactEn:'CONTACT US'
   },
   about:{items:[
-    {en:'R&D',title:'自主研发',desc:'自有版型工坊与 30+ 项专利结构设计，支持 OEM / ODM 深度定制，从打样到量产最快 15 天。'},
-    {en:'QC',title:'军规品质',desc:'面料、拉链、扣具全链路检测，关键部位 200kg 拉力测试，出厂合格率 99.5%。'},
-    {en:'DELIVERY',title:'快速交付',desc:'标准款 48 小时发货，定制款 20 天交付，全球物流可追溯。'}
+    {en:'PRODUCTION',title:'源头工厂直供',desc:'厂房面积 25000㎡，600+ 生产设备，600 多人的专业生产与技术研发团队，集研发设计、生产、销售于一体的综合型企业。'},
+    {en:'STOCK',title:'海量现货储备',desc:'10000㎡ 现货仓库，2000+ SKU 货源充足。支持混批、一件代发，全天售后，24H 快速出货，适合国内外跨境电商及分销代理。'},
+    {en:'OEM/ODM',title:'专业深度定制',desc:'支持贴牌加工、手工加工，承接各类中高品质大数量订单。快速免费打样，供应链强大；应用碳纤维、阻燃、IRR等新技术新材料持续创新。'}
   ]},
+  policy:{
+    price:'现货网上所标价格为出厂价，订制单需另外议价。',
+    freight:'可根据客户要求发物流或快递，运费另外根据所到地区核算；如下单后运费有差可联系客服修改。',
+    invoice:'本厂可以开增值税发票（另加收10%）、普通发票、收据。',
+    payment:'现货支持网上支付宝、银行转账；订单需预付 30% 定金，余款付清后发货。',
+    shipping:'每天 18 点前下单当日发货，18 点后次日发货（特殊情况联系客服）。',
+    aftersale:'收货 7 日内如发现货物有问题请及时联系客服处理。禁止未经允许使用我司图片，使用需在我司采购。',
+    flow1:'咨询说明需求/提供版袋 → 产品估价 → 支付版费 → 按需打样 → 客户确认样品和价格',
+    flow2:'下正式订单 → 预付 30% 定金 → 工厂生产 → 客户验货确认品质 → 支付 70% 尾款 → 安排发货 → 客户收货（版费下大货单退还）',
+    flow3:'打版一般 3-10 天，生产 20-30 天；如需订制材料则需 30-45 天。多位经验丰富的打版师傅，可根据实样、图片及详细要求快速出样。'
+  },
   contact:{
-    address:'浙江省义乌市北苑工业区装备产业园 12 栋',
-    phone:'0579-8666 8888',
-    email:'sales@hongtu-tactical.com',
+    address:'广东省广州市花都区...',
+    phone:'020-8888 8888',
+    email:'sales@lupu-outdoor.com',
     hours:'周一至周六 8:30 - 18:00',
-    note:'* 以上为演示数据，进入编辑模式可直接修改'
+    note:'广州路普旅游用品有限公司 / 广东清远路普户外有限公司 欢迎各位老板来厂洽谈合作'
   },
   products:[
     {id:'p1',name:'路普战术双肩背包',model:'LP-BP35',series:'路普系列',category:'战术背包',
      img:'media-output/img-mssif67f-c7485015.png',imgFallback:'https://sc02.alicdn.com/kf/A3780a645d61c4ef2a277cedf50c78590u.png',
-     gallery:['media-output/img-mssif67f-c7485015.png','media-output/img-mssif5dr-5cef33b0.png'],
+     gallery:['media-output/img-mssif67f-c7485015.png','media-output/img-msspjgl1-1aedef57.png','media-output/img-msspkleb-6b6ea5cf.png','media-output/img-mssif5dr-5cef33b0.png','https://sc04.alicdn.com/kf/A5d00d41cb6c949548e7e8bf2f2e8a7f03.jpg'],
      brief:'35L 大容量战术双肩包，MOLLE 模块化扩展，通勤户外两用',
      desc:'采用 900D 高密度尼龙与防水涂层，底部加强耐磨层；主仓 35L 可容纳 17 英寸笔记本，前仓 MOLLE 织带支持模块化扩展，背部透气背负系统长时间使用不闷热。',
      tags:['35L 大容量','MOLLE 扩展','防水耐磨'],
-     skus:[{name:'颜色',options:['黑色','狼棕','军绿']},{name:'容量',options:['35L','45L']}],
+     skus:[
+       {name:'颜色',options:['黑色','狼棕','军绿']},
+       {name:'图片映射',options:['img-mssif67f-c7485015.png','img-msspjgl1-1aedef57.png','img-msspkleb-6b6ea5cf.png']},
+       {name:'容量',options:['35L','45L']}
+     ],
      specs:[['容量','35L（可扩展 45L）'],['面料','900D 高密度尼龙 + 防水涂层'],['拉链','YKK 双开防爆拉链'],['背负系统','透气网布 + 可调胸带'],['MOLLE 织带','前仓 6×5 格'],['重量','1.35 kg']]},
     {id:'p2',name:'路普战术胸包',model:'LP-CP12',series:'路普系列',category:'战术胸包',
      img:'media-output/img-mssif228-21eee2d1.png',imgFallback:'https://sc02.alicdn.com/kf/A8bbbb999ba3148aab105ca0e20c1d6e53.png',
@@ -694,9 +767,16 @@ function openView(id){
   $('#vmTel').href='tel:'+String(data.contact.phone||'').replace(/\s/g,'');
   var skuBox=$('#vmSku');
   if(p.skus&&p.skus.length){
-    skuBox.innerHTML=p.skus.map(function(g){
-      return '<div class="sku-grp"><div class="sku-name">'+esc(g.name)+'</div>'+g.options.map(function(o){ return '<span class="sku-chip">'+esc(o)+'</span>'; }).join('')+'</div>';
+    var visibleSkus=p.skus.filter(function(g){return g.name!=='图片映射';});
+    skuBox.innerHTML=visibleSkus.map(function(g){
+      return '<div class="sku-grp"><div class="sku-name">'+esc(g.name)+'</div>'+g.options.map(function(o,i){ return '<span class="sku-chip" data-name="'+esc(g.name)+'" data-idx="'+i+'">'+esc(o)+'</span>'; }).join('')+'</div>';
     }).join('');
+    window._vmSkuMap={};
+    var mapGrp=p.skus.filter(function(g){return g.name==='图片映射';})[0];
+    var colGrp=p.skus.filter(function(g){return /颜色|配色/.test(g.name);})[0];
+    if(mapGrp&&colGrp){
+      colGrp.options.forEach(function(o,i){ window._vmSkuMap[o]=mapGrp.options[i]; });
+    }
   } else skuBox.innerHTML='';
   renderGal();
   $('#viewModal').classList.add('open'); document.body.style.overflow='hidden';
@@ -919,6 +999,14 @@ $('#vmSku').addEventListener('click',function(e){
   var grp=chip.closest('.sku-grp');
   grp.querySelectorAll('.sku-chip').forEach(function(c){ c.classList.remove('on'); });
   chip.classList.add('on');
+  if(/颜色|配色/.test(chip.dataset.name)&&window._vmSkuMap){
+    var imgUrl=window._vmSkuMap[chip.textContent];
+    if(imgUrl){
+      var idx=window._vmGal.indexOf('media-output/'+imgUrl);
+      if(idx===-1) idx=window._vmGal.indexOf(imgUrl);
+      if(idx!==-1){ vmIdx=idx; renderGal(); }
+    }
+  }
 });
 $('#contactForm').addEventListener('submit',function(e){ e.preventDefault(); e.target.reset(); toast('提交成功（演示模式，可自行对接后端）'); });
 document.addEventListener('blur',function(e){

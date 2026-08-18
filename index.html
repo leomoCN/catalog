@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>路普户外 · 数字化战术装备智造工厂 | 官方画册 V11.0</title>
+<title>路普户外 · 数字化战术装备智造工厂 | 官方画册 V12.0</title>
 <style>
 :root{
   --red:#f50014; --red-d:#c20010; --black:#050507; --panel:#121216; --card:#1a1a20;
@@ -33,7 +33,7 @@ body{background:var(--black);color:var(--white);font-family:var(--cjk);line-heig
 .nav-links a:hover{color:var(--red)}
 
 /* ---------- Hero ---------- */
-.hero{height:80vh;position:relative;display:flex;align-items:center;overflow:hidden}
+.hero{height:85vh;position:relative;display:flex;align-items:center;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background:url('https://sc02.alicdn.com/kf/H6f83c93e82be4d0ea4dc2494f1fa4d941.jpg') center 65%/cover no-repeat;z-index:1}
 .hero-mask{position:absolute;inset:0;background:linear-gradient(90deg, #050507 8%, rgba(5,5,7,0.6) 40%, transparent 85%);z-index:2}
 .hero-inner{position:relative;z-index:10;padding:0 60px;width:100%;max-width:1400px;margin:0 auto}
@@ -48,24 +48,23 @@ body{background:var(--black);color:var(--white);font-family:var(--cjk);line-heig
 .info-box h4::before{content:"";width:3px;height:16px;background:var(--red)}
 .info-box p{font-size:13px;color:var(--muted);margin-bottom:6px}
 
-/* ---------- Factory Section (Left Side + Hover) ---------- */
-.fac-sec{height:75vh;position:relative;display:flex;background:#000;border-bottom:1px solid var(--line)}
-.fac-sidebar{width:320px;background:rgba(18,18,22,0.6);backdrop-filter:blur(30px);border-right:1px solid var(--line);z-index:20;padding:40px 30px;display:flex;flex-direction:column;gap:12px}
-.fac-tab{padding:18px 22px;border-radius:10px;border:1px solid transparent;cursor:pointer;transition:0.3s;background:rgba(255,255,255,0.02)}
-.fac-tab:hover{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.15)}
-.fac-tab.active{background:var(--red);border-color:var(--red);box-shadow:0 10px 25px rgba(245,0,20,0.3)}
-.fac-tab b{display:block;font-size:16px;margin-bottom:3px}
-.fac-tab span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em}
-.fac-tab.active span{color:rgba(255,255,255,0.8)}
+/* ---------- Fused Factory Section (Tags on Poster) ---------- */
+.fac-sec-fused{height:80vh;position:relative;overflow:hidden;background:#000;border-bottom:1px solid var(--line)}
+.fac-main-img{width:100%;height:100%;object-fit:cover;transition:opacity 0.6s ease}
+.fac-poster-overlay{position:absolute;inset:0;background:linear-gradient(90deg, rgba(0,0,0,0.7) 0%, transparent 40%), radial-gradient(circle at 15% 50%, rgba(0,0,0,0.5) 0%, transparent 60%);z-index:10}
+.fac-floating-sidebar{position:absolute;top:50%;left:50px;transform:translateY(-50%);z-index:30;display:flex;flex-direction:column;gap:12px;width:280px}
+.fac-tag-glass{background:rgba(18,18,22,0.45);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,0.08);padding:18px 25px;border-radius:10px;cursor:pointer;transition:0.3s}
+.fac-tag-glass:hover{background:rgba(18,18,22,0.85);border-color:var(--red);transform:translateX(8px)}
+.fac-tag-glass.active{background:var(--red);border-color:var(--red);box-shadow:0 15px 35px rgba(245,0,20,0.4);transform:translateX(15px)}
+.fac-tag-glass b{display:block;font-size:16px;margin-bottom:2px}
+.fac-tag-glass span{font-size:10px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.1em}
+.fac-tag-glass.active span{color:rgba(255,255,255,0.8)}
 
-.fac-display{flex:1;position:relative;overflow:hidden}
-.fac-img-full{width:100%;height:100%;object-fit:cover;transition:opacity 0.5s ease}
-.fac-overlay{position:absolute;inset:0;background:linear-gradient(0deg, rgba(0,0,0,0.6) 0%, transparent 40%)}
-.fac-content{position:absolute;bottom:50px;left:50px;right:50px;z-index:20;max-width:600px}
-.fac-content h3{font-size:32px;font-weight:900;margin-bottom:12px;text-shadow:0 10px 20px rgba(0,0,0,0.5)}
-.fac-content p{font-size:15px;color:var(--silver);line-height:1.7;background:rgba(0,0,0,0.3);padding:15px 25px;border-radius:8px;backdrop-filter:blur(10px)}
+.fac-poster-desc{position:absolute;bottom:60px;left:380px;right:60px;z-index:30;max-width:650px}
+.fac-poster-desc h3{font-size:42px;font-weight:900;margin-bottom:15px;text-shadow:0 10px 30px rgba(0,0,0,0.8)}
+.fac-poster-desc p{font-size:17px;color:var(--silver);line-height:1.7;background:rgba(0,0,0,0.5);padding:20px 35px;border-radius:12px;backdrop-filter:blur(15px);border-left:5px solid var(--red)}
 
-/* ---------- Product Grid 5x5 ---------- */
+/* ---------- Product Matrix 5x5 ---------- */
 .filter-ui{margin-bottom:35px;display:flex;flex-direction:column;gap:10px}
 .filter-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .filter-row label{font-size:12px;color:var(--muted);width:60px}
@@ -73,70 +72,72 @@ body{background:var(--black);color:var(--white);font-family:var(--cjk);line-heig
 .pill.active{background:var(--red);border-color:var(--red);color:#fff}
 
 .grid-5x5{display:grid;grid-template-columns:repeat(5, 1fr);gap:15px}
-.p-card{background:var(--card);border-radius:8px;overflow:hidden;border:1px solid var(--line);cursor:pointer;transition:0.4s}
-.p-card:hover{transform:translateY(-6px);border-color:var(--red);box-shadow:0 10px 25px rgba(0,0,0,0.5)}
+.p-card{background:var(--card);border-radius:10px;overflow:hidden;border:1px solid var(--line);cursor:pointer;transition:0.4s}
+.p-card:hover{transform:translateY(-8px);border-color:var(--red);box-shadow:0 15px 35px rgba(0,0,0,0.5)}
 .p-card-img{aspect-ratio:1/1;overflow:hidden;background:#000;display:block}
-.p-card-img img{width:100%;height:100%;object-fit:cover;transition:0.5s}
+.p-card-img img{width:100%;height:100%;object-fit:cover;transition:0.6s}
 .p-card:hover .p-card-img img{transform:scale(1.08)}
-.p-card-body{padding:15px}
-.p-card-tag{font-size:9px;color:var(--red);font-weight:800;text-transform:uppercase;margin-bottom:5px;display:block}
-.p-card-name{font-size:15px;font-weight:900;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.p-card-mod{font-size:10px;color:var(--muted)}
+.p-card-body{padding:18px}
+.p-card-tag{font-size:9px;color:var(--red);font-weight:800;text-transform:uppercase;margin-bottom:6px;display:block}
+.p-card-name{font-size:16px;font-weight:900;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p-card-mod{font-size:11px;color:var(--muted)}
 
 .pager{margin-top:40px;display:flex;justify-content:center;gap:8px}
-.page-btn{width:32px;height:32px;border:1px solid var(--line);background:var(--card);color:#fff;border-radius:4px;cursor:pointer}
+.page-btn{width:36px;height:36px;border:1px solid var(--line);background:var(--card);color:#fff;border-radius:4px;cursor:pointer}
 .page-btn.active{background:var(--red);border-color:var(--red)}
 
-/* ---------- Customized Process ---------- */
-.proc-box{padding:60px;background:var(--panel);border-radius:20px;margin-bottom:80px;border:1px solid var(--line)}
+/* ---------- Process Flow ---------- */
+.proc-box{padding:70px 60px;background:var(--panel);border-radius:24px;margin-bottom:80px;border:1px solid var(--line)}
 .proc-line{display:flex;justify-content:space-between;position:relative}
-.proc-line::before{content:"";position:absolute;top:32px;left:0;right:0;height:1px;background:var(--line);z-index:1}
-.proc-node{position:relative;z-index:5;text-align:center;width:120px}
-.proc-circ{width:64px;height:64px;background:var(--card);border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;margin:0 auto 15px;font-size:18px;font-weight:900;transition:0.3s}
-.proc-node:hover .proc-circ{border-color:var(--red);color:var(--red)}
-.proc-node h5{font-size:14px;margin-bottom:5px}
-.proc-node p{font-size:11px;color:var(--muted);line-height:1.4}
+.proc-line::before{content:"";position:absolute;top:38px;left:0;right:0;height:1px;background:var(--line);z-index:1}
+.proc-node{position:relative;z-index:5;text-align:center;width:130px}
+.proc-circ{width:76px;height:76px;background:var(--card);border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;margin:0 auto 20px;font-size:22px;font-weight:900;transition:0.3s}
+.proc-node:hover .proc-circ{border-color:var(--red);color:var(--red);transform:scale(1.1)}
+.proc-node h5{font-size:16px;margin-bottom:8px}
+.proc-node p{font-size:12px;color:var(--muted);line-height:1.4}
 
-/* ---------- Modal V11 (Strict Size) ---------- */
-.modal-mask{position:fixed;inset:0;background:rgba(0,0,0,0.94);backdrop-filter:blur(15px);z-index:1000;display:none;align-items:center;justify-content:center}
+/* ---------- Modal V12 (Strict Scaling) ---------- */
+.modal-mask{position:fixed;inset:0;background:rgba(0,0,0,0.96);backdrop-filter:blur(25px);z-index:1000;display:none;align-items:center;justify-content:center}
 .modal-mask.open{display:flex}
-.modal{width:min(900px, 95vw);max-height:92vh;background:var(--black);border-radius:15px;border:1px solid var(--line);overflow:hidden;position:relative}
-.modal-close{position:absolute;top:20px;right:20px;z-index:1100;background:rgba(255,255,255,0.06);border:0;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer}
-.modal-body{height:100%;overflow-y:auto;padding:45px}
+.modal{width:min(900px, 95vw);max-height:92vh;background:var(--black);border-radius:20px;border:1px solid var(--line);overflow:hidden;position:relative}
+.modal-close{position:absolute;top:25px;right:25px;z-index:1100;background:rgba(255,255,255,0.08);border:0;color:#fff;width:42px;height:42px;border-radius:50%;cursor:pointer}
+.modal-body{height:100%;overflow-y:auto;padding:55px}
 
-.amz-flex{display:grid;grid-template-columns:1fr 1fr;gap:45px}
+.amz-flex{display:grid;grid-template-columns:1fr 1fr;gap:50px}
 .gal-box{position:sticky;top:0}
-.gal-main-wrap{height:400px;background:#000;border-radius:8px;overflow:hidden;margin-bottom:12px;border:1px solid var(--line)}
+.gal-main-wrap{height:420px;background:#000;border-radius:10px;overflow:hidden;margin-bottom:15px;border:1px solid var(--line)}
 .gal-track{display:flex;height:100%;transition:transform 0.4s ease}
-.gal-track img{flex:0 0 100%;height:100%;object-fit:contain} /* Contain to prevent oversized zoom */
-.gal-thumbs{display:flex;gap:8px;overflow-x:auto}
-.gal-thumb{width:70px;height:52px;border-radius:4px;opacity:0.3;cursor:pointer;border:2px solid transparent;flex:none}
+.gal-track img{flex:0 0 100%;height:100%;object-fit:contain} /* Fix: Prevent stretch */
+.gal-thumbs{display:flex;gap:10px;overflow-x:auto}
+.gal-thumb{width:85px;height:64px;border-radius:6px;opacity:0.3;cursor:pointer;border:2px solid transparent;flex:none}
 .gal-thumb.on{opacity:1;border-color:var(--red)}
 .gal-thumb img{width:100%;height:100%;object-fit:cover}
 
-.amz-info h2{font-size:32px;font-weight:900;margin-bottom:6px}
-.amz-sub{color:var(--red);font-size:13px;letter-spacing:0.1em;margin-bottom:25px;display:block}
-.spec-table{width:100%;border-collapse:collapse;margin-top:20px}
-.spec-table td{padding:12px 0;border-bottom:1px solid var(--line);font-size:13px}
-.spec-table td:first-child{color:var(--muted);width:30%}
+.amz-info h2{font-size:36px;font-weight:900;margin-bottom:8px;line-height:1.2}
+.amz-sub{color:var(--red);font-size:14px;letter-spacing:0.1em;margin-bottom:30px;display:block}
+.spec-table{width:100%;border-collapse:collapse;margin-top:25px}
+.spec-table td{padding:16px 0;border-bottom:1px solid var(--line);font-size:14px}
+.spec-table td:first-child{color:var(--muted);width:35%}
 
-/* ---------- Admin V11 ---------- */
-.editbar{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);z-index:2000;display:none;gap:12px;padding:10px 25px;background:rgba(0,0,0,0.98);border-radius:40px;border:1px solid var(--red)}
-.edit-modal{width:min(750px, 90vw);background:var(--panel);border-radius:15px;padding:35px;border:1px solid var(--red);max-height:85vh;overflow-y:auto}
+/* ---------- Admin V12 ---------- */
+.editbar{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);z-index:2000;display:none;gap:15px;padding:12px 30px;background:rgba(0,0,0,0.98);border-radius:50px;border:1px solid var(--red)}
+.edit-modal{width:min(800px, 90vw);background:var(--panel);border-radius:20px;padding:45px;border:1px solid var(--red);max-height:85vh;overflow-y:auto}
 
 /* ---------- Footer ---------- */
-.footer{padding:40px;background:#000;text-align:center;border-top:1px solid var(--line)}
-.footer-logo{font-size:20px;font-weight:900;letter-spacing:0.3em;margin-bottom:10px;display:block}
-.footer-copy{font-size:10px;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase}
+.footer{padding:60px 40px;background:#000;text-align:center;border-top:1px solid var(--line)}
+.footer-logo{font-size:24px;font-weight:900;letter-spacing:0.3em;margin-bottom:12px;display:block}
+.footer-copy{font-size:11px;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase}
 
-@media(max-width:1200px){ .grid-5x5{grid-template-columns:repeat(4, 1fr)} }
-@media(max-width:900px){
+@media(max-width:1300px){ .grid-5x5{grid-template-columns:repeat(4, 1fr)} }
+@media(max-width:1000px){
   .grid-5x5{grid-template-columns:repeat(3, 1fr)}
-  .amz-flex{grid-template-columns:1fr;gap:35px}
-  .info-flex{flex-direction:column;gap:25px}
-  .fac-sec{height:auto;flex-direction:column}
-  .fac-sidebar{width:100%;padding:20px;border-right:0;border-bottom:1px solid var(--line)}
-  .fac-img-full{height:350px}
+  .amz-flex{grid-template-columns:1fr;gap:40px}
+  .info-flex{flex-direction:column;gap:30px}
+  .fac-sec-fused{height:auto;display:flex;flex-direction:column}
+  .fac-floating-sidebar{position:static;transform:none;width:100%;padding:30px 20px;flex-direction:row;flex-wrap:wrap;gap:10px}
+  .fac-tag-glass{width:calc(50% - 10px);padding:15px;text-align:center}
+  .fac-main-img{height:400px}
+  .fac-poster-desc{position:static;padding:40px 25px;max-width:100%}
 }
 @media(max-width:768px){ .grid-5x5{grid-template-columns:repeat(2, 1fr)} }
 </style>
@@ -152,6 +153,7 @@ body{background:var(--black);color:var(--white);font-family:var(--cjk);line-heig
     <a href="#home">智造基地</a>
     <a href="#factory">智造中心</a>
     <a href="#products">产品矩阵</a>
+    <a href="#policy">定制流程</a>
     <a href="#contact">联络业务</a>
   </nav>
 </header>
@@ -160,63 +162,63 @@ body{background:var(--black);color:var(--white);font-family:var(--cjk);line-heig
   <div class="hero-bg"></div>
   <div class="hero-mask"></div>
   <div class="hero-inner">
-    <h2 class="hero-title">驱动数字化<br><span style="color:var(--red)">战术装备</span> 智造</h2>
-    <p class="hero-sub">25,000㎡ 广州/清远双厂引擎，600+人生产团队，专注户外背包与战术防护装备的高端 OEM/ODM 全案定制。</p>
-    <a href="#contact" class="btn-primary">开启商务询盘</a>
+    <h2 class="hero-title">数字化<br><span style="color:var(--red)">战术装备</span> 智造</h2>
+    <p class="hero-sub">25,000㎡ 广州/清远双厂基地，600+人专业技术团队，专注户外背包与战术防护装备的高端 OEM/ODM 全案定制。</p>
+    <a href="#contact" class="btn-primary">立即开启商务询盘</a>
   </div>
 </section>
 
 <section class="company-strip">
   <div class="info-flex">
     <div class="info-box">
-      <h4>制造基座实力</h4>
-      <p><b>规模：</b>25000㎡ 数字化工厂 / 10000㎡ 仓储中心</p>
-      <p><b>团队：</b>600+ 熟练生产技工 / 资深研发设计团队</p>
-      <p><b>设备：</b>600多台高端自动化特种生产设备</p>
+      <h4>工厂实力基座</h4>
+      <p><b>规模：</b>25000㎡ 数字化生产车间 / 10000㎡ 现代化仓储</p>
+      <p><b>团队：</b>600+ 熟练生产技工 / 专业 R&D 研发设计团队</p>
+      <p><b>设备：</b>600多台高端自动化特种生产设备，年产能百万级。</p>
     </div>
     <div class="info-box">
-      <h4>现货与财务</h4>
-      <p><b>储备：</b>2000+ SKU 现货直供，支持全球一件代发。</p>
-      <p><b>发货：</b>现货 48H 极速出库，订单 20-30 天稳定交付。</p>
-      <p><b>财务：</b>支持增值税专票(+10%)、普票及正规收据。</p>
+      <h4>现货与财务政策</h4>
+      <p><b>现货：</b>2000+ SKU 现货直供，支持全球一件代发/混批。</p>
+      <p><b>交付：</b>现货 48H 内极速出库，大货订单 20-30 天稳定交付。</p>
+      <p><b>财务：</b>支持增值税专票(+10%)、普票及正规收据结算。</p>
     </div>
     <div class="info-box">
       <h4>R&D 研发先锋</h4>
-      <p><b>材料：</b>IRR 防红外、阻燃、高强特战面料应用。</p>
-      <p><b>打样：</b>3-10 天极速交付，拥有上百款核心产品专利。</p>
-      <p><b>定位：</b>专注为全球跨境电商及经销商提供专业供应链。</p>
+      <p><b>材料：</b>IRR 防红外、阻燃、高强碳纤维等战术面料深研。</p>
+      <p><b>效率：</b>3-10 天极速打样，拥有上百款外观及实用新型专利。</p>
+      <p><b>愿景：</b>专注为全球跨境电商及经销商提供专业化供应链。</p>
     </div>
   </div>
 </section>
 
-<section class="fac-sec" id="factory">
-  <div class="fac-sidebar">
-    <div class="fac-tab active" data-img="https://sc02.alicdn.com/kf/H6f83c93e82be4d0ea4dc2494f1fa4d941.jpg" data-title="数字化生产车间" data-desc="600多台自动化缝纫设备协同作业，严格执行军工级质量管理，日产突破5000件。">
+<section class="fac-sec-fused" id="factory">
+  <img src="https://sc02.alicdn.com/kf/H6f83c93e82be4d0ea4dc2494f1fa4d941.jpg" class="fac-main-img" id="facImg">
+  <div class="fac-poster-overlay"></div>
+  
+  <div class="fac-floating-sidebar">
+    <div class="fac-tag-glass active" data-img="https://sc02.alicdn.com/kf/H6f83c93e82be4d0ea4dc2494f1fa4d941.jpg" data-title="数字化生产车间" data-desc="拥有600多台高精密特种设备，严格执行军工级质量管理，日产能突破5000件。">
       <b>生产车间</b><span>Workshop</span>
     </div>
-    <div class="fac-tab" data-img="media-output/img-msy1h2pe-a606603e.png" data-title="数字化产品展厅" data-desc="2000+ SKU 原创设计陈列，支持客户现场选样、即刻打版。">
+    <div class="fac-tag-glass" data-img="media-output/img-msy1h2pe-a606603e.png" data-title="数字化产品展厅" data-desc="展示超过2000款原创设计产品，支持现场选样、即刻打版。">
       <b>产品展厅</b><span>Showroom</span>
     </div>
-    <div class="fac-tab" data-img="media-output/img-msy1h28o-de98d006.png" data-title="现代化仓储中心" data-desc="10000平米物理仓储，实时 WMS 系统管控，保障货源稳定输出。">
+    <div class="fac-tag-glass" data-img="media-output/img-msy1h28o-de98d006.png" data-title="现代化仓储中心" data-desc="10000平米物理仓储中心，信息化WMS系统管理，保障货源稳定输出。">
       <b>物流仓库</b><span>Warehouse</span>
     </div>
-    <div class="fac-tab" data-img="media-output/img-msy1gwc1-d52ae243.png" data-title="精益包装专线" data-desc="出口级全流程品检，标准化防潮包装，确保产品完美抵达全球。">
+    <div class="fac-tag-glass" data-img="media-output/img-msy1gwc1-d52ae243.png" data-title="精益包装专线" data-desc="出口级全流程品检标准，标准化防潮防损包装，确保产品完美抵达。">
       <b>包装车间</b><span>Packaging</span>
     </div>
-    <div class="fac-tab" data-img="media-output/img-msy1gzd1-ab174449.png" data-title="协同研发办公区" data-desc="链接全球市场需求，聚焦战术功能定义与新材料应用研发。">
+    <div class="fac-tag-glass" data-img="media-output/img-msy1gzd1-ab174449.png" data-title="协同研发办公区" data-desc="链接全球市场前沿需求，聚焦战术功能定义与特种面料研发。">
       <b>办公中心</b><span>R&D Office</span>
     </div>
-    <div class="fac-tab" data-img="media-output/img-msy1hebl-ad241519.png" data-title="全球行业展会" data-desc="常年深度参与全球各大战术及户外展会，掌握行业核心技术趋势。">
+    <div class="fac-tag-glass" data-img="media-output/img-msy1hebl-ad241519.png" data-title="全球行业展会" data-desc="常年参与国内外顶尖战术及户外装备展，掌握行业最新技术动态。">
       <b>参加展会</b><span>Global Expo</span>
     </div>
   </div>
-  <div class="fac-display">
-    <img src="https://sc02.alicdn.com/kf/H6f83c93e82be4d0ea4dc2494f1fa4d941.jpg" class="fac-img-full" id="facImg">
-    <div class="fac-overlay"></div>
-    <div class="fac-content">
-      <h3 id="facTitle">数字化生产车间</h3>
-      <p id="facDesc">600多台自动化缝纫设备协同作业，严格执行军工级质量管理，日产突破5000件。</p>
-    </div>
+
+  <div class="fac-poster-desc">
+    <h3 id="facTitle">数字化生产车间</h3>
+    <p id="facDesc">拥有600多台高精密特种设备，严格执行军工级质量管理，日产能突破5000件。</p>
   </div>
 </section>
 
@@ -228,14 +230,14 @@ body{background:var(--black);color:var(--white);font-family:var(--cjk);line-heig
   
   <div class="filter-ui">
     <div class="filter-row">
-      <label>系列：</label>
+      <label>按系列：</label>
       <div class="pill active" data-type="series" data-val="全部">全部系列</div>
       <div class="pill" data-type="series" data-val="路普系列">路普系列</div>
       <div class="pill" data-type="series" data-val="山脊系列">山脊系列</div>
       <div class="pill" data-type="series" data-val="侦察系列">侦察系列</div>
     </div>
     <div class="filter-row">
-      <label>品类：</label>
+      <label>按品类：</label>
       <div class="pill active" data-type="cat" data-val="全部">全部品类</div>
       <div class="pill" data-type="cat" data-val="双肩背包">双肩背包</div>
       <div class="pill" data-type="cat" data-val="模块化胸包">模块化胸包</div>
@@ -248,28 +250,28 @@ body{background:var(--black);color:var(--white);font-family:var(--cjk);line-heig
 </section>
 
 <section class="section" id="policy" style="background:#0a0a0d">
-  <div class="sec-head"><h2 class="sec-title">OEM/ODM 定制流程</h2><span class="sec-en">Product Development Cycle</span></div>
+  <div class="sec-head"><h2 class="sec-title">OEM/ODM 开发流程</h2><span class="sec-en">Product Development Cycle</span></div>
   <div class="proc-box">
     <div class="proc-line">
       <div class="proc-node"><div class="proc-circ">01</div><h5>商务咨询</h5><p>需求沟通与估价</p></div>
       <div class="proc-node"><div class="proc-circ">02</div><h5>极速打样</h5><p>3-10天快速出样</p></div>
-      <div class="proc-node" style="color:var(--red)"><div class="proc-circ" style="background:var(--red); color:#fff; border-color:var(--red)">03</div><h5>支付定金</h5><p>30%定金正式开工</p></div>
-      <div class="proc-node"><div class="proc-circ">04</div><h5>批量生产</h5><p>数字化排产监控</p></div>
+      <div class="proc-node" style="color:var(--red)"><div class="proc-circ" style="background:var(--red); color:#fff; border-color:var(--red)">03</div><h5>预付定金</h5><p>30%定金正式开工</p></div>
+      <div class="proc-node"><div class="proc-circ">04</div><h5>批量生产</h5><p>20-30天交期监控</p></div>
       <div class="proc-node"><div class="proc-circ">05</div><h5>质检包装</h5><p>全流程QC质量闭环</p></div>
-      <div class="proc-node"><div class="proc-circ">06</div><h5>结算发货</h5><p>70%余款极速物流</p></div>
+      <div class="proc-node"><div class="proc-circ">06</div><h5>余款发货</h5><p>70%余款极速物流</p></div>
     </div>
   </div>
   
-  <div style="background:var(--card); padding:30px; border-radius:12px; border:1px solid var(--line); display:grid; grid-template-columns:1fr 1fr; gap:60px">
+  <div style="background:var(--card); padding:40px; border-radius:15px; border:1px solid var(--line); display:grid; grid-template-columns:1fr 1fr; gap:60px">
     <div>
-      <h5 style="color:var(--red); font-size:16px; margin-bottom:12px">价格及付款政策</h5>
-      <p style="font-size:12px; color:var(--muted); margin-bottom:6px">1. 现货为出厂底价，订单预付30%定金，余款付清后发货。</p>
-      <p style="font-size:12px; color:var(--muted)">2. 版费在大货单后退还。支持专票(+10%)、普票及收据。</p>
+      <h5 style="color:var(--red); font-size:18px; margin-bottom:15px">价格及付款政策</h5>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:10px">1. 现货为出厂底价，订单预付30%定金，余款付清后发货。</p>
+      <p style="font-size:13px; color:var(--muted)">2. 版费在大货单后退还。支持专票(+10%)、普票及收据结算。</p>
     </div>
     <div>
-      <h5 style="color:var(--red); font-size:16px; margin-bottom:12px">物流及售后保障</h5>
-      <p style="font-size:12px; color:var(--muted); margin-bottom:6px">1. 现货 48H 内极速出库。物流快递按实核算。</p>
-      <p style="font-size:12px; color:var(--muted)">2. 贵司收货 7 日内发现质量问题请及时联络经理处理。</p>
+      <h5 style="color:var(--red); font-size:18px; margin-bottom:15px">物流及售后保障</h5>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:10px">1. 现货 48H 内极速出库。物流快递运费按实核算。</p>
+      <p style="font-size:13px; color:var(--muted)">2. 收货 7 日内发现质量问题请及时联络相关经理处理。</p>
     </div>
   </div>
 </section>
@@ -277,22 +279,22 @@ body{background:var(--black);color:var(--white);font-family:var(--cjk);line-heig
 <section class="section" id="contact">
   <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px">
     <div>
-      <div class="sec-head"><h2 class="sec-title">联络我们</h2><span class="sec-en">Global Sales Direct</span></div>
-      <p style="font-size:15px; margin-bottom:25px">总部地址：广州市花都区狮岭镇杨屋一村五一三街2-15路普</p>
-      <p style="font-size:18px; font-weight:900; color:var(--red); margin-bottom:6px">黄经理: +86-185 6559 3008</p>
-      <p style="font-size:18px; font-weight:900; color:var(--red)">赵小姐: +86-137 2546 7099</p>
+      <div class="sec-head"><h2 class="sec-title">联络我们</h2><span class="sec-en">Global Sales Manager</span></div>
+      <p style="font-size:16px; margin-bottom:30px">总部地址：广州市花都区狮岭镇杨屋一村五一三街2-15路普</p>
+      <p style="font-size:20px; font-weight:900; color:var(--red); margin-bottom:8px">黄经理: +86-185 6559 3008</p>
+      <p style="font-size:20px; font-weight:900; color:var(--red)">赵小姐: +86-137 2546 7099</p>
     </div>
-    <div style="background:var(--panel); padding:35px; border-radius:12px; border:1px solid var(--line)">
-      <div style="margin-bottom:15px"><label style="display:block; margin-bottom:6px; font-size:12px; color:var(--muted)">咨询者称呼</label><input type="text" id="inqName" style="width:100%; background:#000; border:1px solid var(--line); color:#fff; padding:10px; border-radius:6px"></div>
-      <div style="margin-bottom:15px"><label style="display:block; margin-bottom:6px; font-size:12px; color:var(--muted)">采购意向</label><textarea id="inqMsg" rows="3" style="width:100%; background:#000; border:1px solid var(--line); color:#fff; padding:10px; border-radius:6px" placeholder="请简述您的定制需求..."></textarea></div>
-      <button class="btn-primary" style="width:100%" onclick="alert('发送成功，我们将尽快与您联络！')">提交商务询盘</button>
+    <div style="background:var(--panel); padding:40px; border-radius:20px; border:1px solid var(--line)">
+      <div style="margin-bottom:20px"><label style="display:block; margin-bottom:8px; font-size:13px; color:var(--muted)">咨询人姓名</label><input type="text" id="inqName" style="width:100%; background:#000; border:1px solid var(--line); color:#fff; padding:15px; border-radius:8px"></div>
+      <div style="margin-bottom:20px"><label style="display:block; margin-bottom:8px; font-size:13px; color:var(--muted)">询盘需求</label><textarea id="inqMsg" rows="3" style="width:100%; background:#000; border:1px solid var(--line); color:#fff; padding:15px; border-radius:8px" placeholder="请简述采购数量或定制意向..."></textarea></div>
+      <button class="btn-primary" style="width:100%" onclick="alert('发送成功，我们将尽快与您联络！')">提交正式业务询盘</button>
     </div>
   </div>
 </section>
 
 <footer class="footer">
   <span class="footer-logo">LUPU OUTDOOR</span>
-  <p class="footer-copy">© <span id="year"></span> 广州路普旅游用品有限公司 版权所有 · 粤ICP备XXXXXXXX号<br>数字化装备智造基地 · 25,000㎡ 数字化工厂</p>
+  <p class="footer-copy">© <span id="year"></span> 广州路普旅游用品有限公司 版权所有 · 粤ICP备XXXXXXXX号<br>数字化装备智造基地 · 25,000㎡ 广州/清远工厂</p>
 </footer>
 
 <!-- Modals -->
@@ -308,15 +310,15 @@ body{background:var(--black);color:var(--white);font-family:var(--cjk);line-heig
         <div class="amz-info">
           <span class="amz-sub" id="vMeta">SERIES / CATEGORY</span>
           <h2 id="vName">Product Name</h2>
-          <div style="margin:25px 0; background:rgba(255,255,255,0.04); padding:20px; border-radius:8px">
-            <span style="font-size:11px; color:var(--muted); display:block; margin-bottom:6px">B2B QUOTATION</span>
-            <p style="font-size:20px; color:var(--red); font-weight:900">支持 OEM/ODM 定制，请询盘获取底价</p>
+          <div style="margin:25px 0; background:rgba(255,255,255,0.05); padding:20px; border-radius:10px">
+            <span style="font-size:11px; color:var(--muted); display:block; margin-bottom:8px">B2B QUOTATION</span>
+            <p style="font-size:22px; color:var(--red); font-weight:900">支持 OEM/ODM 定制，请询盘获取底价</p>
           </div>
           <table class="spec-table" id="vSpecs"></table>
-          <button class="btn-primary" style="width:100%; margin-top:30px" onclick="window.goInquiry()">获取正式报价单</button>
+          <button class="btn-primary" style="width:100%; margin-top:35px" onclick="window.goInquiry()">获取正式报价单</button>
         </div>
       </div>
-      <div style="text-align:center; margin:60px 0 30px"><span style="border-top:1px solid var(--line); display:block; padding-top:30px; color:var(--red); letter-spacing:0.5em; font-size:11px">DETAIL SHOWCASE</span></div>
+      <div style="text-align:center; margin:80px 0 40px"><span style="border-top:1px solid var(--line); display:block; padding-top:40px; color:var(--red); letter-spacing:0.8em; font-size:12px">DETAIL SHOWCASE</span></div>
       <div id="vDetails"></div>
     </div>
   </div>
@@ -324,26 +326,26 @@ body{background:var(--black);color:var(--white);font-family:var(--cjk);line-heig
 
 <div class="editbar" id="editbar">
   <button onclick="window.openEditor(null)" class="btn-primary">新增产品</button>
-  <button onclick="window.toggleEdit()" style="background:#fff; border:0; color:#000; padding:8px 20px; border-radius:30px; cursor:pointer; font-weight:900; font-size:12px">退出管理</button>
+  <button onclick="window.toggleEdit()" style="background:#fff; border:0; color:#000; padding:10px 25px; border-radius:30px; cursor:pointer; font-weight:900; font-size:13px">退出管理</button>
 </div>
 
 <div class="modal-mask" id="editModal">
   <div class="edit-modal">
-    <h3 style="margin-bottom:25px">画册内容管理器</h3>
+    <h3 style="margin-bottom:30px">产品数据中心</h3>
     <input type="hidden" id="efId">
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px">
-      <div><label>产品名称</label><input type="text" id="efName" style="width:100%; background:#000; border:1px solid var(--line); color:#fff; padding:10px; border-radius:6px"></div>
-      <div><label>型号</label><input type="text" id="efModel" style="width:100%; background:#000; border:1px solid var(--line); color:#fff; padding:10px; border-radius:6px"></div>
-      <div><label>系列</label><input type="text" id="efSeries" style="width:100%; background:#000; border:1px solid var(--line); color:#fff; padding:10px; border-radius:6px"></div>
-      <div><label>子品类</label><input type="text" id="efCat" style="width:100%; background:#000; border:1px solid var(--line); color:#fff; padding:10px; border-radius:6px"></div>
-      <div style="grid-column:span 2"><label>主轮播图(逗号隔开URL)</label><textarea id="efGal" rows="3" style="width:100%; background:#000; border:1px solid var(--line); color:#fff; padding:10px; border-radius:6px"></textarea></div>
-      <div style="grid-column:span 2"><label>详情长图(逗号隔开URL)</label><textarea id="efDet" rows="3" style="width:100%; background:#000; border:1px solid var(--line); color:#fff; padding:10px; border-radius:6px"></textarea></div>
-      <div style="grid-column:span 2"><label>技术参数(名称:值|名称:值)</label><textarea id="efSpec" rows="3" style="width:100%; background:#000; border:1px solid var(--line); color:#fff; padding:10px; border-radius:6px"></textarea></div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:25px">
+      <div><label>产品名称</label><input type="text" id="efName" style="width:100%; background:#000; border:1px solid var(--line); color:#fff; padding:12px; border-radius:8px"></div>
+      <div><label>型号</label><input type="text" id="efModel" style="width:100%; background:#000; border:1px solid var(--line); color:#fff; padding:12px; border-radius:8px"></div>
+      <div><label>系列</label><input type="text" id="efSeries" style="width:100%; background:#000; border:1px solid var(--line); color:#fff; padding:12px; border-radius:8px"></div>
+      <div><label>子品类</label><input type="text" id="efCat" style="width:100%; background:#000; border:1px solid var(--line); color:#fff; padding:12px; border-radius:8px"></div>
+      <div style="grid-column:span 2"><label>轮播图(逗号隔开URL)</label><textarea id="efGal" rows="3" style="width:100%; background:#000; border:1px solid var(--line); color:#fff; padding:12px; border-radius:8px"></textarea></div>
+      <div style="grid-column:span 2"><label>详情长图(逗号隔开URL)</label><textarea id="efDet" rows="3" style="width:100%; background:#000; border:1px solid var(--line); color:#fff; padding:12px; border-radius:8px"></textarea></div>
+      <div style="grid-column:span 2"><label>参数表(名:值|名:值)</label><textarea id="efSpec" rows="3" style="width:100%; background:#000; border:1px solid var(--line); color:#fff; padding:12px; border-radius:8px"></textarea></div>
     </div>
-    <div style="margin-top:30px; display:flex; gap:15px">
+    <div style="margin-top:40px; display:flex; gap:20px">
       <button class="btn-primary" onclick="window.saveEditor()">提交保存</button>
-      <button style="background:none; border:1px solid var(--line); color:#fff; padding:10px 25px; border-radius:6px; cursor:pointer" onclick="window.closeModal('editModal')">取消</button>
-      <button id="btnDel" style="margin-left:auto; color:var(--red); border:0; background:none; cursor:pointer; font-size:13px" onclick="window.deleteItem()">⚠️ 彻底删除</button>
+      <button style="background:none; border:1px solid var(--line); color:#fff; padding:12px 30px; border-radius:8px; cursor:pointer" onclick="window.closeModal('editModal')">取消</button>
+      <button id="btnDel" style="margin-left:auto; color:var(--red); border:0; background:none; cursor:pointer; font-size:14px" onclick="window.deleteItem()">⚠️ 彻底删除</button>
     </div>
   </div>
 </div>
@@ -351,7 +353,7 @@ body{background:var(--black);color:var(--white);font-family:var(--cjk);line-heig
 <script>
 (function(){
 'use strict';
-var LS_KEY='lupu_catalog_v11';
+var LS_KEY='lupu_catalog_v12';
 var $=function(s){return document.querySelector(s)};
 var $$=function(s){return Array.from(document.querySelectorAll(s))};
 
@@ -365,22 +367,22 @@ var DB = JSON.parse(localStorage.getItem(LS_KEY)) || {
      gallery:['media-output/img-mssif228-21eee2d1.png','media-output/img-mssif4tj-14e8cbbd.png'],
      detailImgs:[],
      specs:[['系统','标准MOLLE'],['扣具','UTX快拆']]},
-    {id:'p3',name:'山脊户外腰包',model:'RJ-Waist-06',series:'山脊系列',category:'战术腰包',
+    {id:'p3',name:'山脊系列腰包',model:'RJ-Waist-06',series:'山脊系列',category:'战术腰包',
      gallery:['media-output/img-mssijeu5-40895ce6.png'],
      detailImgs:[],
      specs:[['面料','600D高强尼龙'],['功能','多向携带']]},
     {id:'p4',name:'路普战术背心',model:'LP-Vest-X',series:'路普系列',category:'防护装备',
      gallery:['https://sc04.alicdn.com/kf/H76d29d8a395c479fb9807530e3f0808bI.jpg'],
      detailImgs:[],
-     specs:[['等级','III级防护'],['系统','全向MOLLE']]},
-    {id:'p5',name:'侦察附件包',model:'RC-ACC-01',series:'侦察系列',category:'附件包',
+     specs:[['防护','III级标准'],['挂载','全向MOLLE']]},
+    {id:'p5',name:'侦察附件包',model:'RC-ACC-02',series:'侦察系列',category:'附件包',
      gallery:['media-output/img-mssija8v-900c246a.png'],
      detailImgs:[],
-     specs:[['特色','透明窗口'],['挂载','横纵双向']]},
+     specs:[['系统','标准MOLLE'],['窗口','高透快取面板']]},
     {id:'p6',name:'山脊山地背包',model:'RJ-MT-20',series:'山脊系列',category:'双肩背包',
      gallery:['media-output/img-mssif784-45db30c0.png'],
      detailImgs:[],
-     specs:[['容量','20L'],['重量','0.85kg']]}
+     specs:[['容量','20L'],['重量','0.88kg']]}
   ]
 };
 
@@ -398,7 +400,7 @@ function renderGrid(){
         <span class="p-card-tag">${p.series} - ${p.category}</span>
         <h3 class="p-card-name">${p.name}</h3>
         <p class="p-card-mod">MOD: ${p.model}</p>
-        ${window.isEditing ? `<button style="margin-top:8px; color:var(--red); border:0; background:none; font-size:10px" onclick="event.stopPropagation(); window.openEditor('${p.id}')">[编辑]</button>` : ''}
+        ${window.isEditing ? `<button style="margin-top:10px; color:var(--red); border:0; background:none; font-size:11px" onclick="event.stopPropagation(); window.openEditor('${p.id}')">[编辑本项]</button>` : ''}
       </div>
     </div>
   `).join('');
@@ -417,7 +419,7 @@ window.openDetail = function(id){
   $('#vSlide').innerHTML = activeP.gallery.map(g=>`<img src="${g}">`).join('');
   $('#vThumbBox').innerHTML = activeP.gallery.map((g,i)=>`<div class="gal-thumb ${i===0?'on':''}" onclick="window.vJump(${i})"><img src="${g}"></div>`).join('');
   $('#vSpecs').innerHTML = activeP.specs.map(s=>`<tr><td>${s[0]}</td><td>${s[1]}</td></tr>`).join('');
-  $('#vDetails').innerHTML = activeP.detailImgs.map(d=>`<img src="${d}" style="width:100%; border-radius:10px; margin-bottom:12px">`).join('');
+  $('#vDetails').innerHTML = activeP.detailImgs.map(d=>`<img src="${d}" style="width:100%; border-radius:12px; margin-bottom:15px">`).join('');
   window.vJump(0);
   $('#viewModal').classList.add('open');
   document.body.style.overflow='hidden';
@@ -431,10 +433,10 @@ window.vJump = function(i){
 window.closeModal = function(id){ $('#'+id).classList.remove('open'); document.body.style.overflow=''; };
 $('.modal-mask').onclick = function(e){ if(e.target===this) window.closeModal(this.id) };
 
-// Factory Interactive (Hover)
-$$('.fac-tab').forEach(tab=>{
-  tab.onmouseenter = function(){
-    $$('.fac-tab').forEach(x=>x.classList.remove('active'));
+// Fused Interaction (Hover on Floating Tags)
+$$('.fac-tag-glass').forEach(tag=>{
+  tag.onmouseenter = function(){
+    $$('.fac-tag-glass').forEach(x=>x.classList.remove('active'));
     this.classList.add('active');
     $('#facImg').style.opacity = '0.4';
     setTimeout(()=>{
@@ -460,7 +462,7 @@ $$('.pill').forEach(p=>{
 window.goInquiry = function(){
   window.closeModal('viewModal');
   location.href='#contact';
-  $('#inqMsg').value = `【画册询价单】我对“${activeP.name} (MOD:${activeP.model})”感兴趣，请提供最低报价。`;
+  $('#inqMsg').value = `【画册询价】我对“${activeP.name}”感兴趣，请提供最低报价。`;
   $('#inqMsg').focus();
 };
 
@@ -477,7 +479,7 @@ window.toggleEdit = function(){
   if(window.isEditing){
     window.isEditing=false; $('#editbar').style.display='none';
   } else {
-    if(prompt('授权密令')==='leo6849032'){ window.isEditing=true; $('#editbar').style.display='flex'; }
+    if(prompt('授权令牌')==='leo6849032'){ window.isEditing=true; $('#editbar').style.display='flex'; }
   }
   renderGrid();
 };
@@ -507,7 +509,7 @@ window.saveEditor = function(){
 };
 
 window.deleteItem = function(){
-  if(confirm('确认彻底删除该产品？此操作不可逆。')){
+  if(confirm('确认彻底删除该产品？')){
     DB.products = DB.products.filter(x=>x.id !== $('#efId').value);
     localStorage.setItem(LS_KEY, JSON.stringify(DB));
     renderGrid(); window.closeModal('editModal');

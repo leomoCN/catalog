@@ -3,137 +3,158 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>路普户外 · 户外背包/战术背心/装备智造工厂在线画册</title>
-<meta name="description" content="广州路普旅游用品有限公司，专业户外背包、户外战术装备用品、防护用品工厂。25000㎡智造基地，支持OEM/ODM定制、一件代发。主营：户外背包，战术背心，战术腰带，迷彩服。">
-<meta name="keywords" content="路普户外, 户外背包, 战术背心, 狮岭背包工厂, 军规背包定制, 战术装备, IRR防红外背包, 阻燃背包">
+<title>路普户外 · 战术背包丨户外用品 (官网)</title>
+<meta name="description" content="广州路普旅游用品有限公司，专业户外背包、战术背心工厂。25000㎡智造基地，支持OEM/ODM定制、一件代发。主营：户外背包，战术背心，战术腰带。">
 <style>
 :root{
-  --black:#08080a; --panel:rgba(18,18,22,0.85); --card:rgba(30,30,36,0.9);
-  --red:#f50014; --red-d:#c20010; --silver:#e2e8f0;
-  --glass:rgba(255,255,255,0.03); --glass-border:rgba(255,255,255,0.1);
-  --line:rgba(255,255,255,0.06); --white:#ffffff; --muted:#94a3b8;
+  --black:#050507; --panel:#121216; --card:#1a1a20;
+  --red:#f50014; --red-d:#c20010; --white:#ffffff; --muted:#94a3b8;
   --disp:"Bahnschrift","DIN Alternate","Arial Narrow","Microsoft YaHei",sans-serif;
-  --cjk:"Microsoft YaHei","PingFang SC","Noto Sans SC","Segoe UI",sans-serif;
+  --cjk:"Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--black);color:var(--white);font-family:var(--cjk);line-height:1.6;-webkit-font-smoothing:antialiased}
-.glass{background:var(--glass);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);border:1px solid var(--glass-border)}
 
 /* ---------- Nav ---------- */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(8,8,10,0.4);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
-.brand{display:flex;align-items:center;gap:12px;cursor:pointer}
-.brand-mark{width:36px;height:36px;background:var(--red);clip-path:polygon(0 0, 100% 0, 100% 75%, 75% 100%, 0 100%);display:grid;place-items:center;font-family:var(--disp);font-weight:900;font-size:16px;color:#fff}
-.brand-name{font-size:18px;font-weight:900;letter-spacing:0.18em}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(5,5,7,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06)}
+.brand{display:flex;align-items:center;gap:15px;cursor:pointer}
+.brand-logo-wrap{display:grid;place-items:center;height:42px;width:42px;flex:none}
+.brand-logo-wrap img{height:100%;width:auto;object-fit:contain}
+.brand-name{font-size:20px;font-weight:900;letter-spacing:0.15em;background:linear-gradient(90deg, #fff, #bbb);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .nav-links{display:flex;gap:30px;align-items:center}
-.nav-links a{color:var(--muted);font-size:14px;letter-spacing:0.1em;transition:0.3s;position:relative}
+.nav-links a{color:var(--muted);font-size:14px;letter-spacing:0.1em;transition:0.3s}
 .nav-links a:hover{color:var(--red)}
 
-/* ---------- Hero ---------- */
-.hero{min-height:100vh;padding:120px 40px 80px;position:relative;display:flex;align-items:center;overflow:hidden;background:#000}
-.hero-bg{position:absolute;inset:0;background-image:url('https://sc02.alicdn.com/kf/H6f83c93e82be4d0ea4dc2494f1fa4d941.jpg');background-size:cover;background-position:center 40%;opacity:0.6;filter:brightness(0.7) contrast(1.1)}
-.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg, var(--black) 5%, transparent 70%), linear-gradient(90deg, var(--black) 10%, transparent 60%)}
-.hero-inner{position:relative;z-index:5;max-width:1200px;margin:0 auto;width:100%}
-.hero-title{font-size:clamp(40px, 6vw, 84px);font-weight:900;line-height:1.1;margin-bottom:20px;letter-spacing:-0.02em}
-.hero-sub{font-size:clamp(16px, 1.2vw, 19px);color:var(--muted);max-width:620px;margin-bottom:40px;line-height:1.8}
-.hero-panel{display:grid;grid-template-columns:repeat(4, 1fr);gap:15px;max-width:860px}
-.hp-card{padding:20px;border-radius:12px}
-.hp-val{display:block;font-size:28px;font-weight:900;font-family:var(--disp)}
+/* ---------- Hero 6.0 Side-by-Side ---------- */
+.hero{min-height:92vh;padding:100px 60px 60px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;max-width:1600px;margin:0 auto}
+.hero-text{padding:0;margin:0;z-index:10}
+.hero-img-box{width:100%;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);background:#000;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.8)}
+.hero-img-box img{width:100%;height:auto;display:block;opacity:0.95;transform:scale(1.02)}
+.hero-overlay{display:none}
+.hero-title{font-size:clamp(36px, 5.5vw, 80px);font-weight:900;line-height:1.1;margin-bottom:20px;text-shadow:0 10px 30px rgba(0,0,0,0.5)}
+.hero-sub{font-size:18px;color:var(--muted);max-width:640px;margin-bottom:40px}
+.hero-panel{display:grid;grid-template-columns:repeat(4, 1fr);gap:15px;max-width:1000px}
+.hp-card{background:rgba(255,255,255,0.03);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);padding:25px;border-radius:12px}
+.hp-val{display:block;font-size:32px;font-weight:900;font-family:var(--disp)}
 .hp-val b{color:var(--red);font-size:0.5em;margin-left:4px}
 .hp-lab{font-size:12px;color:var(--muted);margin-top:2px;letter-spacing:0.1em}
 
-/* ---------- R&D ---------- */
-.section{padding:120px 40px;max-width:1300px;margin:0 auto}
+/* ---------- Factory 6 Sections ---------- */
+.section{padding:120px 40px;max-width:1400px;margin:0 auto}
 .sec-head{margin-bottom:60px;border-left:4px solid var(--red);padding-left:25px}
-.sec-title{font-size:38px;font-weight:900;letter-spacing:0.02em}
-.sec-en{font-family:var(--disp);color:var(--red);font-size:12px;letter-spacing:0.4em;text-transform:uppercase;margin-top:5px}
+.sec-title{font-size:40px;font-weight:900;letter-spacing:0.02em}
+.sec-en{font-family:var(--disp);color:var(--red);font-size:12px;letter-spacing:0.4em;text-transform:uppercase;margin-top:5px;display:block}
 
-.rd-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:center}
-.rd-img{border-radius:15px;overflow:hidden;border:1px solid var(--line);box-shadow:0 20px 50px rgba(0,0,0,0.6)}
-.rd-content h3{font-size:26px;margin-bottom:25px;color:var(--silver)}
-.rd-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px}
-.rd-item{background:rgba(255,255,255,0.02);padding:25px;border:1px solid var(--line);border-radius:10px}
-.rd-item i{font-size:11px;color:var(--red);display:block;margin-bottom:10px;font-weight:800}
-.rd-item b{font-size:17px;display:block;margin-bottom:8px}
-.rd-item p{font-size:13.5px;color:var(--muted);line-height:1.7}
+.fac-viewer{display:grid;grid-template-columns:1fr 2.5fr;gap:20px;height:650px}
+.fac-nav{display:grid;grid-template-rows:repeat(6, 1fr);gap:10px}
+.fac-tab{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:15px 25px;display:flex;flex-direction:column;justify-content:center;cursor:pointer;transition:0.3s}
+.fac-tab:hover{border-color:var(--red)}
+.fac-tab.active{background:var(--red);border-color:var(--red)}
+.fac-tab.active b{color:#fff}
+.fac-tab.active span{color:rgba(255,255,255,0.7)}
+.fac-tab b{font-size:18px;display:block}
+.fac-tab span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em}
+.fac-main{border-radius:15px;overflow:hidden;position:relative;background:#000}
+.fac-main img{width:100%;height:100%;object-fit:cover;transition:0.4s}
+.fac-desc-box{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg, rgba(0,0,0,0.9), transparent);padding:40px;z-index:5}
+.fac-desc-box h4{font-size:26px;font-weight:900;margin-bottom:8px}
+.fac-desc-box p{color:rgba(255,255,255,0.7);font-size:15px}
 
-/* ---------- Products ---------- */
-.prod-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:25px}
-.card{background:var(--card);border-radius:15px;overflow:hidden;border:1px solid var(--line);cursor:pointer;transition:0.4s}
-.card:hover{transform:translateY(-8px);border-color:var(--red);box-shadow:0 25px 50px rgba(0,0,0,0.5)}
+/* ---------- Products & Category Blocks ---------- */
+.cat-grid{display:grid;grid-template-columns:repeat(4, 1fr);gap:15px;margin-bottom:50px}
+.cat-item{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:30px;text-align:center;cursor:pointer;transition:0.4s}
+.cat-item:hover{border-color:var(--red);transform:translateY(-5px)}
+.cat-item.active{background:var(--red);border-color:var(--red);box-shadow:0 15px 40px rgba(245,0,20,0.3)}
+.cat-item b{font-size:20px;display:block;margin-bottom:5px}
+.cat-item span{font-size:11px;color:var(--muted);letter-spacing:0.1em}
+.cat-item.active span{color:rgba(255,255,255,0.8)}
+
+.prod-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:30px}
+.card{background:var(--card);border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,0.05);cursor:pointer;transition:0.4s}
+.card:hover{transform:translateY(-10px);border-color:var(--red);box-shadow:0 30px 60px rgba(0,0,0,0.6)}
 .card-img{aspect-ratio:4/3;overflow:hidden;background:#0d0d10}
-.card-img img{width:100%;height:100%;object-fit:cover;transition:0.6s}
-.card:hover .card-img img{transform:scale(1.08)}
-.card-body{padding:25px}
-.card-model{font-family:var(--disp);color:var(--red);font-size:13px;letter-spacing:0.1em;margin-bottom:8px}
-.card-name{font-size:20px;font-weight:800;margin-bottom:12px}
-.card-desc{font-size:13.5px;color:var(--muted);line-height:1.6}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:0.8s}
+.card:hover .card-img img{transform:scale(1.1)}
+.card-body{padding:30px}
+.card-model{font-family:var(--disp);color:var(--red);font-size:14px;margin-bottom:10px}
+.card-name{font-size:23px;font-weight:900;margin-bottom:12px}
 
-/* ---------- Factory & Policy (Small Blocks) ---------- */
-.blocks-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:20px}
-.block-card{background:var(--card);padding:35px;border-radius:12px;border:1px solid var(--line);text-align:center}
-.block-card:hover{background:rgba(245,0,20,0.05);border-color:var(--red)}
-.block-icon{width:50px;height:50px;background:rgba(245,0,20,0.1);border-radius:50%;display:grid;place-items:center;margin:0 auto 20px;color:var(--red);font-size:20px;font-weight:900}
-.block-title{font-size:18px;font-weight:800;margin-bottom:12px;color:var(--silver)}
-.block-desc{font-size:14px;color:var(--muted);line-height:1.7}
+/* ---------- Custom Process Blocks ---------- */
+.policy-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:20px}
+.policy-card{background:var(--card);padding:40px;border-radius:15px;border:1px solid rgba(255,255,255,0.05);position:relative;overflow:hidden}
+.policy-card:hover{border-color:var(--red);background:rgba(245,0,20,0.03)}
+.p-title{font-size:20px;font-weight:900;color:var(--red);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.p-title::before{content:"";width:4px;height:18px;background:var(--red)}
+.p-list{list-style:none}
+.p-list li{font-size:14px;color:var(--muted);margin-bottom:12px;line-height:1.7}
+.p-list li b{color:#fff;margin-right:6px}
 
-/* ---------- Contact ---------- */
-.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:60px}
-.info-item{margin-bottom:30px}
-.info-item label{font-size:12px;color:var(--red);font-weight:800;text-transform:uppercase;letter-spacing:0.2em;display:block;margin-bottom:10px}
-.info-item p{font-size:16px;color:var(--silver)}
-.form-card{padding:40px;border-radius:15px}
+/* ---------- Contact Layout ---------- */
+.contact-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start}
+.contact-info-list{display:flex;flex-direction:column;gap:40px}
+.info-box label{font-size:12px;color:var(--red);font-weight:900;letter-spacing:0.3em;text-transform:uppercase;margin-bottom:10px;display:block}
+.info-box p{font-size:18px;color:var(--white);font-weight:700}
+.form-card{padding:50px;border-radius:20px}
+.field{margin-bottom:25px}
+.field label{display:block;font-size:13px;color:var(--muted);margin-bottom:10px}
+.field input, .field textarea{width:100%;background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:15px;border-radius:8px;transition:0.3s}
+.field input:focus, .field textarea:focus{outline:none;border-color:var(--red);background:rgba(255,255,255,0.05)}
 
-/* ---------- Modal (Amazon Style) ---------- */
-.modal-mask{position:fixed;inset:0;background:rgba(0,0,0,0.92);backdrop-filter:blur(15px);z-index:300;display:none;align-items:center;justify-content:center;padding:40px}
+/* ---------- Modals (Amazon Pro) ---------- */
+.modal-mask{position:fixed;inset:0;background:rgba(0,0,0,0.95);backdrop-filter:blur(20px);z-index:300;display:none;align-items:center;justify-content:center;padding:40px}
 .modal-mask.open{display:flex}
-.modal{width:min(1200px, 100%);height:90vh;background:var(--black);border-radius:20px;border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column;position:relative}
-.modal-header{padding:20px 40px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex:none}
-.modal-close{background:none;border:1px solid var(--line);color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:14px}
-.modal-body{flex:1;overflow-y:auto;padding:40px}
+.modal{width:min(1300px, 100%);height:92vh;background:var(--black);border-radius:24px;border:1px solid rgba(255,255,255,0.1);overflow:hidden;position:relative}
+.modal-close{position:fixed;top:35px;right:45px;z-index:500;background:rgba(255,255,255,0.1);border:0;color:#fff;width:45px;height:45px;border-radius:50%;cursor:pointer;font-size:16px}
+.modal-close:hover{background:var(--red)}
+.modal-body{height:100%;overflow-y:auto;padding:60px}
 
-.vm-amazon{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;margin-bottom:80px}
-.vm-amazon-gallery{position:sticky;top:0}
-.vm-slide-box{aspect-ratio:4/3;background:#0d0d10;border-radius:12px;overflow:hidden;position:relative;margin-bottom:15px}
-.vm-slide-track{display:flex;transition:transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)}
-.vm-slide-item{flex:0 0 100%;aspect-ratio:4/3}
-.vm-slide-item img{width:100%;height:100%;object-fit:cover}
-.vm-thumbs{display:flex;gap:10px;overflow-x:auto}
-.vm-thumb{width:80px;height:60px;border-radius:4px;overflow:hidden;cursor:pointer;opacity:0.5;border:2px solid transparent}
+.vm-amazon{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;margin-bottom:100px}
+.vm-gallery{position:sticky;top:0}
+.vm-slide-container{aspect-ratio:4/3;background:#000;border-radius:12px;overflow:hidden;position:relative;margin-bottom:20px}
+.vm-track{display:flex;transition:transform 0.6s cubic-bezier(0.2, 1, 0.3, 1)}
+.vm-item{flex:0 0 100%;aspect-ratio:4/3}
+.vm-item img{width:100%;height:100%;object-fit:cover}
+.vm-thumbs{display:flex;gap:12px;overflow-x:auto}
+.vm-thumb{width:100px;height:75px;border-radius:6px;overflow:hidden;cursor:pointer;opacity:0.4;border:2px solid transparent;flex:none}
 .vm-thumb.on{opacity:1;border-color:var(--red)}
 .vm-thumb img{width:100%;height:100%;object-fit:cover}
 
-.vm-info-sticky{position:sticky;top:0}
-.vm-amazon-title{font-size:32px;font-weight:900;margin-bottom:10px}
-.vm-amazon-model{color:var(--red);font-family:var(--disp);letter-spacing:0.1em;margin-bottom:25px}
-.vm-amazon-price{font-size:24px;color:#fff;margin-bottom:30px;background:rgba(245,0,20,0.1);padding:15px 25px;border-radius:8px;display:inline-block}
-.vm-sku-section{margin-bottom:35px}
-.sku-name{font-size:13px;color:var(--muted);margin-bottom:12px;display:block}
+.vm-info h2{font-size:42px;font-weight:900;margin-bottom:5px}
+.vm-model-tag{font-size:18px;color:var(--red);font-family:var(--disp);letter-spacing:0.1em;margin-bottom:30px}
+.vm-price-box{background:rgba(245,0,20,0.08);padding:20px 30px;border-radius:8px;margin-bottom:40px}
+.sku-grp{margin-bottom:35px}
+.sku-lab{font-size:12px;color:var(--muted);text-transform:uppercase;margin-bottom:15px;display:block}
 .sku-chips{display:flex;gap:12px;flex-wrap:wrap}
-.sku-chip{padding:10px 25px;border:1px solid var(--line);border-radius:6px;cursor:pointer;font-size:14px}
-.sku-chip.on{border-color:var(--red);color:#fff;background:rgba(245,0,20,0.05)}
-.vm-brief-list{list-style:none;margin-bottom:40px}
-.vm-brief-list li{margin-bottom:15px;padding-left:25px;position:relative;font-size:15px;color:var(--silver)}
-.vm-brief-list li::before{content:"✓";position:absolute;left:0;color:var(--red);font-weight:900}
+.sku-chip{padding:12px 35px;border:1px solid rgba(255,255,255,0.1);border-radius:6px;cursor:pointer;transition:0.3s}
+.sku-chip.on{border-color:var(--red);color:#fff;background:rgba(245,0,20,0.1)}
 
-.vm-amazon-details-divider{text-align:center;margin:60px 0 40px;position:relative}
-.vm-amazon-details-divider::after{content:"";position:absolute;top:50%;left:0;right:0;height:1px;background:var(--line);z-index:1}
-.vm-amazon-details-divider span{background:var(--black);padding:0 30px;position:relative;z-index:5;color:var(--red);font-weight:900;letter-spacing:0.3em;font-size:14px}
-.vm-amazon-details img{width:100%;display:block;margin-bottom:20px;border-radius:10px}
+.vm-specs-table{width:100%;border-collapse:collapse;margin-bottom:40px}
+.vm-specs-table td{padding:15px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:15px}
+.vm-specs-table td:first-child{color:var(--muted);width:35%}
+
+.vm-details-imgs img{width:100%;display:block;margin-bottom:20px;border-radius:15px}
+
+/* ---------- Admin Edit Bar ---------- */
+.editbar{position:fixed;bottom:35px;left:50%;transform:translateX(-50%);z-index:400;display:none;gap:15px;padding:15px 30px;background:rgba(0,0,0,0.9);border-radius:50px;border:1px solid var(--red);box-shadow:0 20px 50px rgba(0,0,0,0.8)}
 
 /* ---------- Responsive ---------- */
-@media(max-width:1024px){
-  .hero-panel{grid-template-columns:repeat(2,1fr)}
-  .rd-wrap,.contact-grid,.vm-amazon{grid-template-columns:1fr}
-  .prod-grid,.blocks-grid{grid-template-columns:1fr 1fr}
+@media(max-width:1100px){
+  .prod-grid,.policy-grid{grid-template-columns:repeat(2,1fr)}
+  .fac-viewer{grid-template-columns:1fr;height:auto}
+  .fac-nav{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr)}
+  .fac-main{height:500px}
 }
 @media(max-width:768px){
   .nav{padding:0 20px}
   .nav-links{display:none}
   .section{padding:80px 20px}
-  .hero{padding:100px 20px}
-  .prod-grid,.blocks-grid{grid-template-columns:1fr}
-  .modal-body{padding:20px}
+  .hero{grid-template-columns:1fr;padding:90px 20px 40px}
+  .hero-text{order:2;text-align:center}
+  .hero-panel{grid-template-columns:repeat(2,1fr)}
+  .prod-grid,.policy-grid{grid-template-columns:1fr}
+  .contact-wrap,.vm-amazon{grid-template-columns:1fr}
+  .modal-body{padding:30px}
 }
 </style>
 </head>
@@ -141,259 +162,249 @@ body{background:var(--black);color:var(--white);font-family:var(--cjk);line-heig
 
 <header class="nav">
   <div class="brand" id="brandLogo">
-    <div class="brand-mark">LP</div>
-    <div class="brand-info">
-      <h1 class="brand-name">路普户外</h1>
+    <div class="brand-logo-wrap">
+      <img src="https://sc02.alicdn.com/kf/H9cf51f2193ab49ee83669eb4ddfe72a9E.jpg" alt="LUPU">
     </div>
+    <h1 class="brand-name">路普户外</h1>
   </div>
   <nav class="nav-links">
     <a href="#home">智造基地</a>
-    <a href="#rd">研发核心</a>
-    <a href="#products">产品画册</a>
-    <a href="#policy">合作保障</a>
+    <a href="#factory">工厂实拍</a>
+    <a href="#products">产品库</a>
+    <a href="#policy">定制流程</a>
     <a href="#contact">联络询盘</a>
   </nav>
 </header>
 
 <section class="hero" id="home">
-  <div class="hero-bg"></div>
+  <div class="hero-img-box">
+    <img src="https://sc02.alicdn.com/kf/H6f83c93e82be4d0ea4dc2494f1fa4d941.jpg" alt="路普工厂大楼全景">
+    <div class="hero-overlay"></div>
+  </div>
   <div class="hero-inner">
-    <span class="sec-en" style="color:var(--red); margin-bottom:15px; display:block">Lupu Outdoor Digital Factory</span>
-    <h2 class="hero-title">为全球品牌提供<br><span style="color:var(--red)">一站式</span> 携行智造方案</h2>
-    <p class="hero-sub">专注户外背包、战术背心及防护装备。集研发、智造、仓储为一体，25,000㎡ 数字化生产车间，2,000+ SKU 现货直供。</p>
-    <div class="hero-panel">
-      <div class="hp-card glass">
-        <span class="hp-val">25,000<b>㎡</b></span>
-        <span class="hp-lab">自有厂房面积</span>
-      </div>
-      <div class="hp-card glass">
-        <span class="hp-val">600<b>+</b></span>
-        <span class="hp-lab">专业智造团队</span>
-      </div>
-      <div class="hp-card glass">
-        <span class="hp-val">2,000<b>+</b></span>
-        <span class="hp-lab">现货 SKU 储备</span>
-      </div>
-      <div class="hp-card glass">
-        <span class="hp-val">48<b>H</b></span>
-        <span class="hp-lab">现货急速发货</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="rd">
-  <div class="sec-head">
-    <h2 class="sec-title">技术研发</h2>
-    <span class="sec-en">Core Technology & Materials</span>
-  </div>
-  <div class="rd-wrap">
-    <div class="rd-img">
-      <img src="media-output/img-msy0ttp4-d8e15515.png" alt="户外背包结构解剖图" loading="lazy">
-    </div>
-    <div class="rd-content">
-      <h3>核心技术护城河 <span>Technical Moat</span></h3>
-      <div class="rd-grid">
-        <div class="rd-item">
-          <i>SPECIAL MATERIALS</i>
-          <b>特种面料应用</b>
-          <p>具备 IRR 防近红外、阻燃、高强度碳纤维增强等特种材质的应用与开发能力。</p>
+    <div class="hero-text">
+      <h2 class="hero-title">一站式专业制造<br><span style="color:var(--red)">户外/战术用品</span> ODM/OEM</h2>
+      <p class="hero-sub">路普户外：25000㎡ 厂房面积，2000+ SKU 现货直供，支持 OEM/ODM 快速打样与大单承接。</p>
+      <div class="hero-panel">
+        <div class="hp-card glass">
+          <span class="hp-val">25,000<b>㎡</b></span>
+          <span class="hp-lab">自有厂房面积</span>
         </div>
-        <div class="rd-item">
-          <i>PATENTED DESIGN</i>
-          <b>百项设计专利</b>
-          <p>持续投入研发，拥有上百款自主知识产权产品，涵盖减震背负、模块化挂载等核心技术。</p>
+        <div class="hp-card glass">
+          <span class="hp-val">600<b>+</b></span>
+          <span class="hp-lab">专业智造团队</span>
         </div>
-        <div class="rd-item">
-          <i>PRECISION LAB</i>
-          <b>军规品质实验室</b>
-          <p>配备拉力、色牢度、盐雾及负重实验室，确保产品在极端环境下的可靠性能。</p>
+        <div class="hp-card glass">
+          <span class="hp-val">2,000<b>+</b></span>
+          <span class="hp-lab">现货 SKU 储备</span>
         </div>
-        <div class="rd-item">
-          <i>OEM/ODM</i>
-          <b>深度定制系统</b>
-          <p>3-10天极速打样，拥有多位20年以上经验的打版大师，支持从图纸到成品的一站式开发。</p>
+        <div class="hp-card glass">
+          <span class="hp-val">48<b>H</b></span>
+          <span class="hp-lab">极速发货时效</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="products" style="background:#050506">
+<section class="section" id="factory">
   <div class="sec-head">
-    <h2 class="sec-title">产品目录</h2>
-    <span class="sec-en">Portfolio Overview</span>
+    <h2 class="sec-title">数字化生产车间</h2>
+    <span class="sec-en">Digital Manufacturing Center</span>
   </div>
-  <!-- 搜索引擎可以直接抓取到下方的产品名称与描述 -->
-  <div class="prod-grid" id="productGrid">
-    <!-- 产品由 JS 灌入，但底层 HTML 结构预留，后续可手动填入几个核心关键词 -->
+  <div class="fac-viewer">
+    <div class="fac-nav" id="facNav">
+      <div class="fac-tab active" data-img="https://sc02.alicdn.com/kf/H6f83c93e82be4d0ea4dc2494f1fa4d941.jpg" data-title="专业生产流水线" data-desc="配备600多台高端生产设备，执行严格的专业生产作业流程。">
+        <b>生产车间</b><span>Workshop</span>
+      </div>
+      <div class="fac-tab" data-img="media-output/img-msy1h2pe-a606603e.png" data-title="全系列产品展示" data-desc="展示全系列路普专利产品，涵盖战术用品、户外背包及模块化防护装备。">
+        <b>产品展厅</b><span>Showroom</span>
+      </div>
+      <div class="fac-tab" data-img="media-output/img-msy1h28o-de98d006.png" data-title="大型物流仓储" data-desc="10000平米现货级仓储中心，专业信息化系统管理，确保库存实时更新与调拨。">
+        <b>物流仓库</b><span>Warehouse</span>
+      </div>
+      <div class="fac-tab" data-img="media-output/img-msy1gwc1-d52ae243.png" data-title="精益包装线" data-desc="出口标准多级质检与密封包装，确保每一件产品都能完好无损地交付至全球客户。">
+        <b>包装车间</b><span>Packaging</span>
+      </div>
+      <div class="fac-tab" data-img="media-output/img-msy1gzd1-ab174449.png" data-title="商务研发区" data-desc="位于广州花都/清远的高效协同办公区，链接产品研发、供应链管理与全球销售网络。">
+        <b>办公室</b><span>Office</span>
+      </div>
+      <div class="fac-tab" data-img="media-output/img-msy1hebl-ad241519.png" data-title="全球行业展会" data-desc="路普积极参与全球各大户外及军警装备展，与国际品牌分享前沿智造技术。">
+        <b>参加展会</b><span>Exhibition</span>
+      </div>
+    </div>
+    <div class="fac-main">
+      <img src="https://sc02.alicdn.com/kf/H6f83c93e82be4d0ea4dc2494f1fa4d941.jpg" id="facMainImg">
+      <div class="fac-desc-box">
+        <h4 id="facTitle">核心智造车间</h4>
+        <p id="facDesc">配备600多台高端自动化缝纫设备，执行严格的专业化生产作业流程。</p>
+      </div>
+    </div>
   </div>
+</section>
+
+<section class="section" id="products" style="background:#050507">
+  <div class="sec-head">
+    <h2 class="sec-title">核心产品全案</h2>
+    <span class="sec-en">Solution Portfolio</span>
+  </div>
+  <div class="cat-grid" id="catNav">
+    <div class="cat-item active" data-series="全部"><b>全系列</b><span>All Systems</span></div>
+    <div class="cat-item" data-series="路普系列"><b>路普系列</b><span>Lupu Series</span></div>
+    <div class="cat-item" data-series="白牌系列"><b>白牌系列</b><span>Ridge Series</span></div>
+    <div class="cat-item" data-series="黑鹰纵队"><b>黑鹰纵队</b><span>Scout Series</span></div>
+  </div>
+  <div class="prod-grid" id="productGrid"></div>
 </section>
 
 <section class="section" id="policy">
   <div class="sec-head">
-    <h2 class="sec-title">合作政策</h2>
-    <span class="sec-en">Cooperation & Reliability</span>
+    <h2 class="sec-title">定制与合作保障</h2>
+    <span class="sec-en">Reliability & Policy</span>
   </div>
-  <div class="blocks-grid">
-    <div class="block-card">
-      <div class="block-icon">壹</div>
-      <h4 class="block-title">价格与发票</h4>
-      <p class="block-desc">出厂价直供，支持增值税专票（10%税点）、普票及收据。</p>
+  <div class="policy-grid">
+    <div class="policy-card">
+      <h4 class="p-title">价格与财务</h4>
+      <ul class="p-list">
+        <li><b>出厂价</b>：官网展示均为大货底价。</li>
+        <li><b>税点</b>：增值税专票(另加10%)。</li>
+        <li><b>结算</b>：定金30%，余款清后发货。</li>
+      </ul>
     </div>
-    <div class="block-card">
-      <div class="block-icon">贰</div>
-      <h4 class="block-title">物流与发货</h4>
-      <p class="block-desc">现货 24-48H 发货，支持一件代发。根据地区核算物流费用，透明高效。</p>
+    <div class="policy-card">
+      <h4 class="p-title">快速出样</h4>
+      <ul class="p-list">
+        <li><b>打样周期</b>：3-10天极速交付。</li>
+        <li><b>版费政策</b>：下大货单全额退还。</li>
+        <li><b>支持</b>：看图、看样、想法打版均可。</li>
+      </ul>
     </div>
-    <div class="block-card">
-      <div class="block-icon">叁</div>
-      <h4 class="block-title">付款方式</h4>
-      <p class="block-desc">现货支持支付宝/转账。定制单 30% 定金，验货合格后结清尾款发货。</p>
-    </div>
-    <div class="block-card">
-      <div class="block-icon">肆</div>
-      <h4 class="block-title">快速打样</h4>
-      <p class="block-desc">提供图纸、实样或想法，3-10 天极速出样，正式下大货单退还版费。</p>
-    </div>
-    <div class="block-card">
-      <div class="block-icon">伍</div>
-      <h4 class="block-title">定制周期</h4>
-      <p class="block-desc">普通订单 20-30 天，特种材料订单 30-45 天，供应链响应敏捷。</p>
-    </div>
-    <div class="block-card">
-      <div class="block-icon">陆</div>
-      <h4 class="block-title">售后保障</h4>
-      <p class="block-desc">7日内质量问题包处理。原创图文保护，仅限采购客户授权使用。</p>
+    <div class="policy-card">
+      <h4 class="p-title">生产时效</h4>
+      <ul class="p-list">
+        <li><b>常规单</b>：20-30天保质交付。</li>
+        <li><b>特材单</b>：30-45天(IRR/阻燃)。</li>
+        <li><b>代发</b>：现货支持全球一件代发。</li>
+      </ul>
     </div>
   </div>
 </section>
 
 <section class="section" id="contact">
-  <div class="contact-grid">
-    <div class="contact-info">
-      <div class="sec-head">
-        <h2 class="sec-title">立即联络</h2>
-        <span class="sec-en">Get in Touch Now</span>
-      </div>
-      <div class="info-item">
-        <label>广州路普总部</label>
-        <p>广州市花都区狮岭镇杨屋一村五一三街2-15路普</p>
-      </div>
-      <div class="info-item">
-        <label>清远智造基地</label>
-        <p>清远市清远高新区创兴大道21号佳亿创鑫科技产业园25栋</p>
-      </div>
-      <div class="info-item">
-        <label>商务经理专线</label>
-        <p>黄先生: +86-185 6559 3008</p>
-        <p>赵小姐: +86-137 2546 7099</p>
-      </div>
+  <div class="contact-wrap">
+    <div class="contact-info-list">
+      <div class="info-box"><label>广州路普总部</label><p>广州市花都区狮岭镇杨屋一村五一三街2-15路普</p></div>
+      <div class="info-box"><label>生产仓储基地</label><p>清远市清远高新区创兴大道21号佳亿创鑫科技产业园25栋</p></div>
+      <div class="info-box"><label>专属商务经理</label><p>黄先生: +86-185 6559 3008</p><p>赵小姐: +86-137 2546 7099</p></div>
     </div>
     <form class="form-card glass" id="contactForm">
-      <div class="field"><label>您的姓名/称呼</label><input type="text" placeholder="如何称呼您" required></div>
-      <div class="field"><label>联系电话/微信</label><input type="tel" placeholder="请输入您的联系方式" required></div>
-      <div class="field"><label>采购意向/描述</label><textarea id="contactMsg" rows="5" placeholder="请简述您的产品定制或采购需求…"></textarea></div>
-      <button type="submit" class="btn-red" style="width:100%; border:0; padding:18px; font-weight:900; border-radius:6px; cursor:pointer">立即发起询价</button>
+      <div class="field"><label>您的姓名</label><input type="text" placeholder="称呼您" required></div>
+      <div class="field"><label>联络电话</label><input type="tel" placeholder="手机或微信号" required></div>
+      <div class="field"><label>询盘内容/定制需求</label><textarea id="contactMsg" rows="6" placeholder="请简述您的采购数量、定制要求及交期等信息…"></textarea></div>
+      <button type="submit" style="background:var(--red); color:#fff; border:0; width:100%; padding:20px; font-weight:900; border-radius:10px; cursor:pointer">立即发起业务咨询</button>
     </form>
   </div>
 </section>
 
 <footer>
-  <span class="brand-name" style="letter-spacing:0.4em; display:block; margin-bottom:15px">LUPU OUTDOOR</span>
-  <p style="font-size:13px; color:var(--muted)">© <span id="year"></span> 路普户外 · 数字化智能工厂在线画册<br>广州路普旅游用品有限公司 / 广东清远路普户外有限公司 版权所有</p>
+  <span style="font-size:24px; font-weight:900; letter-spacing:0.3em; margin-bottom:10px; display:block">LUPU OUTDOOR</span>
+  <p style="font-size:13px; color:var(--muted)">© <span id="year"></span> 广州路普旅游用品有限公司 版权所有</p>
 </footer>
 
-<!-- Amazon Style Modal -->
+<!-- Modals -->
 <div class="modal-mask" id="viewModal">
   <div class="modal">
-    <div class="modal-header">
-      <div class="vm-header-info">
-        <span id="vmModelTop" style="color:var(--red); font-size:12px; font-weight:800">MODEL</span>
-        <h4 id="vmNameTop" style="font-size:18px">Product Name</h4>
-      </div>
-      <button class="modal-close" onclick="window.closeModal('viewModal')">✕</button>
-    </div>
+    <button class="modal-close" onclick="window.closeModal('viewModal')">✕</button>
     <div class="modal-body">
       <div class="vm-amazon">
-        <div class="vm-amazon-gallery">
-          <div class="vm-slide-box">
-            <div class="vm-slide-track" id="vmSlideTrack"></div>
-          </div>
+        <div class="vm-gallery">
+          <div class="vm-slide-container"><div class="vm-track" id="vmSlideTrack"></div></div>
           <div class="vm-thumbs" id="vmThumbs"></div>
         </div>
-        <div class="vm-amazon-info">
-          <div class="vm-info-sticky">
-            <h3 class="vm-amazon-title" id="vmName"></h3>
-            <div class="vm-amazon-model" id="vmModel"></div>
-            <div class="vm-amazon-price">大货/现货价格请询盘</div>
-            
-            <div id="vmSku"></div>
-            
-            <ul class="vm-brief-list" id="vmBriefList">
-              <!-- 自动填充 35L大容量等卖点 -->
-            </ul>
-
-            <div style="display:flex; gap:15px">
-              <button class="btn-red" style="flex:1; border:0; padding:18px; font-weight:900; border-radius:6px; cursor:pointer" onclick="window.inquiryCurrent()">立即发送询盘</button>
-              <a id="vmTel" href="" style="width:60px; height:60px; border:1px solid var(--line); border-radius:6px; display:grid; place-items:center; color:#fff">📞</a>
-            </div>
+        <div class="vm-info">
+          <div class="vm-model-tag" id="vmModel">MODEL-X</div>
+          <h2 id="vmName">Product</h2>
+          <div class="vm-price-box">批量定制/现货供应：请询盘获取实时底价</div>
+          <div id="vmSku"></div>
+          <ul class="vm-features" id="vmBriefList"></ul>
+          <table class="vm-specs-table" id="vmSpecs"></table>
+          <div style="display:flex; gap:15px">
+            <button style="background:var(--red); color:#fff; border:0; flex:1; padding:20px; font-weight:900; border-radius:10px; cursor:pointer" onclick="window.inquiryCurrent()">发送正式询价单</button>
+            <a id="vmTel" style="width:65px; border:1px solid rgba(255,255,255,0.1); border-radius:10px; display:grid; place-items:center; color:#fff" href="">📞</a>
           </div>
         </div>
       </div>
-      
-      <div class="vm-amazon-details-divider"><span>PRODUCT DETAILS</span></div>
-      <div class="vm-amazon-details" id="vmDetails">
-        <!-- 垂直平铺的产品详情图 -->
-      </div>
+      <div class="vm-details-div"><b>PRODUCT DETAILS</b></div>
+      <div class="vm-details-imgs" id="vmDetails"></div>
     </div>
   </div>
 </div>
 
-<div class="editbar glass" id="editbar" style="display:none; position:fixed; bottom:30px; left:50%; transform:translateX(-50%); z-index:400; padding:10px 20px; border-radius:30px">
-  <button onclick="window.openEditor(null)" style="background:var(--red); color:#fff; border:0; padding:8px 18px; border-radius:20px; cursor:pointer; font-size:12px; margin-right:10px">添加产品</button>
-  <button onclick="window.exportData()" style="background:none; border:1px solid #fff; color:#fff; padding:8px 18px; border-radius:20px; cursor:pointer; font-size:12px; margin-right:10px">导出</button>
-  <button onclick="window.toggleEdit()" style="background:#fff; color:#000; border:0; padding:8px 18px; border-radius:20px; cursor:pointer; font-size:12px">退出</button>
+<div class="modal-mask" id="editModal">
+  <div class="edit-modal">
+    <h3 style="margin-bottom:30px">产品管理系统</h3>
+    <input type="hidden" id="efId">
+    <div class="ef-grid">
+      <div class="ef-field"><label>名称</label><input id="efName" type="text"></div>
+      <div class="ef-field"><label>型号</label><input id="efModel" type="text"></div>
+      <div class="ef-field"><label>系列</label><input id="efSeries" type="text"></div>
+      <div class="ef-field"><label>卖点(用|分割)</label><input id="efBrief" type="text"></div>
+      <div class="ef-field ef-full"><label>轮播图 URL (用,分割)</label><textarea id="efGal" rows="2"></textarea></div>
+      <div class="ef-field ef-full"><label>详情长图 URL (用,分割)</label><textarea id="efDet" rows="2"></textarea></div>
+      <div class="ef-field ef-full"><label>SKU颜色 (用,分割)</label><input id="efSku" type="text"></div>
+      <div class="ef-field ef-full"><label>技术参数(名:值|名:值)</label><textarea id="efSpec" rows="2"></textarea></div>
+    </div>
+    <div style="display:flex; gap:15px; margin-top:30px">
+      <button style="background:var(--red); color:#fff; border:0; padding:12px 35px; border-radius:8px; cursor:pointer" onclick="window.saveEditor()">保存更新</button>
+      <button style="background:none; border:1px solid rgba(255,255,255,0.2); color:#fff; padding:12px 30px; border-radius:8px; cursor:pointer" onclick="window.closeModal('editModal')">取消</button>
+      <button id="btnDel" style="margin-left:auto; color:#ff8a92; border:0; background:none; cursor:pointer" onclick="window.deleteCurrent()">删除此产品</button>
+    </div>
+  </div>
+</div>
+
+<div class="editbar" id="editbar">
+  <button onclick="window.openEditor(null)" style="background:var(--red); color:#fff; border:0; padding:10px 25px; border-radius:30px; cursor:pointer; font-weight:700">添加新产品</button>
+  <button onclick="window.toggleEdit()" style="background:#fff; color:#000; border:0; padding:10px 25px; border-radius:30px; cursor:pointer; font-weight:700">完成管理</button>
 </div>
 
 <script>
 (function(){
 'use strict';
-var LS_KEY='ht_catalog_v3';
+var LS_KEY='ht_catalog_v5';
 var $=function(s){return document.querySelector(s);};
 var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s));};
-var clone=function(o){return JSON.parse(JSON.stringify(o));};
 
-// 核心数据 (SEO关键词明文包含在此数组中)
 var DEFAULT_DATA = {
   products: [
-    {id:'p1',name:'路普战术双肩背包',model:'LP-BP35',series:'路普系列',category:'战术背包',
+    {id:'p1',name:'路普战术双肩背包',model:'LP-BP35',series:'路普系列',
      gallery:['media-output/img-mssif67f-c7485015.png','media-output/img-msspjgl1-1aedef57.png','media-output/img-msspkleb-6b6ea5cf.png'],
      detailImgs:['https://sc04.alicdn.com/kf/A5d00d41cb6c949548e7e8bf2f2e8a7f03.jpg'],
-     brief:['35L 军规大容量','MOLLE 模块化系统','900D 防泼水尼龙','YKK 防爆拉链'],
-     skus:[{name:'可选颜色',options:['黑色','狼棕','军绿']}]
+     brief:['35L 军规级大容量','双层MOLLE扩展系统','900D 防泼水特种尼龙','YKK 工业防爆拉链'],
+     skus:[{name:'可选颜色',options:['黑色','狼棕','军绿']}],
+     specs:[['材质','900D耐磨尼龙'],['拉链','YKK/军规扣具'],['容量','35升'],['标准','MIL-SPEC军标级']]
     },
-    {id:'p2',name:'路普战术胸包',model:'LP-CP12',series:'路普系列',category:'战术胸包',
+    {id:'p2',name:'路普战术模块化胸包',model:'LP-CP12',series:'路普系列',
      gallery:['media-output/img-mssif228-21eee2d1.png','media-output/img-mssif4tj-14e8cbbd.png'],
      detailImgs:[],
-     brief:['模块化结构','快拆系统','紧凑便携','高强扣具'],
-     skus:[{name:'可选颜色',options:['黑色','狼棕']}]
+     brief:['激光切割MOLLE','UTX快拆扣具系统','紧凑便携设计','内部分层收纳'],
+     skus:[{name:'可选颜色',options:['黑色','狼棕']}],
+     specs:[['材质','600D高强尼龙'],['扣具','UTX快拆'],['用途','执勤/户外/EDC']]
     }
-    // 后续产品以此类推
   ]
 };
 
 var data = JSON.parse(localStorage.getItem(LS_KEY)) || DEFAULT_DATA;
-var vmIdx=0, currentP=null;
+var vmIdx=0, currentP=null, curSeries='全部';
 
 function renderProducts(){
-  $('#productGrid').innerHTML = data.products.map(p=>`
+  var list = data.products.filter(p=> curSeries==='全部' || p.series===curSeries);
+  $('#productGrid').innerHTML = list.map(p=>`
     <article class="card" onclick="window.openView('${p.id}')">
       <div class="card-img"><img src="${p.gallery[0]}" alt="${p.name}"></div>
       <div class="card-body">
         <div class="card-model">${p.model}</div>
         <h3 class="card-name">${p.name}</h3>
-        <p class="card-desc">${Array.isArray(p.brief)?p.brief.join(' · '):p.brief}</p>
+        <div style="font-size:12px; color:var(--red)">FULL DIGITAL CATALOG →</div>
       </div>
     </article>
   `).join('');
@@ -401,66 +412,79 @@ function renderProducts(){
 
 window.openView = function(id){
   currentP = data.products.find(x=>x.id===id);
-  $('#vmName').textContent = $('#vmNameTop').textContent = currentP.name;
-  $('#vmModel').textContent = $('#vmModelTop').textContent = currentP.model;
+  $('#vmName').textContent = currentP.name;
+  $('#vmModel').textContent = currentP.model;
   $('#vmTel').href = 'tel:18565593008';
-  
-  $('#vmBriefList').innerHTML = (currentP.brief || []).map(b=>`<li>${b}</li>`).join('');
-  
-  $('#vmSku').innerHTML = (currentP.skus || []).map(s=>`
-    <div class="sku-grp">
-      <span class="sku-name">${s.name}</span>
-      <div class="sku-chips">
-        ${s.options.map((o,i)=>`<span class="sku-chip ${i===0?'on':''}" onclick="window.switchSku(${i}, event)">${o}</span>`).join('')}
-      </div>
+  $('#vmBriefList').innerHTML = currentP.brief.map(b=>`<li>${b}</li>`).join('');
+  $('#vmSpecs').innerHTML = (currentP.specs||[]).map(s=>`<tr><td>${s[0]}</td><td>${s[1]}</td></tr>`).join('');
+  $('#vmSku').innerHTML = currentP.skus.map(s=>`
+    <div class="vm-sku-grp">
+      <span class="sku-lab">${s.name}</span>
+      <div class="sku-chips">${s.options.map((o,i)=>`<span class="sku-chip ${i===0?'on':''}" onclick="window.switchSku(${i}, event)">${o}</span>`).join('')}</div>
     </div>
   `).join('');
-  
-  $('#vmSlideTrack').innerHTML = currentP.gallery.map(g=>`<div class="vm-slide-item"><img src="${g}"></div>`).join('');
+  $('#vmSlideTrack').innerHTML = currentP.gallery.map(g=>`<div class="vm-item"><img src="${g}"></div>`).join('');
   $('#vmThumbs').innerHTML = currentP.gallery.map((g,i)=>`<div class="vm-thumb ${i===0?'on':''}" onclick="window.switchSku(${i})"><img src="${g}"></div>`).join('');
-  $('#vmDetails').innerHTML = (currentP.detailImgs || []).map(d=>`<img src="${d}" loading="lazy">`).join('');
-  
-  vmIdx=0;
-  window.updateSlide();
+  $('#vmDetails').innerHTML = (currentP.detailImgs||[]).map(d=>`<img src="${d}" loading="lazy">`).join('');
+  vmIdx=0; window.updateSlide();
   $('#viewModal').classList.add('open');
   document.body.style.overflow='hidden';
 };
 
-window.switchSku = function(idx, e){
-  vmIdx = idx;
+window.switchSku = function(i, e){
+  vmIdx = i;
   if(e){
     e.target.parentNode.querySelectorAll('.sku-chip').forEach(c=>c.classList.remove('on'));
     e.target.classList.add('on');
   }
-  $$('.vm-thumb').forEach((t,i)=>t.classList.toggle('on', i===vmIdx));
+  $$('.vm-thumb').forEach((t,idx)=>t.classList.toggle('on', idx===vmIdx));
   window.updateSlide();
 };
+window.updateSlide = function(){ $('#vmSlideTrack').style.transform = `translateX(-${vmIdx*100}%)`; };
+window.closeModal = function(id){ $('#'+id).classList.remove('open'); document.body.style.overflow=''; };
 
-window.updateSlide = function(){
-  $('#vmSlideTrack').style.transform = `translateX(-${vmIdx*100}%)`;
-};
+// 点击外部关闭
+$('.modal-mask').onclick = function(e){ if(e.target===this) window.closeModal(this.id); };
+$('#viewModal .modal').onclick = function(e){ e.stopPropagation(); };
 
-window.closeModal = function(id){
-  $('#'+id).classList.remove('open');
-  document.body.style.overflow='';
-};
+// 工厂版块切图
+$$('.fac-tab').forEach(tab=>{
+  tab.onclick = function(){
+    $$('.fac-tab').forEach(t=>t.classList.remove('active'));
+    this.classList.add('active');
+    $('#facMainImg').style.opacity = '0.4';
+    setTimeout(()=>{
+      $('#facMainImg').src = this.dataset.img;
+      $('#facTitle').textContent = this.dataset.title;
+      $('#facDesc').textContent = this.dataset.desc;
+      $('#facMainImg').style.opacity = '1';
+    }, 250);
+  }
+});
+
+// 分类导航
+$$('.cat-item').forEach(b=>{
+  b.onclick = function(){
+    $$('.cat-item').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+    curSeries = this.dataset.series;
+    renderProducts();
+  }
+});
 
 window.inquiryCurrent = function(){
-  $('#contactMsg').value = `【询盘】我对“${currentP.name} (型号:${currentP.model})”非常感兴趣，请发送大货报价及起订量信息。`;
+  $('#contactMsg').value = `【正式业务询盘】针对路普户外产品：${currentP.name} (型号:${currentP.model})，我想进一步了解起订量、含税单价及大货交期。`;
   window.closeModal('viewModal');
   location.href='#contact';
   $('#contactMsg').focus();
 };
 
-// 秘密逻辑
+// 秘密入口
 var logoClicks = 0;
 $('#brandLogo').onclick = function(){
   logoClicks++;
-  if(logoClicks === 3){
-    logoClicks = 0;
-    window.toggleEdit();
-  }
-  setTimeout(()=>logoClicks=0, 800);
+  if(logoClicks===3){ logoClicks=0; window.toggleEdit(); }
+  setTimeout(()=>logoClicks=0, 1000);
 };
 
 var editing = false;
@@ -468,9 +492,49 @@ window.toggleEdit = function(){
   if(!editing){
     if(prompt('管理员密令')==='leo6849032'){
       editing=true; $('#editbar').style.display='flex';
+      $$('.card').forEach(c=>c.style.outline='2px dashed var(--red)');
     }
   } else {
     editing=false; $('#editbar').style.display='none';
+    $$('.card').forEach(c=>c.style.outline='none');
+  }
+};
+
+window.openEditor = function(id){
+  var p = data.products.find(x=>x.id===id) || {id:'p'+Date.now(), name:'', model:'', series:'', brief:[], gallery:[], detailImgs:[], skus:[{name:'颜色',options:[]}], specs:[]};
+  $('#efId').value = p.id; $('#efName').value = p.name; $('#efModel').value = p.model;
+  $('#efSeries').value = p.series; $('#efBrief').value = p.brief.join('|');
+  $('#efGal').value = p.gallery.join(','); $('#efDet').value = p.detailImgs.join(',');
+  $('#efSku').value = p.skus[0].options.join(',');
+  $('#efSpec').value = p.specs.map(s=>s.join(':')).join('|');
+  $('#btnDel').style.display = id ? 'block' : 'none';
+  $('#editModal').classList.add('open');
+};
+
+window.saveEditor = function(){
+  var id=$('#efId').value;
+  var p = {
+    id: id,
+    name: $('#efName').value,
+    model: $('#efModel').value,
+    series: $('#efSeries').value,
+    brief: $('#efBrief').value.split('|'),
+    gallery: $('#efGal').value.split(','),
+    detailImgs: $('#efDet').value.split(','),
+    skus: [{name:'颜色', options: $('#efSku').value.split(',')}],
+    specs: $('#efSpec').value.split('|').map(s=>s.split(':'))
+  };
+  var idx = data.products.findIndex(x=>x.id===id);
+  if(idx>-1) data.products[idx]=p; else data.products.push(p);
+  localStorage.setItem(LS_KEY, JSON.stringify(data));
+  renderProducts(); window.closeModal('editModal'); alert('更新成功并已存入本地。');
+};
+
+window.deleteCurrent = function(){
+  if(confirm('彻底删除？')){
+    data.products = data.products.filter(x=>x.id !== $('#efId').value);
+    localStorage.setItem(LS_KEY, JSON.stringify(data));
+    renderProducts(); window.closeModal('editModal');
   }
 };
 

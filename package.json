@@ -1,0 +1,27 @@
+{
+  "name": "product-image-search",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build-catalog": "node scripts/build-catalog.mjs",
+    "validate": "node scripts/validate-catalog.mjs",
+    "test-upload": "node scripts/test-upload.mjs",
+    "test-admin-products": "node scripts/test-admin-products.mjs",
+    "test-admin-dialog": "node scripts/test-admin-dialog.mjs",
+    "test-internal-login": "node scripts/test-internal-login.mjs",
+    "test-internal-mode": "node scripts/test-internal-mode.mjs",
+    "test-internal-advanced": "node scripts/test-internal-advanced.mjs",
+    "test-bilingual-mobile": "node scripts/test-bilingual-mobile.mjs",
+    "test-images-add-remove": "node scripts/test-images-add-remove.mjs",
+    "test-translations": "node scripts/test-translations.mjs",
+    "test-workbench": "node scripts/test-workbench.mjs",
+    "test-category-normalization": "node scripts/test-category-normalization.mjs",
+    "test-review-workbench": "node scripts/test-review-workbench.mjs",
+    "test-standardize": "node scripts/test-standardize.mjs",
+    "test-performance": "node scripts/test-performance.mjs",
+    "review-readiness": "node scripts/review-readiness.mjs",
+    "start": "node server.js",
+    "start-server": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start-server.ps1"
+  }
+}

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>管理后台 · 路普产品图片库</title>
+  <link rel="stylesheet" href="/static/admin.css">
+  <link rel="stylesheet" href="/static/admin-standardize.css">
+</head>
+<body>
+  <header class="topbar admin-topbar">
+    <div class="brand-lockup">
+      <div class="brand-mark">LP</div>
+      <div>
+        <p class="eyebrow">LUOPU · ADMIN</p>
+        <h1>产品图片库 · 管理后台</h1>
+        <p class="brand-note">产品资料 / 图片补充 / 图片标准化 / 图片巡检 / 审计日志</p>
+      </div>
+    </div>
+    <div class="header-meta">
+      <span id="auth-state">未登录</span>
+      <button type="button" class="quiet hidden" id="logout">退出登录</button>
+      <a class="quiet" href="/">返回客户展示</a>
+    </div>
+  </header>
+
+  <main class="admin-layout">
+    <section id="login-panel" class="panel hidden">
+      <h2>管理员登录</h2>
+      <p class="panel-note">输入管理令牌后仅在本次浏览器会话（sessionStorage）中保存，关闭页面即清除。</p>
+      <form id="login-form" class="login-form">
+        <input id="token-input" type="password" placeholder="管理令牌" autocomplete="off" required>
+        <button type="submit" class="primary">登录</button>
+      </form>
+      <p id="login-error" class="error hidden"></p>
+    </section>
+
+    <section id="admin-panel" class="hidden">
+      <nav class="tabs" role="tablist" aria-label="管理功能">
+        <button type="button" class="tab active" data-tab="products">产品资料</button>
+        <button type="button" class="tab" data-tab="workbench">图片补充</button>
+        <button type="button" class="tab" data-tab="standardize">图片标准化</button>
+        <button type="button" class="tab" data-tab="images">图片巡检</button>
+        <button type="button" class="tab" data-tab="audit">审计日志</button>
+      </nav>
+
+      <div id="tab-products" class="tab-panel">
+        <div class="toolbar">
+          <h2>产品资料</h2>
+          <div class="toolbar-actions">
+            <button type="button" class="quiet" id="product-refresh">刷新</button>
+          </div>
+        </div>
+        <div class="product-filters">
+          <input id="filter-q" class="filter-input" type="search" placeholder="关键词（型号 / 品名）">
+          <input id="filter-model" class="filter-input" type="search" placeholder="型号">
+          <select id="filter-category" class="filter-select" aria-label="按分类筛选"><option value="">全部分类</option></select>
+          <select id="filter-brand" class="filter-select" aria-label="按品牌筛选"><option value="">全部品牌</option></select>
+          <select id="filter-status" class="filter-select" aria-label="按状态筛选"><option value="">全部状态</option></select>
+          <select id="sort-field" class="filter-select" aria-label="排序字段">
+            <option value="model">按型号</option>
+            <option value="name">按品名</option>
+            <option value="category">按分类</option>
+            <option value="brand">按品牌</option>
+            <option value="displayStatus">按状态</option>
+          </select>
+          <button type="button" class="quiet" id="sort-dir">升序 ↑</button>
+          <button type="button" class="quiet" id="product-reset">清除筛选</button>
+        </div>
+        <p id="product-count" class="count-note"></p>
+        <div id="product-list" class="product-list"></div>
+      </div>
+
+      <div id="tab-workbench" class="tab-panel hidden">
+        <div class="toolbar">
+          <h2>图片补充</h2>
+          <div class="toolbar-actions">
+            <button type="button" class="quiet" id="workbench-refresh">刷新</button>
+            <button type="button" class="quiet" id="workbench-undo-all" disabled>撤销整批</button>
+          </div>
+        </div>
+        <p class="panel-note">批量补齐产品四视角图片：多选或拖拽图片文件（文件名规范 <code>型号_颜色_视角.jpg</code>，如 <code>LP2136_黑色_正面.jpg</code>），自动解析型号 / 颜色 / 视角并在浏览器本地预检（1200×1500 JPEG、≤20MB），预览后批量新增颜色并上传。上传失败时自动回滚已成功的条目；全成功的批次可在「撤销整批」或每行「撤销」手动回滚（新增槽位删除、替换槽位恢复备份原图）。同时支持按分类 / 审核就绪度筛选，每款产品展示分类、就绪度与快速审核动作（公开 / 待审核 / 隐藏 / 清除覆盖 / 编辑）。</p>
+        <div id="workbench-stats" class="workbench-stats"></div>
+        <div class="workbench-filters">
+          <input id="wb-filter-q" class="filter-input" type="search" placeholder="型号 / 品名">
+          <select id="wb-filter-series" class="filter-select" aria-label="按系列筛选"><option value="">全部系列</option></select>
+          <select id="wb-filter-status" class="filter-select" aria-label="按状态筛选"><option value="">全部状态</option></select>
+          <select id="wb-filter-category" class="filter-select" aria-label="按分类筛选"><option value="">全部分类</option></select>
+          <select id="wb-filter-readiness" class="filter-select" aria-label="按审核就绪度筛选">
+            <option value="all">全部就绪度</option>
+            <option value="ready">就绪</option>
+            <option value="needs-images">待补图</option>
+            <option value="needs-category">待确认分类</option>
+            <option value="needs-both">待补图+分类</option>
+          </select>
+          <select id="wb-filter-completeness" class="filter-select" aria-label="按完整度筛选">
+            <option value="all">全部完整度</option>
+            <option value="complete">4/4 完整</option>
+            <option value="partial">部分完整</option>
+            <option value="missing">缺图</option>
+          </select>
+          <button type="button" class="quiet" id="wb-filter-reset">清除筛选</button>
+        </div>
+        <p id="workbench-count" class="count-note"></p>
+        <div id="workbench-models" class="workbench-models"></div>
+
+        <section class="workbench-batch">
+          <h3 class="wb-section-title">批量上传</h3>
+          <div id="batch-dropzone" class="batch-dropzone">
+            <p><strong>拖拽或点击选择</strong> 多个图片文件（支持多选，文件名按 <code>型号_颜色_视角.jpg</code> 解析）</p>
+            <button type="button" class="quiet" id="batch-pick">选择文件</button>
+          </div>
+          <input id="batch-file-input" type="file" accept="image/jpeg,.jpg,.jpeg" multiple class="hidden">
+          <div id="batch-queue" class="batch-queue"></div>
+          <div id="batch-progress" class="batch-progress"></div>
+          <div class="batch-actions-row">
+            <button type="button" class="primary" id="batch-start">开始上传</button>
+            <button type="button" class="quiet" id="batch-clear">清空队列</button>
+          </div>
+          <p id="batch-note" class="form-note hidden"></p>
+        </section>
+      </div>
+
+      <div id="tab-standardize" class="tab-panel hidden">
+        <div class="toolbar">
+          <h2>图片标准化</h2>
+          <div class="toolbar-actions">
+            <button type="button" class="quiet" id="std-prev" title="聚焦上一张卡片（Alt+←）">上一张</button>
+            <button type="button" class="quiet" id="std-next" title="聚焦下一张卡片（Alt+→）">下一张</button>
+            <span id="std-position" class="std-position" title="当前聚焦的卡片">0 / 0</span>
+            <button type="button" class="quiet" id="std-grid-toggle" title="显示 / 隐藏裁切对齐网格与中心十字（仅预览辅助，不写入导出图）">网格：开</button>
+            <button type="button" class="quiet" id="std-clear">清空</button>
+            <button type="button" class="primary" id="std-export">导出所选（1200×1500 JPEG）</button>
+          </div>
+        </div>
+        <p class="panel-note">浏览器本地图片标准化工具：多选任意图片，逐张调整「填充裁切 / 完整适配」、拖动裁切区域（图像随指针移动）与缩放，可用箭头按钮微调取景，每张可自定义导出文件名，按统一 <b>1200×1500（4:5）</b> 导出 JPEG。全部在浏览器内完成，<b>不上传、不调接口、不写服务器</b>；导出后可再到「产品资料 → 编辑 → 产品图片」上传。适合把非标准尺寸的素材图先统一成产品图规格。</p>
+        <div class="std-global-controls">
+          <label class="field std-quality-field">
+            <span class="field-label">导出质量 <b id="std-quality-label">85%</b></span>
+            <input id="std-quality" type="range" min="10" max="100" value="85">
+          </label>
+          <div class="std-progress-row" title="已勾选「已处理」的卡片数量（交互自动标记，也可手动勾选）">
+            <span id="std-progress-text">已处理 0 / 0 张</span>
+            <div class="std-progress-track"><div id="std-progress-bar" class="std-progress-bar"></div></div>
+          </div>
+        </div>
+        <section class="std-picker">
+          <div id="std-dropzone" class="std-dropzone">
+            <p><strong>拖拽或点击选择</strong> 多张图片（JPEG / PNG / WebP，浏览器可解码即可）</p>
+            <button type="button" class="quiet" id="std-pick">选择图片</button>
+          </div>
+          <input id="std-file-input" type="file" accept="image/jpeg,.jpg,.jpeg,image/png,.png,image/webp,.webp" multiple class="hidden">
+        </section>
+        <p id="std-count" class="count-note"></p>
+        <div id="std-grid" class="std-grid"></div>
+        <p id="std-status" class="status hidden"></p>
+        <p id="std-error" class="error hidden"></p>
+      </div>
+
+      <div id="tab-images" class="tab-panel hidden">
+        <div class="toolbar">
+          <h2>图片巡检</h2>
+          <div class="toolbar-actions">
+            <button type="button" class="quiet" id="refresh">刷新</button>
+            <button type="button" class="quiet" id="rebuild">重新构建目录</button>
+          </div>
+        </div>
+        <p class="panel-note">只读查看已拍摄图片的槽位与完整度（每色最多四视角，允许部分完整）；日常图片维护请在「产品资料 → 编辑 → 颜色管理 / 产品图片」中操作：先新增颜色，再为缺失视角上传图片，已有视角可替换或删除（删除会自动备份原图）。图片必须 1200×1500、≤20MB。</p>
+        <div id="slots" class="slots"></div>
+        <p id="status" class="status hidden"></p>
+        <p id="upload-error" class="error hidden"></p>
+      </div>
+
+      <div id="tab-audit" class="tab-panel hidden">
+        <div class="toolbar section-toolbar">
+          <h2>审计日志</h2>
+          <button type="button" class="quiet" id="audit-refresh">刷新日志</button>
+        </div>
+        <div id="audit" class="audit"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="product-dialog" class="dialog hidden" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+    <div class="dialog-box">
+      <header class="dialog-header">
+        <h2 id="dialog-title">产品资料编辑</h2>
+        <button type="button" class="quiet" id="dialog-close">关闭</button>
+      </header>
+      <div id="dialog-body" class="dialog-body"></div>
+    </div>
+  </div>
+
+  <input id="file-input" type="file" accept="image/jpeg,.jpg,.jpeg" class="hidden">
+
+  <script src="/static/admin.js"></script>
+  <script src="/static/admin-standardize.js"></script>
+</body>
+</html>

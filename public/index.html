@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="document.title">路普户外 · 产品展示中心</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-lockup"><div class="brand-mark">LP</div><div><p class="eyebrow">LUOPU · PRODUCT SHOWROOM</p><h1>路普户外 · 产品展示中心</h1><p class="brand-note" data-i18n="brand.note">探索实用设计，发现适合您的户外装备</p></div></div>
+    <div class="header-meta">
+      <div class="lang-switch" id="lang-switch" role="group" aria-label="语言切换">
+        <button type="button" class="lang-btn active" data-lang="zh">中文</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="bilingual">中/EN</button>
+      </div>
+      <div class="mode-switch" id="mode-switch" role="group" aria-label="展示模式切换">
+        <button type="button" class="mode-btn active" data-mode="public" data-i18n="mode.public">客户展示</button>
+        <button type="button" class="mode-btn" data-mode="internal">内部查询</button>
+      </div>
+      <span id="mode-state"></span>
+      <button type="button" class="quiet hidden" id="internal-logout">退出内部</button>
+      <span id="health">正在连接…</span>
+      <span id="count"></span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <div class="drawer-backdrop" id="drawer-backdrop"></div>
+    <aside class="filters" id="filters" aria-label="筛选面板" data-i18n-aria="filters.aria">
+      <div class="drawer-header" id="drawer-header">
+        <h2 class="drawer-title" data-i18n="drawer.title">筛选</h2>
+        <button type="button" class="drawer-close" id="drawer-close" aria-label="关闭" data-i18n-aria="drawer.close">×</button>
+      </div>
+
+      <div class="search-box">
+        <label for="search" data-i18n="search.label">搜索产品</label>
+        <input id="search" type="search" placeholder="型号、品名、材质、颜色、容量…" autocomplete="off" data-i18n-ph="search.placeholder" data-i18n-aria="search.label" aria-label="搜索产品">
+      </div>
+
+      <div class="filter-group">
+        <h2><span data-i18n="filters.series">品牌 / 系列</span> <button type="button" class="group-clear" data-group="series" title="清除本组筛选" data-i18n-title="filters.clearGroup">×</button></h2>
+        <div class="filter-options" id="series-filters"></div>
+      </div>
+
+      <div class="filter-group">
+        <h2><span data-i18n="filters.category">分类</span> <button type="button" class="group-clear" data-group="category" title="清除本组筛选" data-i18n-title="filters.clearGroup">×</button></h2>
+        <div class="filter-options" id="category-filters"></div>
+      </div>
+
+      <div class="filter-group">
+        <h2><span data-i18n="filters.color">颜色</span> <button type="button" class="group-clear" data-group="color" title="清除本组筛选" data-i18n-title="filters.clearGroup">×</button></h2>
+        <div class="filter-options scroll" id="color-filters"></div>
+      </div>
+
+      <div class="filter-group">
+        <h2><span data-i18n="filters.media">图片状态</span> <button type="button" class="group-clear" data-group="media" title="清除本组筛选" data-i18n-title="filters.clearGroup">×</button></h2>
+        <div class="filter-options" id="media-filters"></div>
+      </div>
+
+      <!-- 高级筛选：仅在内部查询模式显示（客户模式永不渲染内部字段） -->
+      <div class="filter-group advanced-group hidden" id="advanced-filters" aria-label="高级筛选（内部查询模式）">
+        <h2>高级筛选 · 内部 <button type="button" class="group-clear" data-group="advanced" title="清除全部高级筛选">×</button></h2>
+        <button type="button" class="adv-toggle" id="adv-toggle" aria-expanded="true">收起高级筛选</button>
+        <div id="adv-body">
+          <div class="search-box">
+            <label for="adv-search">内部关键词</label>
+            <input id="adv-search" type="search" placeholder="备注、来源、价格、尺码、箱规、状态…" autocomplete="off">
+          </div>
+
+          <div class="filter-group adv-sub">
+            <h2>来源系列 <button type="button" class="group-clear" data-group="source" title="清除本组筛选">×</button></h2>
+            <div class="filter-options scroll" id="source-filters"></div>
+          </div>
+
+          <div class="filter-group adv-sub">
+            <h2>审核状态 <button type="button" class="group-clear" data-group="status" title="清除本组筛选">×</button></h2>
+            <div class="filter-options" id="status-filters"></div>
+          </div>
+
+          <div class="filter-group adv-sub">
+            <h2>品牌（精确） <button type="button" class="group-clear" data-group="brand" title="清除本组筛选">×</button></h2>
+            <div class="filter-options scroll" id="brand-filters"></div>
+          </div>
+
+          <div class="filter-group adv-sub">
+            <h2>业务属性</h2>
+            <div class="filter-options">
+              <label class="check"><input type="checkbox" class="flag-check" data-flag="has-wholesale" id="has-wholesale"><span class="check-label">有批发价</span><span class="count" id="count-has-wholesale"></span></label>
+              <label class="check"><input type="checkbox" class="flag-check" data-flag="has-moq" id="has-moq"><span class="check-label">有MOQ</span><span class="count" id="count-has-moq"></span></label>
+              <label class="check"><input type="checkbox" class="flag-check" data-flag="has-carton" id="has-carton"><span class="check-label">有箱规</span><span class="count" id="count-has-carton"></span></label>
+              <label class="check"><input type="checkbox" class="flag-check" data-flag="has-sizechart" id="has-sizechart"><span class="check-label">有尺码表</span><span class="count" id="count-has-sizechart"></span></label>
+              <label class="check"><input type="checkbox" class="flag-check" data-flag="has-admin-override" id="has-admin-override"><span class="check-label">有管理端覆盖</span><span class="count" id="count-has-admin-override"></span></label>
+            </div>
+          </div>
+
+          <div class="filter-group adv-sub">
+            <h2>容量（L）</h2>
+            <div class="range-row">
+              <input id="capacity-min" type="number" min="0" step="1" placeholder="最小" autocomplete="off">
+              <span>—</span>
+              <input id="capacity-max" type="number" min="0" step="1" placeholder="最大" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="filter-group adv-sub">
+            <h2>批发价（¥）</h2>
+            <div class="range-row">
+              <input id="wholesale-min" type="number" min="0" step="0.1" placeholder="最低" autocomplete="off">
+              <span>—</span>
+              <input id="wholesale-max" type="number" min="0" step="0.1" placeholder="最高" autocomplete="off">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="similar-box">
+        <h2 data-i18n="similar.title">以图搜相似</h2>
+        <p data-i18n="similar.desc">上传参考图片，快速发现外观相近的产品。</p>
+        <label class="upload"><span data-i18n="similar.upload">选择参考图片</span><input id="upload" type="file" accept="image/*"></label>
+        <button id="clear-similar" class="quiet hidden" data-i18n="similar.exit">退出相似检索</button>
+      </div>
+
+      <div class="drawer-footer" id="drawer-footer">
+        <button type="button" class="quiet" id="drawer-clear" data-i18n="drawer.clear">清除筛选</button>
+        <button type="button" class="primary" id="drawer-apply" data-i18n="drawer.apply">应用</button>
+      </div>
+    </aside>
+
+    <section class="content">
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <button type="button" class="quiet toggle-filters" id="toggle-filters" aria-pressed="false">隐藏筛选</button>
+          <div class="toolbar-title"><h2 id="result-title" data-i18n="title.all">全部产品</h2><span id="result-count"></span></div>
+          <button type="button" class="quiet hidden" id="reset" data-i18n="toolbar.clear">清除筛选</button>
+        </div>
+        <div class="toolbar-right">
+          <div class="segmented" id="view-toggle" role="group" aria-label="视图切换" data-i18n-aria="view.aria">
+            <button type="button" data-view="product" class="active" data-i18n="view.product">产品视图</button>
+            <button type="button" data-view="variant" data-i18n="view.variant">颜色视图</button>
+            <button type="button" data-view="table" data-i18n="view.table">表格视图</button>
+          </div>
+          <select id="sort" aria-label="排序方式" data-i18n-aria="sort.label">
+            <option value="default" data-i18n="sort.default">默认排序</option>
+            <option value="model-asc" data-i18n="sort.modelAsc">型号 A→Z</option>
+            <option value="model-desc" data-i18n="sort.modelDesc">型号 Z→A</option>
+            <option value="name" data-i18n="sort.name">按品名</option>
+            <option value="category" data-i18n="sort.category">按分类</option>
+            <option value="media" data-i18n="sort.media">按图片完整度</option>
+            <option value="capacity" data-i18n="sort.capacity">按容量</option>
+            <option value="wholesale" class="internal-only">按批发价</option>
+            <option value="status" class="internal-only">按审核状态</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="chips" class="chips hidden"></div>
+      <div id="similar-status" class="similar-status hidden"></div>
+      <div id="grid" class="grid"></div>
+      <div id="pagination" class="pagination hidden"></div>
+      <div id="empty-state" class="empty-state hidden"></div>
+    </section>
+  </main>
+
+  <div class="mobile-toolbar" id="mobile-toolbar" aria-label="移动端工具栏">
+    <input id="mobile-search" type="search" placeholder="搜索产品…" autocomplete="off" data-i18n-ph="search.placeholder" data-i18n-aria="search.label" aria-label="搜索产品">
+    <span id="mobile-count" class="mobile-count"></span>
+    <button type="button" class="mobile-lang" id="mobile-lang" aria-label="语言切换">中</button>
+    <button type="button" class="mobile-filter-btn" id="mobile-filter-btn" aria-pressed="false"><span id="mobile-filter-label" data-i18n="toolbar.filter">筛选</span><span id="mobile-filter-badge" class="badge-count hidden"></span></button>
+  </div>
+
+  <dialog id="internal-login-dialog" aria-label="内部模式登录">
+    <form id="internal-login-form">
+      <h2>内部查询登录</h2>
+      <p>请输入内部查询密码（仅本次标签页会话保存）。</p>
+      <input id="internal-password" type="password" placeholder="内部查询密码" autocomplete="off" required>
+      <p id="internal-login-error" class="error hidden"></p>
+      <div class="dialog-actions">
+        <button type="button" class="quiet" id="internal-login-cancel">取消</button>
+        <button type="submit" class="primary">登录</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="gallery-dialog" aria-label="产品图库" data-i18n-aria="gallery.aria"></dialog>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
